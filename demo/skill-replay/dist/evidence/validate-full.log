@@ -1,0 +1,106 @@
+[RUN] /usr/bin/python3 /home/hermes/workspace/skills/kg-validator/run.py --checks A,B,C,D,E,F --graphrag-url  --sample 0 (cwd=/home/hermes/workspace/demo/skill-replay/workspace)
+# 知识图谱验证报告 — 2026-10-14 10:02:00
+
+**结论**：✅ 无 CRITICAL 问题
+**统计**：CRITICAL 0 / MAJOR 1 / MINOR 1 / INFO 24 / PASS 11 / SKIP 3
+
+
+## A 类检查
+- ✅ [PASS] nodes.csv schema 正确
+  > 87 行
+- ✅ [PASS] edges.csv schema 正确
+  > 77 行
+- ✅ [PASS] node_attributes.csv schema 正确
+  > 17 行
+- ✅ [PASS] knowledge_graph.json 合法
+  > nodes=87 edges=77
+
+## B 类检查
+- ✅ [PASS] 边引用完整
+  > 77 条边两端节点均存在
+- ✅ [PASS] combines 结构正确
+  > 11 个复合节点均分解到 fault 子节点
+
+## C 类检查
+- ✅ [PASS] node_id 无重复
+  > 87 个节点
+- ✅ [PASS] 边无重复
+  > 77 条边
+- 🟡 [MINOR] 6 对疑似同义节点
+  > PDU_L1_CSNP ~ PDU_L2_CSNP（name 相似度 0.86）
+  > PDU_L1_LAN_IIH ~ PDU_L2_LAN_IIH（name 相似度 0.90）
+  > R01 ~ R02（name 相似度 0.90）
+  > TLV_EXT_IP_REACH ~ TLV_EXT_IS_REACH（name 相似度 0.96）
+  > auth_failure ~ l2_r002（name 相似度 1.00）
+  > combo_auth_circuit ~ combo_mtu_circuit（name 相似度 0.86）
+
+## D 类检查
+- 🟠 [MAJOR] 2 个节点来源不可溯源
+  > TLV_EXT_IP_REACH: source=RFC 5305 但 knowledge/rfc/ 无对应文件（现有 ['rfc1195_summary', 'rfc3358_summary', 'rfc5301_summary']）
+  > TLV_EXT_IS_REACH: source=RFC 5305 但 knowledge/rfc/ 无对应文件（现有 ['rfc1195_summary', 'rfc3358_summary', 'rfc5301_summary']）
+
+## E 类检查
+- ✅ [PASS] CSV ↔ JSON 节点集一致
+  > 87 节点
+- ✅ [PASS] CSV ↔ JSON 边三元组一致
+  > 77 条边
+- ⏭️ [SKIP] GraphRAG 一致性未检查
+  > 未提供 --graphrag-url
+
+## F 类检查
+- 🔵 [INFO] PDU_L1_CSNP 来源与描述可能跨语言，需人工复核
+  > RFC 1195
+- 🔵 [INFO] PDU_L1_LAN_IIH 来源与描述可能跨语言，需人工复核
+  > RFC 1195
+- 🔵 [INFO] PDU_L1_LSP 来源与描述可能跨语言，需人工复核
+  > RFC 1195
+- 🔵 [INFO] PDU_L2_CSNP 来源与描述可能跨语言，需人工复核
+  > RFC 1195
+- 🔵 [INFO] PDU_L2_LAN_IIH 来源与描述可能跨语言，需人工复核
+  > RFC 1195
+- 🔵 [INFO] PDU_L2_LSP 来源与描述可能跨语言，需人工复核
+  > RFC 1195
+- 🔵 [INFO] PDU_P2P_IIH 来源与描述可能跨语言，需人工复核
+  > RFC 1195
+- 🔵 [INFO] TLV_AREA_ADDR 来源与描述可能跨语言，需人工复核
+  > RFC 1195
+- 🔵 [INFO] TLV_AUTH 来源与描述可能跨语言，需人工复核
+  > RFC 1195
+- ⏭️ [SKIP] TLV_EXT_IP_REACH 对应 RFC 语料缺失
+  > RFC 5305
+- ⏭️ [SKIP] TLV_EXT_IS_REACH 对应 RFC 语料缺失
+  > RFC 5305
+- 🔵 [INFO] TLV_HOSTNAME 来源与描述可能跨语言，需人工复核
+  > RFC 5301
+- 🔵 [INFO] TLV_IP_ADDR 来源与描述可能跨语言，需人工复核
+  > RFC 1195
+- 🔵 [INFO] TLV_PADDING 来源与描述可能跨语言，需人工复核
+  > RFC 1195
+- 🔵 [INFO] TLV_PROTOS_SUPPORTED 来源与描述可能跨语言，需人工复核
+  > RFC 1195
+- 🔵 [INFO] adjacency_down 来源与描述可能跨语言，需人工复核
+  > RFC3358
+- 🔵 [INFO] adjacency_up 来源与描述可能跨语言，需人工复核
+  > RFC3358
+- 🔵 [INFO] area_mismatch 来源与描述可能跨语言，需人工复核
+  > RFC3358
+- 🔵 [INFO] auth_mismatch 来源与描述可能跨语言，需人工复核
+  > RFC3358
+- 🔵 [INFO] circuit_type_mismatch 来源与描述可能跨语言，需人工复核
+  > RFC3358
+- 🔵 [INFO] duplicate_system_id 来源与描述可能跨语言，需人工复核
+  > RFC5301
+- 🔵 [INFO] r01 来源与描述可能跨语言，需人工复核
+  > RFC5301
+- 🔵 [INFO] r02 来源与描述可能跨语言，需人工复核
+  > RFC5301
+- 🔵 [INFO] r03 来源与描述可能跨语言，需人工复核
+  > RFC5301
+- 🔵 [INFO] r04 来源与描述可能跨语言，需人工复核
+  > RFC5301
+- 🔵 [INFO] r05 来源与描述可能跨语言，需人工复核
+  > RFC5301
+- ✅ [PASS] TLV code 与 isis_pdu.py 交叉核对通过
+
+[报告已保存] /home/hermes/workspace/demo/skill-replay/workspace/knowledge/learnings/validation/kg_validation_20261014_100200_116311.md
+[SUMMARY] CRITICAL=0 MAJOR=1 MINOR=1 INFO=24

@@ -1,0 +1,53 @@
+{
+  "steps": [
+    {
+      "id": "load",
+      "name": "加载数据",
+      "enabled": true
+    },
+    {
+      "id": "feature",
+      "name": "特征提取",
+      "enabled": true
+    },
+    {
+      "id": "knowledge",
+      "name": "知识图谱查询",
+      "enabled": true
+    },
+    {
+      "id": "L1",
+      "name": "物理层检查",
+      "enabled": true,
+      "rules_file": "layer1_physical.json"
+    },
+    {
+      "id": "L2",
+      "name": "链路层检查",
+      "enabled": true,
+      "rules_file": "layer2_link.json"
+    },
+    {
+      "id": "L3",
+      "name": "IS-IS路由层检查",
+      "enabled": true,
+      "rules_file": "layer3_routing.json"
+    },
+    {
+      "id": "L4",
+      "name": "应用层检查",
+      "enabled": true,
+      "rules_file": "layer4_application.json"
+    },
+    {
+      "id": "llm",
+      "name": "LLM辅助诊断",
+      "enabled": true
+    },
+    {
+      "id": "report",
+      "name": "生成报告",
+      "enabled": true
+    }
+  ]
+}

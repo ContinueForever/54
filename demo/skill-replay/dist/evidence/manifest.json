@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "title": "IS-IS 技能协作回放",
+  "prepared_at": "2026-10-14T10:02:00.327605+08:00",
+  "historical_run": "run_20261013_200713",
+  "mode": "offline_replay",
+  "source_provenance": {
+    "historical_trace": "agent-analysis/data/traces/run_20261013_200713.json",
+    "historical_report": "agent-analysis/output/reports/run_20261013_200713.md",
+    "archive_pcap": "isis-simulator/output/verify_circuit_type/pcapng/circuit-type-mismatch.pcap",
+    "archive_log": "isis-simulator/output/verify_circuit_type/logs/circuit_type_mismatch.log",
+    "supplemental_source": "agent-analysis/config/diagnosis_rules/layer2_link.json"
+  },
+  "commands": [
+    {
+      "stage": "extract",
+      "command": [
+        "python3",
+        "skills/knowledge-builder/run.py",
+        "extract",
+        "/home/hermes/workspace/agent-analysis/config/diagnosis_rules/layer2_link.json",
+        "--source",
+        "rule:layer2_link.json",
+        "--batch",
+        "demo_rules"
+      ],
+      "returncode": 0,
+      "ran_at": "2026-10-14T10:01:59.409787+08:00"
+    },
+    {
+      "stage": "diff",
+      "command": [
+        "python3",
+        "skills/knowledge-builder/run.py",
+        "diff",
+        "/home/hermes/workspace/demo/skill-replay/workspace/knowledge/incoming/demo_rules"
+      ],
+      "returncode": 0,
+      "ran_at": "2026-10-14T10:01:59.548586+08:00"
+    },
+    {
+      "stage": "merge-and-build",
+      "command": [
+        "python3",
+        "skills/knowledge-builder/run.py",
+        "merge",
+        "/home/hermes/workspace/demo/skill-replay/workspace/knowledge/incoming/demo_rules"
+      ],
+      "returncode": 0,
+      "ran_at": "2026-10-14T10:01:59.956526+08:00"
+    },
+    {
+      "stage": "validate-full",
+      "command": [
+        "python3",
+        "skills/knowledge-builder/run.py",
+        "validate",
+        "--graphrag-url",
+        "",
+        "--sample",
+        "0"
+      ],
+      "returncode": 0,
+      "ran_at": "2026-10-14T10:02:00.145030+08:00"
+    },
+    {
+      "stage": "validate",
+      "command": [
+        "python3",
+        "skills/knowledge-builder/run.py",
+        "validate",
+        "--json",
+        "--graphrag-url",
+        "",
+        "--sample",
+        "0"
+      ],
+      "returncode": 0,
+      "ran_at": "2026-10-14T10:02:00.304566+08:00"
+    }
+  ],
+  "artifact_hashes": {
+    "evidence/after/edges.csv": "e51898a930f295b5ca02714c4f03241ad38bdc64975bbd0c7b875212b5a77316",
+    "evidence/after/knowledge_graph.json": "9249896a12fd436d16ccaecfe1d0580a2bf3c719ffa69178dba3c9e39efa6abd",
+    "evidence/after/node_attributes.csv": "30aefed849148b550e29f9bb7b5ee33611cf28da1a2bf7477c7123c80a0b7544",
+    "evidence/after/nodes.csv": "f90e733af6d20eab77aac824cc6ac30fb2c5cc4003475a337fdf9991e8828ca8",
+    "evidence/analysis-trace.json": "99cc1e51e4bf52b236185a70681e6fc5a9508ad30b19b77e4db6f63233e1f120",
+    "evidence/before/edges.csv": "e51898a930f295b5ca02714c4f03241ad38bdc64975bbd0c7b875212b5a77316",
+    "evidence/before/knowledge_graph.json": "bdfdb8e5ac26d5ff3d6d8f094f0372766cc86ddb3f4c487eafcae9002deef57a",
+    "evidence/before/node_attributes.csv": "35bdb45cebdb237414a1e6f2c0e33177f695bb803ab0664abe30220029b4031c",
+    "evidence/before/nodes.csv": "e6845b9a839d354a705a40f844eac498119a51b58f43fea694915d25686b0981",
+    "evidence/candidate/candidate_attributes.csv": "185f57cd40184665f4a11aee24fbefa09e272661e0f5aebae3a3da2faf053f3f",
+    "evidence/candidate/candidate_edges.csv": "b7e7531ff674128fc3253c96e568cf2b734c954fbf909d37468b9f135f1cd2cd",
+    "evidence/candidate/candidate_nodes.csv": "6c397b25d41c69e3e94b5a4f58e31dbe1f11f78a040e8969c7bc96c11c48803a",
+    "evidence/candidate/diff_report.md": "392bb281cee13690463ceb18240420e7ccd1b8ef6908a0d185221379a398094e",
+    "evidence/circuit-type-mismatch.pcap": "8b3bca2431b72fc1b145124245bb4e23af57ec94934b7ce30809849c37ec2c9d",
+    "evidence/circuit_type_mismatch.log": "c2da84feb7313a2affab68d779b57e0a45e6addca4b90a8edae7aa742ca84008",
+    "evidence/diff.log": "c9a36d8ef221947f80c1e08e1b6e1ff8f6677f0621c8c8fea382a958e9c788bd",
+    "evidence/execution-record.json": "67f9dc147c89c996c50f51a05d3569413f433fd186b0c6650eb7219a556c99c7",
+    "evidence/extract.log": "3739fbe8db1a1727491107f7b0b261139280750473489d5a4351085e860fe297",
+    "evidence/interpretation.md": "98091454b01d802ef5ff9c4b0194c2585d206426f40d60db1cea205715591e50",
+    "evidence/knowledge-query.json": "3aeffa48a9c03c9cad53d78f0c934d99dfee533754b5fd2ac7cdb165d980cb59",
+    "evidence/knowledge_graph.txt": "bb5ea2de701d45dc22f5d50c263437009550b0c527c936638a05ab77246838af",
+    "evidence/merge-and-build.log": "19e4badc1584db649cee6a1912e1683d7bfbd5853f1b69265ddb43f3ea325cff",
+    "evidence/merge_snapshot/.initialized": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence/merge_snapshot/edges.csv": "e51898a930f295b5ca02714c4f03241ad38bdc64975bbd0c7b875212b5a77316",
+    "evidence/merge_snapshot/node_attributes.csv": "35bdb45cebdb237414a1e6f2c0e33177f695bb803ab0664abe30220029b4031c",
+    "evidence/merge_snapshot/nodes.csv": "e6845b9a839d354a705a40f844eac498119a51b58f43fea694915d25686b0981",
+    "evidence/original-report.md": "2e79a3e983c6068549cc48ce41cb8ec0fefb6060fb56e8d5e3ede39be2a7c284",
+    "evidence/original-sequence.html": "a9f3d63fad342c4b3c3ee34672f16deb66d1110601857de6683a1f37142eb526",
+    "evidence/packets.json": "384fa6f9ab603f252d0714c689b79ac5e7e30fccbbe05cac68a46a76d43ebe00",
+    "evidence/pcap-features.json": "90ebdb1a82b955ede2c5ea48b60a74c1013077d7d5a4eaab58f62b4d343678f5",
+    "evidence/source-rules.json": "11470ea487ad75548fec805a9f8e51030df6a94f92cca19c84f74590d3f33980",
+    "evidence/validate-full.log": "9b3d3c97dc94a4fd00619a7707288aafdb1906ca75805422e08150893086f288",
+    "evidence/validate.log": "c2bf8d78fe3aee5036a561acecca39f6e33788c44e9ab9cbff521094f548e059",
+    "evidence/validation.json": "6f9f6c09309f1dfe963e9f01e6c8e48ec139fc2d42979ac14240edf5d2d441c7",
+    "evidence/validation.md": "ae2e2a2687e8aaba7821a7985c2dea1c79dbfc0b1509c7e0a85f409dded09b12"
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "schema": "isis-observation-v1",
+  "data_origin": "synthetic_demo",
+  "captured_at": "2026-10-14T14:31:09+08:00",
+  "observation": "R01–R02 邻接中断；R01 到 R02 业务环回地址 10.20.2.1 的探测连续无应答。",
+  "topology": {
+    "link": [
+      "R01:Gig0/0/0",
+      "R02:Gig0/0/0"
+    ],
+    "system_ids": {
+      "R01": "000000000001",
+      "R02": "000000000002",
+      "R03": "000000000003",
+      "R04": "000000000004"
+    },
+    "service_target": "10.20.2.1"
+  },
+  "snapshots": [
+    {
+      "stage": "before",
+      "at": "2026-10-14T14:30:25+08:00",
+      "nodes": [
+        {
+          "node": "R01",
+          "interface": "Gig0/0/0",
+          "physical_state": "UP",
+          "crc_errors": 0,
+          "input_errors": 0,
+          "mtu": 1500,
+          "authentication": "disabled",
+          "area_address": "49.0001",
+          "process_is_type": "level-2-only",
+          "interface_circuit_type": "level-2-only",
+          "neighbor": "R02",
+          "adjacency": "UP",
+          "revision": 1041
+        },
+        {
+          "node": "R02",
+          "interface": "Gig0/0/0",
+          "physical_state": "UP",
+          "crc_errors": 0,
+          "input_errors": 0,
+          "mtu": 1500,
+          "authentication": "disabled",
+          "area_address": "49.0001",
+          "process_is_type": "level-2-only",
+          "interface_circuit_type": "level-2-only",
+          "neighbor": "R01",
+          "adjacency": "UP",
+          "revision": 1041
+        }
+      ],
+      "route_to_10_20_2_1": "via R02, IS-IS L2"
+    },
+    {
+      "stage": "fault",
+      "at": "2026-10-14T14:31:05+08:00",
+      "nodes": [
+        {
+          "node": "R01",
+          "interface": "Gig0/0/0",
+          "physical_state": "UP",
+          "crc_errors": 0,
+          "input_errors": 0,
+          "mtu": 1500,
+          "authentication": "disabled",
+          "area_address": "49.0001",
+          "process_is_type": "level-2-only",
+          "interface_circuit_type": "level-2-only",
+          "neighbor": "R02",
+          "adjacency": "DOWN",
+          "revision": 1041
+        },
+        {
+          "node": "R02",
+          "interface": "Gig0/0/0",
+          "physical_state": "UP",
+          "crc_errors": 0,
+          "input_errors": 0,
+          "mtu": 1500,
+          "authentication": "disabled",
+          "area_address": "49.0001",
+          "process_is_type": "level-1",
+          "interface_circuit_type": "level-1",
+          "neighbor": "R01",
+          "adjacency": "DOWN",
+          "revision": 1042
+        }
+      ],
+      "route_to_10_20_2_1": "absent"
+    }
+  ]
+}

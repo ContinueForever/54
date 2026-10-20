@@ -1,0 +1,35 @@
+{
+  "kind": "skill execution and responsibility audit",
+  "started_at": "2026-10-14T17:32:41.529841+08:00",
+  "completed_at": "2026-10-14T17:32:41.535698+08:00",
+  "orchestrator": {
+    "skill": "workspace-orchestrator",
+    "executor": "Codex agent",
+    "actions": [
+      "检查输入来源与完整性",
+      "在副本准备并校验知识",
+      "调用项目诊断引擎",
+      "检查规则归因与模型证据",
+      "独立审查并交付工作台"
+    ],
+    "entrypoint": "demo/client-diagnosis/run_case.py",
+    "note": "技能由本次执行代理按 SKILL.md 应用；不是声称引擎独立调用了 skill API。"
+  },
+  "stage_skills": {
+    "load": "isis-analysis",
+    "feature": "isis-analysis",
+    "knowledge": "knowledge-bridge",
+    "L1": "isis-analysis",
+    "L2": "isis-analysis",
+    "L3": "isis-analysis",
+    "L4": "isis-analysis",
+    "llm": "isis-analysis",
+    "report": "isis-analysis"
+  },
+  "tracer": {
+    "skill": "flow-tracer",
+    "entrypoint": "agent_analysis.tracer.Tracer",
+    "trace_file": "evidence/analysis-trace.json"
+  },
+  "knowledge_preparation": "evidence/preparation.json"
+}

@@ -1,0 +1,88 @@
+node_id,node_type,name,description,source
+PDU_L1_CSNP,protocol,L1 CSNP,Complete Sequence Number PDU used for LSDB synchronization on L1 broadcast segments,RFC 1195
+PDU_L1_LAN_IIH,protocol,L1 LAN IIH,Level-1 LAN Hello PDU used on L1-only broadcast segments,RFC 1195
+PDU_L1_LSP,protocol,L1 LSP,Level-1 Link State PDU carrying area topology information,RFC 1195
+PDU_L2_CSNP,protocol,L2 CSNP,Complete Sequence Number PDU used for LSDB synchronization on L2 broadcast segments,RFC 1195
+PDU_L2_LAN_IIH,protocol,L2 LAN IIH,Level-2 LAN Hello PDU used to discover and maintain IS-IS neighbors on broadcast segments,RFC 1195
+PDU_L2_LSP,protocol,L2 LSP,Level-2 Link State PDU carrying topology and reachability information,RFC 1195
+PDU_P2P_IIH,protocol,P2P IIH,Point-to-point Hello PDU used on point-to-point links,RFC 1195
+R01,device,Router R01,Central star router in the simulated topology,topology
+R02,device,Router R02,Fault-peer router on the focal link,topology
+TLV_AREA_ADDR,tlv,Area Address TLV,TLV 1 lists area addresses supported by the originating IS,RFC 1195
+TLV_AUTH,tlv,Authentication TLV,TLV 10 carries authentication information used to verify IS-IS PDUs,RFC 1195
+TLV_EXT_IP_REACH,tlv,Extended IP Reachability TLV,TLV 135 describes IP prefixes with extended metrics,RFC 5305
+TLV_EXT_IS_REACH,tlv,Extended IS Reachability TLV,TLV 22 describes IS neighbors with extended metrics,RFC 5305
+TLV_HOSTNAME,tlv,Dynamic Hostname TLV,TLV 137 carries human-readable hostname of the router,RFC 5301
+TLV_IP_ADDR,tlv,IP Interface Address TLV,TLV 132 lists IPv4 addresses of the originating interface,RFC 1195
+TLV_PADDING,tlv,Padding TLV,TLV 8 is used to pad PDUs to desired size for MTU consistency,RFC 1195
+TLV_PROTOS_SUPPORTED,tlv,Protocols Supported TLV,TLV 129 lists NLPIDs of network layer protocols supported by the IS,RFC 1195
+adjacency,symptom,Adjacency,规则 adjacency_down 的指标：Adjacency,rule:layer2_link.json
+adjacency_down,state,Adjacency Down,IS-IS neighbor adjacency has transitioned to Down state,RFC3358
+adjacency_up,state,Adjacency Up,IS-IS neighbor adjacency has reached Up state,RFC3358
+area_mismatch,fault,Area Mismatch,Area Address TLV does not match between neighbors,RFC3358
+auth_fail,symptom,auth_fail,规则 auth_failure 的指标：auth_fail,rule:layer2_link.json
+auth_failure,rule,auth_failure,IS-IS认证失败,rule:layer2_link.json
+auth_mismatch,fault,Authentication Mismatch,Authentication TLV missing or checksum invalid,RFC3358
+authentication_failed,symptom,Authentication failed,规则 auth_failure 的指标：Authentication failed,rule:layer2_link.json
+baseline,fault,Baseline,baseline 对照场景：before / fault / after 均为正常 IIH，标准化异常应为 0。,scenario
+circuit_type_mismatch,fault,Circuit Type Mismatch,L1/L2 circuit level inconsistent,RFC3358
+combo_auth_area,composite_fault,combo-auth-area,复合故障：auth_mismatch + area_mismatch。表现为两个独立故障在同一故障窗口同时出现，需分别识别各子故障证据，按规则逐项排查。,combo_lib
+combo_auth_circuit,composite_fault,combo-auth-circuit,复合故障：auth_mismatch + circuit_type_mismatch。表现为两个独立故障在同一故障窗口同时出现，需分别识别各子故障证据，按规则逐项排查。,combo_lib
+combo_auth_hello,composite_fault,combo-auth-hello,复合故障：auth_mismatch + hello_timer_mismatch。表现为两个独立故障在同一故障窗口同时出现，需分别识别各子故障证据，按规则逐项排查。,combo_lib
+combo_auth_mtu,composite_fault,combo-auth-mtu,复合故障：auth_mismatch + mtu_mismatch。表现为两个独立故障在同一故障窗口同时出现，需分别识别各子故障证据，按规则逐项排查。,combo_lib
+combo_circuit_area,composite_fault,combo-circuit-area,复合故障：circuit_type_mismatch + area_mismatch。表现为两个独立故障在同一故障窗口同时出现，需分别识别各子故障证据，按规则逐项排查。,combo_lib
+combo_duplicate_auth,composite_fault,combo-duplicate-auth,复合故障：duplicate_system_id + auth_mismatch。表现为两个独立故障在同一故障窗口同时出现，需分别识别各子故障证据，按规则逐项排查。,combo_lib
+combo_hello_area,composite_fault,combo-hello-area,复合故障：hello_timer_mismatch + area_mismatch。表现为两个独立故障在同一故障窗口同时出现，需分别识别各子故障证据，按规则逐项排查。,combo_lib
+combo_link_netem,composite_fault,combo-link-netem,复合故障：link_down + netem_loss_delay。表现为两个独立故障在同一故障窗口同时出现，需分别识别各子故障证据，按规则逐项排查。,combo_lib
+combo_mtu_area,composite_fault,combo-mtu-area,复合故障：mtu_mismatch + area_mismatch。表现为两个独立故障在同一故障窗口同时出现，需分别识别各子故障证据，按规则逐项排查。,combo_lib
+combo_mtu_circuit,composite_fault,combo-mtu-circuit,复合故障：mtu_mismatch + circuit_type_mismatch。表现为两个独立故障在同一故障窗口同时出现，需分别识别各子故障证据，按规则逐项排查。,combo_lib
+combo_mtu_hello,composite_fault,combo-mtu-hello,复合故障：mtu_mismatch + hello_timer_mismatch。表现为两个独立故障在同一故障窗口同时出现，需分别识别各子故障证据，按规则逐项排查。,combo_lib
+crc错误计数增加,symptom,CRC错误计数增加,规则 interface_errors 的指标：CRC错误计数增加,rule:layer1_physical.json
+down,symptom,Down,规则 adjacency_down 的指标：Down,rule:layer2_link.json
+duplicate_system_id,fault,Duplicate System ID,Two devices advertise the same System ID,RFC5301
+hello_timer_mismatch,fault,Hello Timer Mismatch,Hello or Hold timer values differ significantly,observational
+high_latency,rule,high_latency,端到端时延过高,rule:layer4_application.json
+holding_timer_mismatch,symptom,holding_timer_mismatch,规则 hello_timer_mismatch 的指标：holding_timer_mismatch,rule:layer2_link.json
+interface_down,rule,interface_down,接口物理状态为down,rule:layer1_physical.json
+interface_errors,rule,interface_errors,接口存在大量物理层错误,rule:layer1_physical.json
+interface_is_down,symptom,Interface is Down,规则 interface_down 的指标：Interface is Down,rule:layer1_physical.json
+l1/l2邻接建立失败,symptom,L1/L2邻接建立失败,规则 area_mismatch 的指标：L1/L2邻接建立失败,rule:layer3_routing.json
+l2_r001,rule,adjacency_down,IS-IS邻接关系Down,rule:layer2_link.json
+l2_r002,rule,auth_failure,IS-IS认证失败,rule:layer2_link.json
+l2_r003,rule,circuit_type_mismatch,电路类型不匹配,rule:layer2_link.json
+l2_r004,rule,hello_timer_mismatch,Hello/Holding定时器不匹配,rule:layer2_link.json
+l2_r005,rule,mtu_mismatch,接口MTU不匹配,rule:layer2_link.json
+level不匹配导致路由信息丢失,symptom,Level不匹配导致路由信息丢失,规则 circuit_type_mismatch 的指标：Level不匹配导致路由信息丢失,rule:layer3_routing.json
+link_down,fault,Link Down,link-down 场景：fault 段在 R02 焦点接口执行 ip link set down，,scenario
+lsp_seq_num_wrap,rule,lsp_seq_num_wrap,LSP序列号异常环绕,rule:layer3_routing.json
+lsp_suppression,fault,LSP Suppression,LSP generation/refresh abnormally suppressed,observational
+lsp序列号不连续,symptom,LSP序列号不连续,规则 lsp_seq_num_wrap 的指标：LSP序列号不连续,rule:layer3_routing.json
+lsp来源冲突,symptom,LSP来源冲突,规则 duplicate_system_id 的指标：LSP来源冲突,rule:layer3_routing.json
+lsp频繁刷新,symptom,LSP频繁刷新,规则 lsp_seq_num_wrap 的指标：LSP频繁刷新,rule:layer3_routing.json
+mtu_mismatch,fault,MTU Mismatch,Interface MTU or LSP buffer size inconsistent,observational
+neighbor_loss,fault,Neighbor Loss,Expected IIH packets missing from a known neighbor during fault window,observational
+netem_loss_delay,fault,Network Impairment,Packet loss or delay causing adjacency instability,observational
+ping_rtt超过阈值,symptom,ping RTT超过阈值,规则 high_latency 的指标：ping RTT超过阈值,rule:layer4_application.json
+ping_unreachable,rule,ping_unreachable,端到端ping不可达,rule:layer4_application.json
+ping成功率低于阈值,symptom,ping成功率低于阈值,规则 ping_unreachable 的指标：ping成功率低于阈值,rule:layer4_application.json
+r01,device,R01,Star center router,RFC5301
+r02,device,R02,Fault focus router,RFC5301
+r03,device,R03,Background router,RFC5301
+r04,device,R04,Background router,RFC5301
+r05,device,R05,Background router,RFC5301
+一端为l1_only，另一端为l2_only,symptom,一端为L1-only，另一端为L2-only,规则 circuit_type_mismatch 的指标：一端为L1-only，另一端为L2-only,rule:layer3_routing.json
+业务响应缓慢,symptom,业务响应缓慢,规则 high_latency 的指标：业务响应缓慢,rule:layer4_application.json
+两端区域地址不同,symptom,两端区域地址不同,规则 area_mismatch 的指标：两端区域地址不同,rule:layer3_routing.json
+区域间路由不可达,symptom,区域间路由不可达,规则 area_mismatch 的指标：区域间路由不可达,rule:layer3_routing.json
+只能建立单边邻接,symptom,只能建立单边邻接,规则 circuit_type_mismatch 的指标：只能建立单边邻接,rule:layer3_routing.json
+同一system_id出现在多个位置,symptom,同一System ID出现在多个位置,规则 duplicate_system_id 的指标：同一System ID出现在多个位置,rule:layer3_routing.json
+帧错误计数增加,symptom,帧错误计数增加,规则 interface_errors 的指标：帧错误计数增加,rule:layer1_physical.json
+序列号差值大于阈值,symptom,序列号差值大于阈值,规则 lsp_seq_num_wrap 的指标：序列号差值大于阈值,rule:layer3_routing.json
+接口状态显示down,symptom,接口状态显示down,规则 interface_down 的指标：接口状态显示down,rule:layer1_physical.json
+物理层丢包,symptom,物理层丢包,规则 interface_errors 的指标：物理层丢包,rule:layer1_physical.json
+物理层无信号,symptom,物理层无信号,规则 interface_down 的指标：物理层无信号,rule:layer1_physical.json
+目的主机不可达,symptom,目的主机不可达,规则 ping_unreachable 的指标：目的主机不可达,rule:layer4_application.json
+路由不可达,symptom,路由不可达,规则 ping_unreachable 的指标：路由不可达,rule:layer4_application.json
+路由震荡,symptom,路由震荡,规则 duplicate_system_id 的指标：路由震荡,rule:layer3_routing.json
+链路光功率异常,symptom,链路光功率异常,规则 interface_down 的指标：链路光功率异常,rule:layer1_physical.json
+链路拥塞,symptom,链路拥塞,规则 high_latency 的指标：链路拥塞,rule:layer4_application.json

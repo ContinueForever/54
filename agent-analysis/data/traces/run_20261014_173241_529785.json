@@ -1,0 +1,163 @@
+{
+  "trace_id": "run_20261014_173241_529785",
+  "start_time": "2026-10-14T17:32:41.529816+08:00",
+  "end_time": "2026-10-14T17:32:41.533307+08:00",
+  "steps": [
+    {
+      "seq": 1,
+      "timestamp": "17:32:41.529",
+      "layer": "load",
+      "action": "加载数据",
+      "status": "RUNNING",
+      "detail": ""
+    },
+    {
+      "seq": 2,
+      "timestamp": "17:32:41.530",
+      "layer": "load",
+      "action": "加载数据",
+      "status": "DONE",
+      "detail": "pcap=1 log=1 state=1"
+    },
+    {
+      "seq": 3,
+      "timestamp": "17:32:41.530",
+      "layer": "feature",
+      "action": "特征提取",
+      "status": "RUNNING",
+      "detail": ""
+    },
+    {
+      "seq": 4,
+      "timestamp": "17:32:41.531",
+      "layer": "feature",
+      "action": "特征提取",
+      "status": "DONE",
+      "detail": "pcap=1 log=1"
+    },
+    {
+      "seq": 5,
+      "timestamp": "17:32:41.531",
+      "layer": "knowledge",
+      "action": "知识图谱查询",
+      "status": "RUNNING",
+      "detail": ""
+    },
+    {
+      "seq": 6,
+      "timestamp": "17:32:41.531",
+      "layer": "knowledge",
+      "action": "知识图谱查询",
+      "status": "DONE",
+      "detail": "命中 5 个节点"
+    },
+    {
+      "seq": 7,
+      "timestamp": "17:32:41.531",
+      "layer": "L1",
+      "action": "物理层检查",
+      "status": "RUNNING",
+      "detail": ""
+    },
+    {
+      "seq": 8,
+      "timestamp": "17:32:41.532",
+      "layer": "L1",
+      "action": "物理层检查",
+      "status": "PASS",
+      "detail": "未命中本层规则"
+    },
+    {
+      "seq": 9,
+      "timestamp": "17:32:41.532",
+      "layer": "L2",
+      "action": "链路层检查",
+      "status": "RUNNING",
+      "detail": ""
+    },
+    {
+      "seq": 10,
+      "timestamp": "17:32:41.532",
+      "layer": "L2",
+      "action": "链路层检查",
+      "status": "FAIL",
+      "detail": "命中 2 条规则",
+      "anomaly_id": "L2-R001,L2-R003"
+    },
+    {
+      "seq": 11,
+      "timestamp": "17:32:41.532",
+      "layer": "L3",
+      "action": "IS-IS路由层检查",
+      "status": "RUNNING",
+      "detail": ""
+    },
+    {
+      "seq": 12,
+      "timestamp": "17:32:41.532",
+      "layer": "L3",
+      "action": "IS-IS路由层检查",
+      "status": "FAIL",
+      "detail": "命中 1 条规则",
+      "anomaly_id": "L3-R004"
+    },
+    {
+      "seq": 13,
+      "timestamp": "17:32:41.532",
+      "layer": "L4",
+      "action": "应用层检查",
+      "status": "RUNNING",
+      "detail": ""
+    },
+    {
+      "seq": 14,
+      "timestamp": "17:32:41.532",
+      "layer": "L4",
+      "action": "应用层检查",
+      "status": "FAIL",
+      "detail": "命中 1 条规则",
+      "anomaly_id": "L4-R001"
+    },
+    {
+      "seq": 15,
+      "timestamp": "17:32:41.532",
+      "layer": "llm",
+      "action": "LLM辅助诊断",
+      "status": "RUNNING",
+      "detail": ""
+    },
+    {
+      "seq": 16,
+      "timestamp": "17:32:41.533",
+      "layer": "llm",
+      "action": "LLM辅助诊断",
+      "status": "DONE",
+      "detail": "demonstration/证据解读示例（未调用配置模型） 返回诊断结论"
+    },
+    {
+      "seq": 17,
+      "timestamp": "17:32:41.533",
+      "layer": "report",
+      "action": "生成报告",
+      "status": "RUNNING",
+      "detail": ""
+    },
+    {
+      "seq": 18,
+      "timestamp": "17:32:41.533",
+      "layer": "report",
+      "action": "生成报告",
+      "status": "DONE",
+      "detail": "/home/hermes/workspace/agent-analysis/output/reports/run_20261014_173241_529785.md"
+    }
+  ],
+  "errors": [],
+  "conclusion": {
+    "status": "anomaly_detected",
+    "fault_layer": "L2",
+    "fault_type": "L2-R001,L2-R003",
+    "affected_nodes": [],
+    "severity": "critical",
+    "recommended_action": "查看详细报告和时序流程图"
+  }
+}

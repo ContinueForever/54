@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IS-IS 智能分析平台改进报告 — 2026-08-19</title>
+<style>
+  :root {
+    --bg: #f7f9fb; --card: #ffffff; --ink: #1f2937; --muted: #6b7280;
+    --accent: #2563eb; --accent-soft: #eff6ff;
+    --ok: #047857; --ok-soft: #ecfdf5; --ok-border: #a7f3d0;
+    --bad: #b91c1c; --bad-soft: #fef2f2; --bad-border: #fecaca;
+    --warn: #b45309; --warn-soft: #fffbeb;
+    --border: #e5e7eb; --code-bg: #0f172a; --code-ink: #e2e8f0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+    line-height: 1.75; font-size: 15px;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 32px 24px 80px; }
+  header.hero {
+    background: linear-gradient(135deg, #065f46 0%, #059669 55%, #2563eb 100%);
+    color: #fff; border-radius: 14px; padding: 36px 32px; margin-bottom: 28px;
+  }
+  header.hero h1 { margin: 0 0 8px; font-size: 26px; }
+  header.hero p { margin: 4px 0; opacity: .92; font-size: 14px; }
+  .badge { display: inline-block; background: rgba(255,255,255,.2); border-radius: 20px;
+           padding: 2px 12px; font-size: 12.5px; margin-right: 6px; }
+  nav.toc {
+    background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+    padding: 18px 22px; margin-bottom: 28px;
+  }
+  nav.toc a { display: inline-block; color: var(--accent); text-decoration: none;
+              margin: 2px 18px 2px 0; font-size: 13.5px; }
+  nav.toc a:hover { text-decoration: underline; }
+  section { background: var(--card); border: 1px solid var(--border);
+            border-radius: 10px; padding: 22px 26px; margin-bottom: 22px; }
+  h2 { font-size: 20px; margin: 6px 0 14px; padding-bottom: 10px;
+       border-bottom: 2px solid var(--accent-soft); color: #111827; }
+  h3 { font-size: 16px; margin: 22px 0 8px; color: #065f46; }
+  h4 { font-size: 14.5px; margin: 16px 0 6px; color: #374151; }
+  p { margin: 8px 0; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13.5px; }
+  th, td { border: 1px solid var(--border); padding: 7px 10px; text-align: left; vertical-align: top; }
+  th { background: #f1f5f9; font-weight: 600; }
+  tr:nth-child(even) td { background: #fafbfc; }
+  code { font-family: Consolas, Menlo, monospace;
+         background: #eef2ff; color: #3730a3; padding: 1px 5px; border-radius: 4px; font-size: 13px; }
+  pre { background: var(--code-bg); color: var(--code-ink); border-radius: 8px;
+        padding: 14px 16px; overflow-x: auto; font-size: 12.5px; line-height: 1.6; }
+  pre code { background: none; color: inherit; padding: 0; font-size: 12.5px; }
+  .note { border-left: 4px solid var(--accent); background: var(--accent-soft);
+          padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 12px 0; font-size: 13.5px; }
+  .ok { border-left: 4px solid var(--ok); background: var(--ok-soft);
+        padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 12px 0; font-size: 13.5px; }
+  .bad { border-left: 4px solid var(--bad); background: var(--bad-soft);
+         padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 12px 0; font-size: 13.5px; }
+  .cmp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 16px 0; }
+  @media (max-width: 820px) { .cmp-grid { grid-template-columns: 1fr; } }
+  .cmp { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .cmp.old { border-color: var(--bad-border); }
+  .cmp.new { border-color: var(--ok-border); }
+  .cmp .head { padding: 8px 14px; font-weight: 600; font-size: 13.5px; color: #fff; }
+  .cmp.old .head { background: #dc2626; }
+  .cmp.new .head { background: #059669; }
+  .cmp .body { background: var(--code-bg); padding: 12px 14px; }
+  .cmp .body pre { margin: 0; padding: 0; background: none; }
+  .cmp .body pre code { color: var(--code-ink); }
+  .stat { display: flex; flex-wrap: wrap; gap: 12px; margin: 14px 0; }
+  .stat .item { flex: 1; min-width: 150px; border: 1px solid var(--border); border-radius: 10px;
+                background: #fff; padding: 12px 16px; text-align: center; }
+  .stat .num { font-size: 24px; font-weight: 700; color: var(--accent); }
+  .stat .lbl { font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+  .flow { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 14px 0; font-size: 13px; }
+  .box { border: 1px solid var(--border); background: #fff; border-radius: 8px;
+         padding: 6px 10px; text-align: center; min-width: 96px; }
+  .box.on { border-color: var(--ok); background: var(--ok-soft); }
+  .arrow { color: var(--muted); }
+  footer { text-align: center; color: var(--muted); font-size: 12.5px; margin-top: 30px; }
+  ul, ol { margin: 8px 0; padding-left: 22px; }
+  li { margin: 4px 0; }
+  .tag { display:inline-block; border-radius: 4px; padding: 0 7px; font-size: 12px; margin-right: 4px; }
+  .tag.green { background: var(--ok-soft); color: var(--ok); border: 1px solid var(--ok-border); }
+  .tag.gray { background: #f3f4f6; color: var(--muted); border: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <h1>IS-IS 智能分析平台改进报告</h1>
+  <p>基于 <code style="background:rgba(255,255,255,.2);color:#fff">docs/pcap_log_diagnosis_guide.html</code> 问题清单（P1~P11）实施整改 · 发布日期 2026-08-19</p>
+  <p><span class="badge">阶段 A：pcap 纳入规则判定</span><span class="badge">阶段 B：知识进入 LLM 诊断</span><span class="badge">阶段 C：服务可靠性治理</span></p>
+</header>
+
+<nav class="toc">
+  <strong>目录：</strong>
+  <a href="#s1">1. 整改总览</a>
+  <a href="#s2">2. 核心对比案例</a>
+  <a href="#s3">3. 阶段 A 详情</a>
+  <a href="#s4">4. 阶段 B 详情</a>
+  <a href="#s5">5. 阶段 C 详情</a>
+  <a href="#s6">6. 模型切换记录</a>
+  <a href="#s7">7. 全场景验证结果</a>
+  <a href="#s8">8. 已知限制与后续建议</a>
+  <a href="#s9">9. 改动文件清单</a>
+</nav>
+
+<!-- ============ 第 1 节 ============ -->
+<section id="s1">
+  <h2>1. 整改总览</h2>
+  <p>本次整改依据 <code>docs/pcap_log_diagnosis_guide.html</code> 第 5 节列出的 11 项问题（P1~P11），按第 6 节三阶段方案逐步实施。全部问题均已落地修复并完成全场景验证。</p>
+  <table>
+    <tr><th>编号</th><th>问题</th><th>对应整改</th><th>状态</th></tr>
+    <tr><td>P1</td><td>规则判定唯一输入是 log 事件类型</td><td>A4：规则引擎增加 pcap 信号匹配分支，双路独立命中</td><td><span class="tag green">已修复</span></td></tr>
+    <tr><td>P2</td><td>pcap 特征字典缺少 has_auth / iih_ts / LSP 明细</td><td>A1：复用 verify.aggregate 补齐关键记账字段</td><td><span class="tag green">已修复</span></td></tr>
+    <tr><td>P3</td><td>13 类协议异常检测与流水线断开</td><td>A2：detect_anomalies 输出并入特征（pcap_signals）</td><td><span class="tag green">已修复</span></td></tr>
+    <tr><td>P4</td><td>LLM 提示词中 pcap 摘要过于简化</td><td>B1：特征摘要写入 signals 明细</td><td><span class="tag green">已修复</span></td></tr>
+    <tr><td>P5</td><td>GraphRAG 查询结果不进入 LLM 输入</td><td>B1：LLM prompt 新增"知识图谱参考"节</td><td><span class="tag green">已修复</span></td></tr>
+    <tr><td>P6</td><td>知识查询词使用事件名原文</td><td>B2：组合事件+信号成开放问题，触发图谱多跳检索</td><td><span class="tag green">已修复</span></td></tr>
+    <tr><td>P7</td><td>报告不标注知识来源、空结果视为命中</td><td>B4：来源标注 + 空回答降级 CSV</td><td><span class="tag green">已修复</span></td></tr>
+    <tr><td>P8</td><td>GraphRAG 依赖外部 LLM 配额</td><td>C1 + 模型切换（第 6 节），失败/空回答降级 CSV</td><td><span class="tag green">已修复</span></td></tr>
+    <tr><td>P9</td><td>索引重建后服务未重启致向量化器不匹配</td><td>C3：knowledge-builder 重建后自动重启 systemd 服务</td><td><span class="tag green">已修复</span></td></tr>
+    <tr><td>P10</td><td>工作流自启实例与常驻服务端口冲突</td><td>C4：探测已有健康实例并复用</td><td><span class="tag green">已修复</span></td></tr>
+    <tr><td>P11</td><td>本地 TF-IDF 中文查询产生全零向量</td><td>C5：全零向量回退同维度 hash 向量</td><td><span class="tag green">已修复</span></td></tr>
+  </table>
+  <div class="stat">
+    <div class="item"><div class="num">11/11</div><div class="lbl">问题修复</div></div>
+    <div class="item"><div class="num">10</div><div class="lbl">验证场景（9故障+baseline）</div></div>
+    <div class="item"><div class="num">13</div><div class="lbl">规则总数（含 pcap 信号映射）</div></div>
+    <div class="item"><div class="num">4</div><div class="lbl">规则文件新增 pcap_indicators</div></div>
+  </div>
+</section>
+
+<!-- ============ 第 2 节 ============ -->
+<section id="s2">
+  <h2>2. 核心对比案例</h2>
+  <p>以下案例全部使用同一份输入数据（同 pcap、同 log）的<strong>整改前旧报告</strong>与<strong>整改后新报告</strong>的<strong>真实输出</strong>做对比。</p>
+
+  <h3>案例 1：link-down 场景 — 从"只看日志声明"到"pcap 数值证据"</h3>
+  <p>同一输入：<code>link-down.pcap</code>（60 包）+ <code>link_down.log</code>（2 行日志）。</p>
+  <div class="cmp-grid">
+    <div class="cmp old">
+      <div class="head">整改前（run_20260811_163347）</div>
+      <div class="body"><pre><code>输入数据
+- pcap: 1
+- log: 1
+
+## 命中规则
+- [L2] L2-R001 adjacency_down: ...
+
+## GraphRAG 知识图谱结果
+- [graphrag_answer] adjacency down:          ← 空描述
+- [graphrag_answer] link down:               ← 空描述
+
+## LLM 特征摘要
+- pcap link-down.pcap: pdus=60, types=[L2_IIH]
+                                            ← 无阶段差异、无源ID</code></pre></div>
+    </div>
+    <div class="cmp new">
+      <div class="head">整改后（run_20260819_190655）</div>
+      <div class="body"><pre><code>## pcap 协议信号
+- link-down.pcap:
+  - NEIGHBOR_LOSS_AT_FAULT
+    （R02 IIH: before=10, fault=0）   ← 数值证据
+
+## 命中规则
+- [L2] L2-R001 adjacency_down: ...        ← 两路印证
+
+## GraphRAG 知识图谱结果
+- [来源:graphrag] 开放问题组合查询:
+  若干+h系统分析（Entity 62/15 引用）  ← 有实质知识
+
+## LLM 特征摘要
+- pcap: signals=[NEIGHBOR_LOSS_AT_FAULT]  ← 信号进LLM</code></pre></div>
+    </div>
+  </div>
+  <p><strong>改进点</strong>：</p>
+  <ul>
+    <li>报告新增"pcap 协议信号"节：明确"R02 的 Hello 包在故障窗口从 10 个降为 0 个"，把故障证据从文本声明落到了报文数量</li>
+    <li>规则命中同时被 log 事件（adjacency_down）与 pcap 信号（NEIGHBOR_LOSS_AT_FAULT）两路证实，误报概率下降</li>
+    <li>知识查询从两个空的"图节点命中"变成一个有实质内容的图谱回答</li>
+  </ul>
+
+  <h3>案例 2：hello-timer-mismatch — pcap 给出"字段级"证据</h3>
+  <p>同一输入：<code>hello-timer-mismatch.pcap</code>（90 包，R02 间隔 3s→1s、Holding 9→10）。</p>
+  <div class="cmp-grid">
+    <div class="cmp old">
+      <div class="head">整改前</div>
+      <div class="body"><pre><code>## 命中规则
+- [L2] L2-R004 hello_timer_mismatch
+
+依据来源：log 一行文本
+"Holding timer mismatch"
+                            ← 只有文本声明，
+                              无具体数值，
+                              无法定位到设备</code></pre></div>
+    </div>
+    <div class="cmp new">
+      <div class="head">整改后</div>
+      <div class="body"><pre><code>## pcap 协议信号
+- hello-timer-mismatch.pcap:
+  - HELLO_INTERVAL_CHANGE
+    （R02 Hello 间隔: 3.0s -> 1.0s）
+  - HOLDING_TIMER_CHANGE
+    （R02 Holding: [9] -> [10]）
+
+## per_source 明细（特征字典）
+"000000000002": {
+  "stages": {
+    "before": {"holding_values": [9],
+                "hello_intervals_s": [3.0]},
+    "fault":  {"holding_values": [10],
+                "hello_intervals_s": [1.0]}}
+}</code></pre></div>
+    </div>
+  </div>
+  <p><strong>改进点</strong>：故障证据细化到字段级（Hello 周期 3.0s→1.0s、Holding 9→10）和<strong>设备级</strong>（可定位到 R02）。日志只给出"定时器不匹配"的结论，pcap 给出能复核的参数变更过程。</p>
+
+  <h3>案例 3：duplicate-system-id — pcap 独立检出"双 MAC 冲突"</h3>
+  <div class="cmp-grid">
+    <div class="cmp old">
+      <div class="head">整改前</div>
+      <div class="body"><pre><code>## 命中规则
+- [L3] L3-R002 duplicate_system_id
+
+## 特征字典
+"duplicate_system_id": true     ← 1 个布尔值，
+                                  无冲突细节，
+                                  无法区分哪台设备</code></pre></div>
+    </div>
+    <div class="cmp new">
+      <div class="head">整改后</div>
+      <div class="body"><pre><code>## pcap 协议信号
+- duplicate-system-id.pcap:
+  - DUPLICATE_NEIGHBOR_SYSTEM_ID
+    （SystemID 000000000002 关联多个源MAC）
+  - SOURCE_ID_MAC_CONFLICT
+
+## LLM 特征摘要
+- pcap: signals=[DUPLICATE_NEIGHBOR_SYSTEM_ID,
+        HELLO_INTERVAL_CHANGE, ...]</code></pre></div>
+    </div>
+  </div>
+  <p><strong>改进点</strong>：从单一布尔值扩展为"具体 System ID + 多个源 MAC"的可操作证据，且该证据来自 pcap 独立分析，即使日志未提示也能检出。</p>
+
+  <h3>案例 4：知识查询 — 从"字面点名"到"开放问题 + 来源标注"</h3>
+  <p>同一轮运行中的查询词与结果对照：</p>
+  <table>
+    <tr><th>维度</th><th>整改前</th><th>整改后</th></tr>
+    <tr><td>查询词</td><td><code>adjacency down</code>（事件名原文，字面检索）</td><td><code>adjacency down, link down 与 pcap 协议信号 NEIGHBOR LOSS AT FAULT 同时出现的 IS-IS 故障原因、影响与排查步骤</code>（开放问题，触发图谱实体映射与多跳）</td></tr>
+    <tr><td>结果进 LLM</td><td>不进入：LLM 提示词无知识节</td><td>进入："知识图谱参考"节注入，LLM 可引用图谱 </td></tr>
+    <tr><td>来源标注</td><td>无（空结果也被计为 graphrag 命中）</td><td><code>[来源:graphrag]</code> / <code>[来源:csv_fallback]</code> / <code>[来源:local_csv]</code> 三态标注</td></tr>
+    <tr><td>空回答处理</td><td>返回 200 + source=graphrag + 空内容</td><td>服务端降级 CSV 并标记 csv_fallback，/health 记录 last_query_status=empty</td></tr>
+  </table>
+
+  <h3>案例 5：中文查询 — 从"全零向量"到"有效向量"</h3>
+  <div class="cmp-grid">
+    <div class="cmp old">
+      <div class="head">整改前（local_embedding.py）</div>
+      <div class="body"><pre><code>查询: "邻居 断开 Link down adjacency"
+→ TfidfVectorizer.transform()
+→ 向量非零特征数: 0 / 2331
+→ L2 范数: 0.0
+→ 检索相似度全部为 0
+  （中文查询彻底失效）</code></pre></div>
+    </div>
+    <div class="cmp new">
+      <div class="head">整改后（同一次调用）</div>
+      <div class="body"><pre><code>查询: "邻居 断开 Link down adjacency"
+→ transform() 全零检测
+→ 回退字符级 hash 向量（维度与索引一致）
+→ 向量维度: 2331
+→ L2 范数: 1.0
+→ 中文查询可参与检索</code></pre></div>
+    </div>
+  </div>
+
+  <h3>案例 6：规则精度 — 消除两处误命中</h3>
+  <p>整改初版曾把过泛信号接入规则，实测触发跨场景误报；已通过"信号选择"修正：</p>
+  <table>
+    <tr><th>场景</th><th>初版误报</th><th>修正后</th></tr>
+    <tr><td>hello-timer-mismatch</td><td>误命中 L3-R003 area_mismatch（因 PARAMETER_VALIDATION_ALERTS 属通用信号）</td><td>area 规则不再绑定通用信号，L3-R003 仅由 log 事件驱动</td></tr>
+    <tr><td>netem-loss-delay</td><td>误命中 L2-R004 hello_timer_mismatch（抖动 3.0→2.8s 触发 HELLO_INTERVAL_CHANGE）</td><td>定时器规则改用确定性信号 HOLDING_TIMER_CHANGE，仅命中 L4-R001</td></tr>
+    <tr><td>duplicate-system-id</td><td>误命中 L2-R004（干扰场景 Hello 间隔为 0.5s）</td><td>仅命中 L3-R002（正确）</td></tr>
+  </table>
+  <div class="ok"><strong>结论</strong>：规则信号选择上，优先使用"该故障独有的确定性信号"（如 HOLDING_TIMER_CHANGE、DUPLICATE_NEIGHBOR_SYSTEM_ID、LINK_PROBE_DEGRADATION），避免使用多场景共有的通用报警信号（PARAMETER_VALIDATION_ALERTS）和对时序抖动敏感的测量信号（HELLO_INTERVAL_CHANGE）。</div>
+</section>
+<!-- ============ 第 3 节 ============ -->
+<section id="s3">
+  <h2>3. 阶段 A：让 pcap 纳入规则判定（解决 P1~P4）</h2>
+
+  <h3>A1. 特征字典补充字段（pcap_feature.py）</h3>
+  <p>复用 <code>isis_simulator.verify</code> 的 <code>aggregate()</code> 补齐此前缺失的关键记账，输出新增三个字段：</p>
+  <ul>
+    <li><code>pcap_signals</code>：协议异常信号集合（来自 <code>detect_anomalies</code>，13 类检测全量接入）</li>
+    <li><code>signal_evidence</code>：每条信号的可读数值证据</li>
+    <li><code>per_source</code>：按源 System ID 输出每阶段计数 / Holding / 区域 / 认证 / PDU 长度 / Hello 间隔</li>
+  </ul>
+
+  <h3>A2. 异常检测接入</h3>
+  <p><code>extract_features()</code> 直接调用 <code>detect_anomalies(packets)</code>，13 类信号从仿真器自检工具升级为诊断流水线的一等公民。<strong>唯一代码改动在 agent-analysis 侧</strong>，仿真器逻辑未改，行为一致。</p>
+
+  <h3>A3. 新增 pcap 驱动规则（config/diagnosis_rules/*.json）</h3>
+  <p>规则新增 <code>pcap_indicators</code> 声明，实现 pcap 信号到规则的双路命中：</p>
+  <table>
+    <tr><th>规则</th><th>pcap_indicators</th><th>信号来源场景</th></tr>
+    <tr><td>L2-R001 adjacency_down</td><td>NEIGHBOR_LOSS_AT_FAULT</td><td>link-down / lsp-suppression / auth-mismatch</td></tr>
+    <tr><td>L2-R002 auth_failure</td><td>INITIALIZING_NEIGHBOR_PRESENT</td><td>auth-mismatch</td></tr>
+    <tr><td>L2-R003 circuit_type_mismatch</td><td>CIRCUIT_TYPE_CHANGE, MIXED_HELLO_PDU_TYPES</td><td>circuit-type-mismatch</td></tr>
+    <tr><td>L2-R004 hello_timer_mismatch</td><td>HOLDING_TIMER_CHANGE（确定性信号）</td><td>hello-timer-mismatch</td></tr>
+    <tr><td>L2-R005 mtu_mismatch</td><td>INTERFACE_MTU_CHANGE</td><td>mtu-mismatch</td></tr>
+    <tr><td>L3-R002 duplicate_system_id</td><td>DUPLICATE_NEIGHBOR_SYSTEM_ID, SOURCE_ID_MAC_CONFLICT</td><td>duplicate-system-id</td></tr>
+    <tr><td>L4-R001 ping_unreachable</td><td>LINK_PROBE_DEGRADATION</td><td>netem-loss-delay</td></tr>
+  </table>
+  <div class="bad"><strong>实现说明</strong>：初始映射曾把 PARAMETER_VALIDATION_ALERTS 关联到 L3-R003、把 HELLO_INTERVAL_CHANGE 关联到 L2-R004，实测发现误报（详见案例 6），已修正为上述最终映射。</div>
+
+  <h3>A4. 规则引擎支持 pcap 信号（engine.py _match_rule）</h3>
+  <p>在原有 log 事件匹配之外新增 pcap 信号匹配分支，两路命中彼此独立、可并列出现，互不覆盖。</p>
+
+  <h3>A5. 报告增加"pcap 协议信号"节</h3>
+  <p>报告新增节，逐条列出信号及数值证据，与命中规则并列展示（见案例 1 的新版报告节选）。</p>
+</section>
+
+<!-- ============ 第 4 节 ============ -->
+<section id="s4">
+  <h2>4. 阶段 B：让 GraphRAG 知识进入 LLM 诊断（解决 P5~P7）</h2>
+
+  <h3>B1. LLM prompt 注入知识结果</h3>
+  <p>新增"知识图谱参考"节，把知识查询结果（含来源标签）注入提示词，要求 LLM 依据知识图谱推理：</p>
+  <pre><code>## 知识图谱参考
+- [来源:graphrag] adjacency down, link down 与 pcap 协议信号
+  NEIGHBOR LOSS AT FAULT 同时出现的 IS-IS 故障原因、影响与排查步骤:
+  ### IS-IS 故障概览：Adjacency Down 与 Link Down 关联分析
+  ... [Data: Entities (62, 15); Relationships (130, 44)]</code></pre>
+
+  <h3>B2. 查询词改造</h3>
+  <p>事件名原文（字面检索）→ 组合开放问题（实体映射 + 跨节点检索）。为控制耗时（单次 GraphRAG 查询约 30~90 秒），事件与信号合并为<strong>单次查询</strong>；同时修复了中文 body 的 latin-1 编码错误（<code>body.encode("utf-8")</code>）。</p>
+
+  <h3>B3. pcap 信号并入查询来源</h3>
+  <p>pcap 信号（如 NEIGHBOR_LOSS_AT_FAULT）与 log 事件一同进入知识查询，协议层信号同样获得知识支撑。</p>
+
+  <h3>B4. 报告标注知识来源</h3>
+  <p>报告每条知识条目前缀标注来源三态：<code>[来源:graphrag]</code> / <code>[来源:csv_fallback]</code> / <code>[来源:local_csv]</code>。服务端对空回答改为降级 CSV（详见 C1），空 graphrag 命中不再出现。</p>
+</section>
+
+<!-- ============ 第 5 节 ============ -->
+<section id="s5">
+  <h2>5. 阶段 C：GraphRAG 服务可靠性治理（解决 P8~P11）</h2>
+  <div class="stat">
+    <div class="item"><div class="num">4</div><div class="lbl">服务端 /health 新增字段</div></div>
+    <div class="item"><div class="num">180s</div><div class="lbl">引擎知识查询超时（原 30s）</div></div>
+    <div class="item"><div class="num">2331</div><div class="lbl">修复后中文查询向量维度</div></div>
+  </div>
+  <table>
+    <tr><th>编号</th><th>措施</th><th>文件</th><th>说明</th></tr>
+    <tr><td>C1</td><td>空回答按失败处理</td><td>graphrag/server.py</td><td>LocalSearch 返回空 response 时降级 CSV，/query 明确返回 source=csv_fallback</td></tr>
+    <tr><td>C2</td><td>/health 返回完整状态</td><td>graphrag/server.py</td><td>新增 model、index_built_at、last_query_status、last_query_error</td></tr>
+    <tr><td>C3</td><td>索引重建后自动重启服务</td><td>knowledge-builder/run.py</td><td>cmd_build / cmd_graphrag_index 完成后检测 systemd 服务，运行中则自动重启</td></tr>
+    <tr><td>C4</td><td>自启实例复用已有服务</td><td>scripts_lib/runner.py</td><td>start_graphrag_server 先探测 9200 健康实例，存在则返回哨兵对象复用</td></tr>
+    <tr><td>C5</td><td>中文查询 TF-IDF 回退</td><td>graphrag/local_embedding.py</td><td>全零向量回退同维度字符级 hash 向量（见案例 5）</td></tr>
+  </table>
+  <p><code>/health</code> 增强后的实际输出：</p>
+  <pre><code>{
+  "status": "ok",
+  "graphrag_index_loaded": true,
+  "model": "Qwen/Qwen3.5-27B",
+  "index_built_at": "2026-07-22 16:38:40",
+  "last_query_status": "ok",
+  "last_query_error": "",
+  "nodes": 24,
+  "edges": 53
+}</code></pre>
+</section>
+
+<!-- ============ 第 6 节 ============ -->
+<section id="s6">
+  <h2>6. 模型切换记录</h2>
+  <p>整改过程中按需求将 GraphRAG chat 模型自 kimi-k3 切换：</p>
+  <table>
+    <tr><th>阶段</th><th>model</th><th>api_base</th><th>实测情况</th></tr>
+    <tr><td>整改前</td><td>kimi-k3</td><td>api.kimi.com/coding/v1</td><td>配额耗尽（403），查询空结果/失败</td></tr>
+    <tr><td>过渡（已废弃）</td><td>nvidia/nemotron-3-ultra-550b-a55b:free</td><td>openrouter.ai/api/v1</td><td>免费版限流，查询超时 90s+ 无响应</td></tr>
+    <tr><td><strong>当前</strong></td><td><strong>Qwen/Qwen3.5-27B</strong></td><td><strong>api.siliconflow.cn/v1</strong></td><td>英文 45s、中文 75s 正常返回，支持中文查询</td></tr>
+  </table>
+  <div class="note"><strong>配置备份</strong>：graphrag/config/settings.yaml.bak-kimi、settings.yaml.bak-openrouter。聊天模型切换不影响本地 TF-IDF embedding。</div>
+</section>
+
+<!-- ============ 第 7 节 ============ -->
+<section id="s7">
+  <h2>7. 全场景验证结果</h2>
+  <p>10 个场景（9 故障 + baseline）全量运行，输出真实报告验证：</p>
+  <table>
+    <tr><th>场景</th><th>pcap 信号</th><th>改进后命中规则</th><th>是否误报</th></tr>
+    <tr><td>baseline</td><td>无</td><td>无</td><td><span class="tag green">正确</span></td></tr>
+    <tr><td>link-down</td><td>NEIGHBOR_LOSS_AT_FAULT</td><td>L2-R001</td><td><span class="tag green">正确</span></td></tr>
+    <tr><td>hello-timer-mismatch</td><td>HOLDING_TIMER_CHANGE 等</td><td>L2-R001, L2-R004</td><td><span class="tag green">正确</span></td></tr>
+    <tr><td>auth-mismatch</td><td>INITIALIZING_NEIGHBOR_PRESENT 等</td><td>L2-R001, L2-R002</td><td><span class="tag green">正确</span></td></tr>
+    <tr><td>area-mismatch</td><td>（log 驱动）</td><td>L3-R003</td><td><span class="tag green">正确</span></td></tr>
+    <tr><td>circuit-type-mismatch</td><td>CIRCUIT_TYPE_CHANGE 等</td><td>L2-R003</td><td><span class="tag green">正确</span></td></tr>
+    <tr><td>mtu-mismatch</td><td>INTERFACE_MTU_CHANGE</td><td>L2-R001, L2-R005</td><td><span class="tag green">正确</span></td></tr>
+    <tr><td>netem-loss-delay</td><td>LINK_PROBE_DEGRADATION</td><td>L4-R001</td><td><span class="tag green">正确</span></td></tr>
+    <tr><td>lsp-suppression</td><td>NEIGHBOR_LOSS_AT_FAULT</td><td>L2-R001</td><td><span class="tag green">正确</span></td></tr>
+    <tr><td>duplicate-system-id</td><td>DUPLICATE_NEIGHBOR_SYSTEM_ID 等</td><td>L3-R002</td><td><span class="tag green">正确</span></td></tr>
+  </table>
+  <div class="ok"><strong>验证通过</strong>：全部故障场景命中对应规则、baseline 无命中、无跨场景误报；模块冒烟（pcap 提取 / 引擎 / 日志解析 / 知识适配 / 规则加载 / GraphRAG 服务）全部正常。</div>
+</section>
+
+<!-- ============ 第 8 节 ============ -->
+<section id="s8">
+  <h2>8. 已知限制与后续建议</h2>
+  <ul>
+    <li><strong>外部模型响应较慢</strong>：Qwen/Qwen3.5-27B 单次知识查询 45~75s，偶发超时（引擎超时已放宽至 180s）；超时后自动降级 CSV，不影响报告生成</li>
+    <li><strong>agent-analysis 诊断 LLM 仍指向 kimi-k3</strong>（配额已耗尽）：当前 LLM 结论为降级结构化提示 + 规则 + 知识参考；如需切换为硅基流动 / 内网 vLLM，改动 agent-analysis/.env.project 即可</li>
+    <li><strong>知识索引规模偏小</strong>：24 节点 / 53 边，建议继续扩充 RFC 深度知识与甲方专家规则（knowledge-builder）</li>
+    <li><strong>索引由旧模型构建</strong>：索引实体抽取由 kimi-k3 完成，若发现实体质量下降，需重建索引（重建后服务自动重启逻辑已就位）</li>
+  </ul>
+</section>
+
+<!-- ============ 第 9 节 ============ -->
+<section id="s9">
+  <h2>9. 改动文件清单</h2>
+  <table>
+    <tr><th>文件</th><th>改动</th></tr>
+    <tr><td>agent-analysis/src/agent_analysis/pcap_feature.py</td><td>新增 pcap_signals / signal_evidence / per_source；接入 aggregate / detect_anomalies</td></tr>
+    <tr><td>agent-analysis/src/agent_analysis/engine.py</td><td>pcap 信号匹配；开放问题查询；LLM 注入知识；报告信号节 + 来源标注；超时放宽；中文 body 编码修复</td></tr>
+    <tr><td>agent-analysis/config/diagnosis_rules/layer2_link.json</td><td>L2 规则新增 pcap_indicators（定时器规则改用确定性信号）</td></tr>
+    <tr><td>agent-analysis/config/diagnosis_rules/layer3_routing.json</td><td>L3 规则新增 pcap_indicators</td></tr>
+    <tr><td>agent-analysis/config/diagnosis_rules/layer4_application.json</td><td>L4 规则新增 pcap_indicators</td></tr>
+    <tr><td>graphrag/src/graphrag_server/server.py</td><td>空回答降级；/health 增强（model / index_built_at / 查询状态）</td></tr>
+    <tr><td>graphrag/src/graphrag_server/local_embedding.py</td><td>中文全零向量回退 hash 向量</td></tr>
+    <tr><td>graphrag/config/settings.yaml</td><td>chat 模型切换至硅基流动 Qwen/Qwen3.5-27B（备份保留）</td></tr>
+    <tr><td>~/.config/systemd/user/isis-graphrag.service</td><td>环境变量切换 SILICONFLOW_API_KEY</td></tr>
+    <tr><td>scripts_lib/runner.py</td><td>start_graphrag_server 复用已有健康实例</td></tr>
+    <tr><td>skills/knowledge-builder/run.py</td><td>索引重建后自动重启 systemd 服务</td></tr>
+  </table>
+</section>
+
+<footer>
+  IS-IS 智能分析平台 · 改进报告 2026-08-19 · 对应 Markdown 完整版：docs/improv_report_20260819.md<br>
+  对比案例数据均来自同一输入数据的整改前后真实报告输出（agent-analysis/output/reports/）
+</footer>
+</div>
+</body>
+</html>

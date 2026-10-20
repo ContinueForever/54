@@ -1,0 +1,6 @@
+node_id,node_type,name,description,source
+l2_r001,rule,adjacency_down,IS-IS邻接关系Down,rule:layer2_link.json
+l2_r002,rule,auth_failure,IS-IS认证失败,rule:layer2_link.json
+l2_r003,rule,circuit_type_mismatch,电路类型不匹配,rule:layer2_link.json
+l2_r004,rule,hello_timer_mismatch,Hello/Holding定时器不匹配,rule:layer2_link.json
+l2_r005,rule,mtu_mismatch,接口MTU不匹配,rule:layer2_link.json

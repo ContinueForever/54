@@ -1,0 +1,65 @@
+{
+  "mode": "local_csv",
+  "queries": [
+    "adjacency_down",
+    "adjacency_up",
+    "circuit_type_mismatch",
+    "packet_loss",
+    "ping_unreachable",
+    "probe_healthy"
+  ],
+  "hits": [
+    {
+      "node_id": "adjacency_down",
+      "node_type": "state",
+      "name": "Adjacency Down",
+      "description": "IS-IS neighbor adjacency has transitioned to Down state",
+      "source": "RFC3358"
+    },
+    {
+      "node_id": "adjacency_up",
+      "node_type": "state",
+      "name": "Adjacency Up",
+      "description": "IS-IS neighbor adjacency has reached Up state",
+      "source": "RFC3358"
+    },
+    {
+      "node_id": "circuit_type_mismatch",
+      "node_type": "fault",
+      "name": "Circuit Type Mismatch",
+      "description": "L1/L2 circuit level inconsistent",
+      "source": "RFC3358"
+    },
+    {
+      "node_id": "netem_loss_delay",
+      "node_type": "fault",
+      "name": "Network Impairment",
+      "description": "Packet loss or delay causing adjacency instability",
+      "source": "observational"
+    },
+    {
+      "node_id": "ping_unreachable",
+      "node_type": "rule",
+      "name": "ping_unreachable",
+      "description": "端到端ping不可达",
+      "source": "rule:layer4_application.json"
+    }
+  ],
+  "stats": {
+    "total_nodes": 87,
+    "total_edges": 77,
+    "node_types": {
+      "protocol": 7,
+      "device": 7,
+      "tlv": 8,
+      "symptom": 30,
+      "state": 2,
+      "fault": 11,
+      "rule": 11,
+      "composite_fault": 11
+    },
+    "loaded": true
+  },
+  "table_source": "workspace/knowledge/tables",
+  "queried_during_actual_run": true
+}

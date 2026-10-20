@@ -1,0 +1,17 @@
+# agent-analysis 依赖
+# 离线安装: pip install -r requirements.txt --no-index --find-links ./wheels/
+
+# 核心依赖
+requests>=2.28.0
+
+# 数据解析
+pyshark>=0.6.0          # pcap解析（需安装tshark）
+scapy>=2.5.0            # 报文解析（备选）
+
+# 测试
+pytest>=7.0.0
+pytest-cov>=4.0.0
+
+# 可选：向量检索（Phase 3 GraphRAG）
+# pymilvus>=2.3.0       # Milvus客户端
+# sentence-transformers>=2.2.0  # 向量编码

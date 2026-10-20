@@ -1,0 +1,674 @@
+# RFC1195
+# RFC 1195 - 在 OSI IS-IS 中携带 IP 和 ISO 路由
+
+IS-IS 最初为 ISO CLNP 设计，RFC 1195 扩展了 IS-IS 以支持 IPv4/IPv6 路由，引入以下关键 TLV：
+
+- **TLV 128 (IP Internal Reachability)**：宣告直连 IPv4 前缀。
+- **TLV 129 (Protocols Supported)**：宣告支持的协议族（NLPID = 0xCC 表示 IPv4）。
+- **TLV 130 (IP External Reachability)**：宣告外部引入的 IPv4 路由。
+- **TLV 132 (IP Interface Address)**：宣告接口 IP 地址。
+
+## 诊断相关要点
+
+| 症状 | 可能原因 |
+|------|----------|
+| IP 路由不发布 | 缺少 Protocols Supported TLV 或 NLPID 不匹配 |
+| 外部路由不可达 | IP External Reachability TLV 缺失或 down-bit 置位 |
+| 邻居 UP 但无 IP 路由 | 接口未使能 IS-IS 或地址族未协商 |
+
+
+---
+# RFC3358
+# RFC 3358 - IS-IS 邻接关系与状态机
+
+IS-IS 邻接按如下状态机演进：
+
+```
+Down -> Init -> Up
+```
+
+## 关键状态
+
+- **Down**：未收到任何 IIH 或 Hold Timer 超时。
+- **Init**：收到 IIH，但邻居列表中未看到自己 System ID。
+- **Up**：双向通信确认，邻居列表中包含自己 System ID。
+
+## 影响邻接的常见故障
+
+| 故障类型 | 典型现象 |
+|----------|----------|
+| 区域不匹配 | 收到 IIH 但 Area Address TLV 不一致，邻接无法到达 Up |
+| 认证失败 | IIH 被丢弃，序列中看不到任何邻接状态变更 |
+| Hello 定时器不匹配 | 短期可能不影响邻接，长期导致保活抖动 |
+| Circuit Type 不匹配 | L1/L2 级别不一致，邻接状态停滞 |
+| 重复 System ID | LSP 冲突、多次邻接震荡 |
+| MTU 不匹配 | LSP 分片交互异常，邻接反复 Init |
+| 链路物理 down | 对端停止发送 IIH，本端 Hold Timer 超时后 Down |
+
+## 诊断规则
+
+- 若 fault 段 src_ids 减少且邻接日志出现 adjacency_down，判定为 NEIGHBOR_LOSS_AT_FAULT。
+- 若 fault 段持续收到 IIH 但邻接不 Up，检查 Area、Auth、Circuit Type、MTU。
+- 若出现 duplicate_system_id 标志且多个节点共享同一 System ID，判定为 DUPLICATE_SYSTEM_ID。
+
+
+---
+# RFC5301
+# RFC 5301 - IS-IS 动态主机名
+
+动态主机名映射 System ID 到可读名称，通过 **TLV 137 (Dynamic Hostname)** 携带。
+
+## 诊断价值
+
+- 通过 System ID 反查主机名，便于定位故障节点。
+- 若日志或 pcap 中出现 System ID 冲突，可结合主机名快速定位网元。
+
+## 表格
+
+| System ID | Hostname | Role |
+|-----------|----------|------|
+| 0000.0000.0001 | R01 | 星型中心 |
+| 0000.0000.0002 | R02 | 焦点节点 |
+| 0000.0000.0003 | R03 | 背景节点 |
+| 0000.0000.0004 | R04 | 背景节点 |
+| 0000.0000.0005 | R05 | 背景节点 |
+
+
+---
+## Entity: L1 CSNP (PDU_L1_CSNP)
+Type: protocol
+Description: Complete Sequence Number PDU used for LSDB synchronization on L1 broadcast segments
+Source: RFC 1195
+
+---
+## Entity: L1 LAN IIH (PDU_L1_LAN_IIH)
+Type: protocol
+Description: Level-1 LAN Hello PDU used on L1-only broadcast segments
+Source: RFC 1195
+
+---
+## Entity: L1 LSP (PDU_L1_LSP)
+Type: protocol
+Description: Level-1 Link State PDU carrying area topology information
+Source: RFC 1195
+
+---
+## Entity: L2 CSNP (PDU_L2_CSNP)
+Type: protocol
+Description: Complete Sequence Number PDU used for LSDB synchronization on L2 broadcast segments
+Source: RFC 1195
+
+---
+## Entity: L2 LAN IIH (PDU_L2_LAN_IIH)
+Type: protocol
+Description: Level-2 LAN Hello PDU used to discover and maintain IS-IS neighbors on broadcast segments
+Source: RFC 1195
+
+---
+## Entity: L2 LSP (PDU_L2_LSP)
+Type: protocol
+Description: Level-2 Link State PDU carrying topology and reachability information
+Source: RFC 1195
+
+---
+## Entity: P2P IIH (PDU_P2P_IIH)
+Type: protocol
+Description: Point-to-point Hello PDU used on point-to-point links
+Source: RFC 1195
+
+---
+## Entity: Router R01 (R01)
+Type: device
+Description: Central star router in the simulated topology
+Source: topology
+
+---
+## Entity: Router R02 (R02)
+Type: device
+Description: Fault-peer router on the focal link
+Source: topology
+
+---
+## Entity: Area Address TLV (TLV_AREA_ADDR)
+Type: tlv
+Description: TLV 1 lists area addresses supported by the originating IS
+Source: RFC 1195
+
+---
+## Entity: Authentication TLV (TLV_AUTH)
+Type: tlv
+Description: TLV 10 carries authentication information used to verify IS-IS PDUs
+Source: RFC 1195
+
+---
+## Entity: Extended IP Reachability TLV (TLV_EXT_IP_REACH)
+Type: tlv
+Description: TLV 135 describes IP prefixes with extended metrics
+Source: RFC 5305
+
+---
+## Entity: Extended IS Reachability TLV (TLV_EXT_IS_REACH)
+Type: tlv
+Description: TLV 22 describes IS neighbors with extended metrics
+Source: RFC 5305
+
+---
+## Entity: Dynamic Hostname TLV (TLV_HOSTNAME)
+Type: tlv
+Description: TLV 137 carries human-readable hostname of the router
+Source: RFC 5301
+
+---
+## Entity: IP Interface Address TLV (TLV_IP_ADDR)
+Type: tlv
+Description: TLV 132 lists IPv4 addresses of the originating interface
+Source: RFC 1195
+
+---
+## Entity: Padding TLV (TLV_PADDING)
+Type: tlv
+Description: TLV 8 is used to pad PDUs to desired size for MTU consistency
+Source: RFC 1195
+
+---
+## Entity: Protocols Supported TLV (TLV_PROTOS_SUPPORTED)
+Type: tlv
+Description: TLV 129 lists NLPIDs of network layer protocols supported by the IS
+Source: RFC 1195
+
+---
+## Entity: Adjacency (adjacency)
+Type: symptom
+Description: 规则 adjacency_down 的指标：Adjacency
+Source: rule:layer2_link.json
+
+---
+## Entity: Adjacency Down (adjacency_down)
+Type: state
+Description: IS-IS neighbor adjacency has transitioned to Down state
+Source: RFC3358
+Relationship: adjacency_down --causes--> neighbor_loss. Neighbor adjacency Down leads to neighbor loss symptom
+Relationship: adjacency_down --indicates--> adjacency. adjacency_down indicates Adjacency
+Relationship: adjacency_down --indicates--> down. adjacency_down indicates Down
+
+---
+## Entity: Adjacency Up (adjacency_up)
+Type: state
+Description: IS-IS neighbor adjacency has reached Up state
+Source: RFC3358
+
+---
+## Entity: Area Mismatch (area_mismatch)
+Type: fault
+Description: Area Address TLV does not match between neighbors
+Source: RFC3358
+Relationship: area_mismatch --prevents--> adjacency_up. Area mismatch prevents adjacency from reaching Up
+Relationship: area_mismatch --causes--> adjacency_down. Area Mismatch may cause adjacency Down
+Relationship: area_mismatch --indicates--> 两端区域地址不同. area_mismatch indicates 两端区域地址不同
+Relationship: area_mismatch --indicates--> l1/l2邻接建立失败. area_mismatch indicates L1/L2邻接建立失败
+Relationship: area_mismatch --indicates--> 区域间路由不可达. area_mismatch indicates 区域间路由不可达
+
+---
+## Entity: auth_fail (auth_fail)
+Type: symptom
+Description: 规则 auth_failure 的指标：auth_fail
+Source: rule:layer2_link.json
+
+---
+## Entity: auth_failure (auth_failure)
+Type: rule
+Description: IS-IS认证失败
+Source: rule:layer2_link.json
+Relationship: auth_failure --indicates--> auth_fail. auth_failure indicates auth_fail
+Relationship: auth_failure --indicates--> authentication_failed. auth_failure indicates Authentication failed
+
+---
+## Entity: Authentication Mismatch (auth_mismatch)
+Type: fault
+Description: Authentication TLV missing or checksum invalid
+Source: RFC3358
+Relationship: auth_mismatch --prevents--> adjacency_up. Authentication failure prevents adjacency Up
+Relationship: auth_mismatch --causes--> adjacency_down. Authentication Mismatch may cause adjacency Down
+
+---
+## Entity: Authentication failed (authentication_failed)
+Type: symptom
+Description: 规则 auth_failure 的指标：Authentication failed
+Source: rule:layer2_link.json
+
+---
+## Entity: Baseline (baseline)
+Type: fault
+Description: baseline 对照场景：before / fault / after 均为正常 IIH，标准化异常应为 0。
+Source: scenario
+Relationship: baseline --causes--> adjacency_down. Baseline may cause adjacency Down
+
+---
+## Entity: Circuit Type Mismatch (circuit_type_mismatch)
+Type: fault
+Description: L1/L2 circuit level inconsistent
+Source: RFC3358
+Relationship: circuit_type_mismatch --prevents--> adjacency_up. Circuit level mismatch prevents adjacency Up
+Relationship: circuit_type_mismatch --causes--> adjacency_down. Circuit Type Mismatch may cause adjacency Down
+Relationship: circuit_type_mismatch --indicates--> 一端为l1_only，另一端为l2_only. circuit_type_mismatch indicates 一端为L1-only，另一端为L2-only
+Relationship: circuit_type_mismatch --indicates--> 只能建立单边邻接. circuit_type_mismatch indicates 只能建立单边邻接
+Relationship: circuit_type_mismatch --indicates--> level不匹配导致路由信息丢失. circuit_type_mismatch indicates Level不匹配导致路由信息丢失
+
+---
+## Entity: combo-auth-area (combo_auth_area)
+Type: composite_fault
+Description: 复合故障：auth_mismatch + area_mismatch。表现为两个独立故障在同一故障窗口同时出现，需分别识别各子故障证据，按规则逐项排查。
+Source: combo_lib
+Relationship: combo_auth_area --combines--> auth_mismatch. 复合故障 combo-auth-area 由 auth_mismatch 与另一故障叠加而成
+Relationship: combo_auth_area --combines--> area_mismatch. 复合故障 combo-auth-area 由 area_mismatch 与另一故障叠加而成
+
+---
+## Entity: combo-auth-circuit (combo_auth_circuit)
+Type: composite_fault
+Description: 复合故障：auth_mismatch + circuit_type_mismatch。表现为两个独立故障在同一故障窗口同时出现，需分别识别各子故障证据，按规则逐项排查。
+Source: combo_lib
+Relationship: combo_auth_circuit --combines--> auth_mismatch. 复合故障 combo-auth-circuit 由 auth_mismatch 与另一故障叠加而成
+Relationship: combo_auth_circuit --combines--> circuit_type_mismatch. 复合故障 combo-auth-circuit 由 circuit_type_mismatch 与另一故障叠加而成
+
+---
+## Entity: combo-auth-hello (combo_auth_hello)
+Type: composite_fault
+Description: 复合故障：auth_mismatch + hello_timer_mismatch。表现为两个独立故障在同一故障窗口同时出现，需分别识别各子故障证据，按规则逐项排查。
+Source: combo_lib
+Relationship: combo_auth_hello --combines--> auth_mismatch. 复合故障 combo-auth-hello 由 auth_mismatch 与另一故障叠加而成
+Relationship: combo_auth_hello --combines--> hello_timer_mismatch. 复合故障 combo-auth-hello 由 hello_timer_mismatch 与另一故障叠加而成
+
+---
+## Entity: combo-auth-mtu (combo_auth_mtu)
+Type: composite_fault
+Description: 复合故障：auth_mismatch + mtu_mismatch。表现为两个独立故障在同一故障窗口同时出现，需分别识别各子故障证据，按规则逐项排查。
+Source: combo_lib
+Relationship: combo_auth_mtu --combines--> auth_mismatch. 复合故障 combo-auth-mtu 由 auth_mismatch 与另一故障叠加而成
+Relationship: combo_auth_mtu --combines--> mtu_mismatch. 复合故障 combo-auth-mtu 由 mtu_mismatch 与另一故障叠加而成
+
+---
+## Entity: combo-circuit-area (combo_circuit_area)
+Type: composite_fault
+Description: 复合故障：circuit_type_mismatch + area_mismatch。表现为两个独立故障在同一故障窗口同时出现，需分别识别各子故障证据，按规则逐项排查。
+Source: combo_lib
+Relationship: combo_circuit_area --combines--> circuit_type_mismatch. 复合故障 combo-circuit-area 由 circuit_type_mismatch 与另一故障叠加而成
+Relationship: combo_circuit_area --combines--> area_mismatch. 复合故障 combo-circuit-area 由 area_mismatch 与另一故障叠加而成
+
+---
+## Entity: combo-duplicate-auth (combo_duplicate_auth)
+Type: composite_fault
+Description: 复合故障：duplicate_system_id + auth_mismatch。表现为两个独立故障在同一故障窗口同时出现，需分别识别各子故障证据，按规则逐项排查。
+Source: combo_lib
+Relationship: combo_duplicate_auth --combines--> duplicate_system_id. 复合故障 combo-duplicate-auth 由 duplicate_system_id 与另一故障叠加而成
+Relationship: combo_duplicate_auth --combines--> auth_mismatch. 复合故障 combo-duplicate-auth 由 auth_mismatch 与另一故障叠加而成
+
+---
+## Entity: combo-hello-area (combo_hello_area)
+Type: composite_fault
+Description: 复合故障：hello_timer_mismatch + area_mismatch。表现为两个独立故障在同一故障窗口同时出现，需分别识别各子故障证据，按规则逐项排查。
+Source: combo_lib
+Relationship: combo_hello_area --combines--> hello_timer_mismatch. 复合故障 combo-hello-area 由 hello_timer_mismatch 与另一故障叠加而成
+Relationship: combo_hello_area --combines--> area_mismatch. 复合故障 combo-hello-area 由 area_mismatch 与另一故障叠加而成
+
+---
+## Entity: combo-link-netem (combo_link_netem)
+Type: composite_fault
+Description: 复合故障：link_down + netem_loss_delay。表现为两个独立故障在同一故障窗口同时出现，需分别识别各子故障证据，按规则逐项排查。
+Source: combo_lib
+Relationship: combo_link_netem --combines--> link_down. 复合故障 combo-link-netem 由 link_down 与另一故障叠加而成
+Relationship: combo_link_netem --combines--> netem_loss_delay. 复合故障 combo-link-netem 由 netem_loss_delay 与另一故障叠加而成
+
+---
+## Entity: combo-mtu-area (combo_mtu_area)
+Type: composite_fault
+Description: 复合故障：mtu_mismatch + area_mismatch。表现为两个独立故障在同一故障窗口同时出现，需分别识别各子故障证据，按规则逐项排查。
+Source: combo_lib
+Relationship: combo_mtu_area --combines--> mtu_mismatch. 复合故障 combo-mtu-area 由 mtu_mismatch 与另一故障叠加而成
+Relationship: combo_mtu_area --combines--> area_mismatch. 复合故障 combo-mtu-area 由 area_mismatch 与另一故障叠加而成
+
+---
+## Entity: combo-mtu-circuit (combo_mtu_circuit)
+Type: composite_fault
+Description: 复合故障：mtu_mismatch + circuit_type_mismatch。表现为两个独立故障在同一故障窗口同时出现，需分别识别各子故障证据，按规则逐项排查。
+Source: combo_lib
+Relationship: combo_mtu_circuit --combines--> mtu_mismatch. 复合故障 combo-mtu-circuit 由 mtu_mismatch 与另一故障叠加而成
+Relationship: combo_mtu_circuit --combines--> circuit_type_mismatch. 复合故障 combo-mtu-circuit 由 circuit_type_mismatch 与另一故障叠加而成
+
+---
+## Entity: combo-mtu-hello (combo_mtu_hello)
+Type: composite_fault
+Description: 复合故障：mtu_mismatch + hello_timer_mismatch。表现为两个独立故障在同一故障窗口同时出现，需分别识别各子故障证据，按规则逐项排查。
+Source: combo_lib
+Relationship: combo_mtu_hello --combines--> mtu_mismatch. 复合故障 combo-mtu-hello 由 mtu_mismatch 与另一故障叠加而成
+Relationship: combo_mtu_hello --combines--> hello_timer_mismatch. 复合故障 combo-mtu-hello 由 hello_timer_mismatch 与另一故障叠加而成
+
+---
+## Entity: CRC错误计数增加 (crc错误计数增加)
+Type: symptom
+Description: 规则 interface_errors 的指标：CRC错误计数增加
+Source: rule:layer1_physical.json
+
+---
+## Entity: Down (down)
+Type: symptom
+Description: 规则 adjacency_down 的指标：Down
+Source: rule:layer2_link.json
+
+---
+## Entity: Duplicate System ID (duplicate_system_id)
+Type: fault
+Description: Two devices advertise the same System ID
+Source: RFC5301
+Relationship: duplicate_system_id --causes--> adjacency_down. Duplicate System ID causes LSP conflict and adjacency issues
+Relationship: duplicate_system_id --indicates--> 同一system_id出现在多个位置. duplicate_system_id indicates 同一System ID出现在多个位置
+Relationship: duplicate_system_id --indicates--> lsp来源冲突. duplicate_system_id indicates LSP来源冲突
+Relationship: duplicate_system_id --indicates--> 路由震荡. duplicate_system_id indicates 路由震荡
+
+---
+## Entity: Hello Timer Mismatch (hello_timer_mismatch)
+Type: fault
+Description: Hello or Hold timer values differ significantly
+Source: observational
+Relationship: hello_timer_mismatch --causes--> adjacency_down. Hello timer mismatch can cause adjacency timeout
+Relationship: hello_timer_mismatch --indicates--> holding_timer_mismatch. hello_timer_mismatch indicates holding_timer_mismatch
+
+---
+## Entity: high_latency (high_latency)
+Type: rule
+Description: 端到端时延过高
+Source: rule:layer4_application.json
+Relationship: high_latency --indicates--> ping_rtt超过阈值. high_latency indicates ping RTT超过阈值
+Relationship: high_latency --indicates--> 业务响应缓慢. high_latency indicates 业务响应缓慢
+Relationship: high_latency --indicates--> 链路拥塞. high_latency indicates 链路拥塞
+
+---
+## Entity: holding_timer_mismatch (holding_timer_mismatch)
+Type: symptom
+Description: 规则 hello_timer_mismatch 的指标：holding_timer_mismatch
+Source: rule:layer2_link.json
+
+---
+## Entity: interface_down (interface_down)
+Type: rule
+Description: 接口物理状态为down
+Source: rule:layer1_physical.json
+Relationship: interface_down --indicates--> 接口状态显示down. interface_down indicates 接口状态显示down
+Relationship: interface_down --indicates--> 链路光功率异常. interface_down indicates 链路光功率异常
+Relationship: interface_down --indicates--> 物理层无信号. interface_down indicates 物理层无信号
+Relationship: interface_down --indicates--> link_down. interface_down indicates link_down
+Relationship: interface_down --indicates--> interface_is_down. interface_down indicates Interface is Down
+
+---
+## Entity: interface_errors (interface_errors)
+Type: rule
+Description: 接口存在大量物理层错误
+Source: rule:layer1_physical.json
+Relationship: interface_errors --indicates--> crc错误计数增加. interface_errors indicates CRC错误计数增加
+Relationship: interface_errors --indicates--> 帧错误计数增加. interface_errors indicates 帧错误计数增加
+Relationship: interface_errors --indicates--> 物理层丢包. interface_errors indicates 物理层丢包
+
+---
+## Entity: Interface is Down (interface_is_down)
+Type: symptom
+Description: 规则 interface_down 的指标：Interface is Down
+Source: rule:layer1_physical.json
+
+---
+## Entity: L1/L2邻接建立失败 (l1/l2邻接建立失败)
+Type: symptom
+Description: 规则 area_mismatch 的指标：L1/L2邻接建立失败
+Source: rule:layer3_routing.json
+
+---
+## Entity: adjacency_down (l2_r001)
+Type: rule
+Description: IS-IS邻接关系Down
+Source: rule:layer2_link.json
+
+---
+## Entity: auth_failure (l2_r002)
+Type: rule
+Description: IS-IS认证失败
+Source: rule:layer2_link.json
+
+---
+## Entity: circuit_type_mismatch (l2_r003)
+Type: rule
+Description: 电路类型不匹配
+Source: rule:layer2_link.json
+
+---
+## Entity: hello_timer_mismatch (l2_r004)
+Type: rule
+Description: Hello/Holding定时器不匹配
+Source: rule:layer2_link.json
+
+---
+## Entity: mtu_mismatch (l2_r005)
+Type: rule
+Description: 接口MTU不匹配
+Source: rule:layer2_link.json
+
+---
+## Entity: Level不匹配导致路由信息丢失 (level不匹配导致路由信息丢失)
+Type: symptom
+Description: 规则 circuit_type_mismatch 的指标：Level不匹配导致路由信息丢失
+Source: rule:layer3_routing.json
+
+---
+## Entity: Link Down (link_down)
+Type: fault
+Description: link-down 场景：fault 段在 R02 焦点接口执行 ip link set down，
+Source: scenario
+Relationship: link_down --causes--> adjacency_down. Link Down may cause adjacency Down
+Relationship: link_down --causes--> neighbor_loss. Link Down may lead to neighbor loss
+
+---
+## Entity: lsp_seq_num_wrap (lsp_seq_num_wrap)
+Type: rule
+Description: LSP序列号异常环绕
+Source: rule:layer3_routing.json
+Relationship: lsp_seq_num_wrap --indicates--> lsp序列号不连续. lsp_seq_num_wrap indicates LSP序列号不连续
+Relationship: lsp_seq_num_wrap --indicates--> 序列号差值大于阈值. lsp_seq_num_wrap indicates 序列号差值大于阈值
+Relationship: lsp_seq_num_wrap --indicates--> lsp频繁刷新. lsp_seq_num_wrap indicates LSP频繁刷新
+
+---
+## Entity: LSP Suppression (lsp_suppression)
+Type: fault
+Description: LSP generation/refresh abnormally suppressed
+Source: observational
+Relationship: lsp_suppression --causes--> neighbor_loss. LSP suppression can lead to route reachability issues
+Relationship: lsp_suppression --causes--> adjacency_down. LSP Suppression may cause adjacency Down
+
+---
+## Entity: LSP序列号不连续 (lsp序列号不连续)
+Type: symptom
+Description: 规则 lsp_seq_num_wrap 的指标：LSP序列号不连续
+Source: rule:layer3_routing.json
+
+---
+## Entity: LSP来源冲突 (lsp来源冲突)
+Type: symptom
+Description: 规则 duplicate_system_id 的指标：LSP来源冲突
+Source: rule:layer3_routing.json
+
+---
+## Entity: LSP频繁刷新 (lsp频繁刷新)
+Type: symptom
+Description: 规则 lsp_seq_num_wrap 的指标：LSP频繁刷新
+Source: rule:layer3_routing.json
+
+---
+## Entity: MTU Mismatch (mtu_mismatch)
+Type: fault
+Description: Interface MTU or LSP buffer size inconsistent
+Source: observational
+Relationship: mtu_mismatch --causes--> adjacency_down. MTU mismatch can cause adjacency flaps
+
+---
+## Entity: Neighbor Loss (neighbor_loss)
+Type: fault
+Description: Expected IIH packets missing from a known neighbor during fault window
+Source: observational
+Relationship: neighbor_loss --indicates--> link_down. Neighbor loss may indicate physical link down
+Relationship: neighbor_loss --causes--> adjacency_down. Neighbor Loss may cause adjacency Down
+
+---
+## Entity: Network Impairment (netem_loss_delay)
+Type: fault
+Description: Packet loss or delay causing adjacency instability
+Source: observational
+Relationship: netem_loss_delay --causes--> adjacency_down. Packet loss/delay can cause Hold timer expiration
+Relationship: netem_loss_delay --causes--> neighbor_loss. Network Impairment may lead to neighbor loss
+
+---
+## Entity: ping RTT超过阈值 (ping_rtt超过阈值)
+Type: symptom
+Description: 规则 high_latency 的指标：ping RTT超过阈值
+Source: rule:layer4_application.json
+
+---
+## Entity: ping_unreachable (ping_unreachable)
+Type: rule
+Description: 端到端ping不可达
+Source: rule:layer4_application.json
+Relationship: ping_unreachable --indicates--> ping成功率低于阈值. ping_unreachable indicates ping成功率低于阈值
+Relationship: ping_unreachable --indicates--> 目的主机不可达. ping_unreachable indicates 目的主机不可达
+Relationship: ping_unreachable --indicates--> 路由不可达. ping_unreachable indicates 路由不可达
+
+---
+## Entity: ping成功率低于阈值 (ping成功率低于阈值)
+Type: symptom
+Description: 规则 ping_unreachable 的指标：ping成功率低于阈值
+Source: rule:layer4_application.json
+
+---
+## Entity: R01 (r01)
+Type: device
+Description: Star center router
+Source: RFC5301
+Relationship: r01 --has_state--> adjacency_up. R01 normally has adjacency Up with neighbors
+
+---
+## Entity: R02 (r02)
+Type: device
+Description: Fault focus router
+Source: RFC5301
+Relationship: r02 --has_state--> adjacency_down. R02 is the fault focus node and may experience adjacency Down
+
+---
+## Entity: R03 (r03)
+Type: device
+Description: Background router
+Source: RFC5301
+Relationship: r03 --has_state--> adjacency_up. R03 normally has adjacency Up
+
+---
+## Entity: R04 (r04)
+Type: device
+Description: Background router
+Source: RFC5301
+Relationship: r04 --has_state--> adjacency_up. R04 normally has adjacency Up
+
+---
+## Entity: R05 (r05)
+Type: device
+Description: Background router
+Source: RFC5301
+Relationship: r05 --has_state--> adjacency_up. R05 normally has adjacency Up
+
+---
+## Entity: 一端为L1-only，另一端为L2-only (一端为l1_only，另一端为l2_only)
+Type: symptom
+Description: 规则 circuit_type_mismatch 的指标：一端为L1-only，另一端为L2-only
+Source: rule:layer3_routing.json
+
+---
+## Entity: 业务响应缓慢 (业务响应缓慢)
+Type: symptom
+Description: 规则 high_latency 的指标：业务响应缓慢
+Source: rule:layer4_application.json
+
+---
+## Entity: 两端区域地址不同 (两端区域地址不同)
+Type: symptom
+Description: 规则 area_mismatch 的指标：两端区域地址不同
+Source: rule:layer3_routing.json
+
+---
+## Entity: 区域间路由不可达 (区域间路由不可达)
+Type: symptom
+Description: 规则 area_mismatch 的指标：区域间路由不可达
+Source: rule:layer3_routing.json
+
+---
+## Entity: 只能建立单边邻接 (只能建立单边邻接)
+Type: symptom
+Description: 规则 circuit_type_mismatch 的指标：只能建立单边邻接
+Source: rule:layer3_routing.json
+
+---
+## Entity: 同一System ID出现在多个位置 (同一system_id出现在多个位置)
+Type: symptom
+Description: 规则 duplicate_system_id 的指标：同一System ID出现在多个位置
+Source: rule:layer3_routing.json
+
+---
+## Entity: 帧错误计数增加 (帧错误计数增加)
+Type: symptom
+Description: 规则 interface_errors 的指标：帧错误计数增加
+Source: rule:layer1_physical.json
+
+---
+## Entity: 序列号差值大于阈值 (序列号差值大于阈值)
+Type: symptom
+Description: 规则 lsp_seq_num_wrap 的指标：序列号差值大于阈值
+Source: rule:layer3_routing.json
+
+---
+## Entity: 接口状态显示down (接口状态显示down)
+Type: symptom
+Description: 规则 interface_down 的指标：接口状态显示down
+Source: rule:layer1_physical.json
+
+---
+## Entity: 物理层丢包 (物理层丢包)
+Type: symptom
+Description: 规则 interface_errors 的指标：物理层丢包
+Source: rule:layer1_physical.json
+
+---
+## Entity: 物理层无信号 (物理层无信号)
+Type: symptom
+Description: 规则 interface_down 的指标：物理层无信号
+Source: rule:layer1_physical.json
+
+---
+## Entity: 目的主机不可达 (目的主机不可达)
+Type: symptom
+Description: 规则 ping_unreachable 的指标：目的主机不可达
+Source: rule:layer4_application.json
+
+---
+## Entity: 路由不可达 (路由不可达)
+Type: symptom
+Description: 规则 ping_unreachable 的指标：路由不可达
+Source: rule:layer4_application.json
+
+---
+## Entity: 路由震荡 (路由震荡)
+Type: symptom
+Description: 规则 duplicate_system_id 的指标：路由震荡
+Source: rule:layer3_routing.json
+
+---
+## Entity: 链路光功率异常 (链路光功率异常)
+Type: symptom
+Description: 规则 interface_down 的指标：链路光功率异常
+Source: rule:layer1_physical.json
+
+---
+## Entity: 链路拥塞 (链路拥塞)
+Type: symptom
+Description: 规则 high_latency 的指标：链路拥塞
+Source: rule:layer4_application.json

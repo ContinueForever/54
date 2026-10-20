@@ -1,0 +1,25 @@
+{
+  "query": "circuit type mismatch",
+  "source": "agent-analysis/config/knowledge_tables",
+  "queried_at": "2026-10-14T10:02:00.319531+08:00",
+  "hits": [
+    {
+      "node_id": "circuit_type_mismatch",
+      "node_type": "fault",
+      "name": "Circuit Type Mismatch",
+      "description": "L1/L2 circuit-type mismatch prevents adjacency formation",
+      "source": "RFC 1195"
+    }
+  ],
+  "related": [],
+  "incoming_edges": [
+    {
+      "source_id": "adjacency_down",
+      "relation": "caused_by",
+      "target_id": "circuit_type_mismatch",
+      "strength": "0.7",
+      "description": "Circuit type mismatch causes adjacency down"
+    }
+  ],
+  "incoming_edge_source": "agent-analysis/config/knowledge_tables/edges.csv"
+}

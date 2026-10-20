@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>54所卫星网络 IS-IS 智能分析平台 — 升级工作报告</title>
+<style>
+  :root {
+    --primary: #1f4e79;
+    --primary-light: #e8f0f8;
+    --accent: #c55a11;
+    --ok: #1e7e34;
+    --ok-bg: #e6f4ea;
+    --warn: #b45309;
+    --warn-bg: #fef3e2;
+    --bad: #b91c1c;
+    --bad-bg: #fde8e8;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --border: #d1d9e6;
+    --bg: #f7f9fc;
+    --card: #ffffff;
+    --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+  /* ===== 顶部 ===== */
+  header.hero {
+    background: linear-gradient(135deg, #16385c 0%, var(--primary) 55%, #2e6ca3 100%);
+    color: #fff;
+    padding: 56px 48px 48px;
+  }
+  header.hero .kicker { font-size: 13px; letter-spacing: 3px; opacity: .85; text-transform: uppercase; }
+  header.hero h1 { font-size: 30px; margin: 10px 0 6px; font-weight: 700; }
+  header.hero .sub { font-size: 15px; opacity: .92; max-width: 860px; }
+  header.hero .meta { margin-top: 18px; display: flex; gap: 28px; flex-wrap: wrap; font-size: 13px; opacity: .9; }
+  header.hero .meta span b { font-weight: 600; }
+  /* ===== 导航 ===== */
+  nav.toc {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 48px;
+    position: sticky; top: 0; z-index: 50;
+    box-shadow: 0 2px 8px rgba(31,78,121,.06);
+    display: flex; gap: 22px; flex-wrap: wrap;
+  }
+  nav.toc a { color: var(--primary); text-decoration: none; font-size: 13.5px; font-weight: 600; }
+  nav.toc a:hover { color: var(--accent); }
+  /* ===== 主体 ===== */
+  main { max-width: 1080px; margin: 0 auto; padding: 40px 24px 80px; }
+  section { margin-bottom: 52px; }
+  h2 {
+    font-size: 22px; color: var(--primary);
+    padding-bottom: 10px; border-bottom: 2px solid var(--primary);
+    margin-bottom: 22px;
+  }
+  h2 .no { color: var(--accent); margin-right: 8px; font-family: var(--mono); }
+  h3 { font-size: 17px; margin: 24px 0 10px; color: #15395e; }
+  p  { margin-bottom: 12px; }
+  ul, ol { margin: 6px 0 14px 22px; }
+  li { margin-bottom: 6px; }
+  code {
+    font-family: var(--mono); font-size: 13px;
+    background: #eef2f7; color: #223b57;
+    padding: 2px 6px; border-radius: 4px;
+  }
+  pre {
+    font-family: var(--mono); font-size: 13px;
+    background: #12263b; color: #d7e6f7;
+    padding: 16px 18px; border-radius: 8px;
+    overflow-x: auto; margin: 12px 0 16px; line-height: 1.6;
+  }
+  pre .c { color: #7fa8c9; }
+  /* ===== 卡片 ===== */
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 22px 24px; margin-bottom: 18px;
+    box-shadow: 0 1px 4px rgba(31,78,121,.05);
+  }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; margin: 18px 0; }
+  .stat {
+    background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+    padding: 18px 20px; text-align: center;
+  }
+  .stat .num { font-size: 32px; font-weight: 800; color: var(--primary); }
+  .stat .lbl { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  /* ===== 表格 ===== */
+  table { width: 100%; border-collapse: collapse; margin: 14px 0 20px; font-size: 13.5px; }
+  th, td { border: 1px solid var(--border); padding: 8px 12px; text-align: left; }
+  th { background: var(--primary-light); color: #15395e; font-weight: 700; white-space: nowrap; }
+  tr:nth-child(even) td { background: #fbfcfe; }
+  td.mono { font-family: var(--mono); font-size: 12.5px; }
+  .pill { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 12px; font-weight: 700; white-space: nowrap; }
+  .pill.ok    { background: var(--ok-bg);   color: var(--ok); }
+  .pill.warn  { background: var(--warn-bg); color: var(--warn); }
+  .pill.bad   { background: var(--bad-bg);  color: var(--bad); }
+  .pill.blue  { background: var(--primary-light); color: var(--primary); }
+  /* ===== 徽章/标签 ===== */
+  .tag { display: inline-block; padding: 1px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-right: 6px; }
+  .tag.pass { background: #dcedf6; color: var(--primary); }
+  .tag.crit { background: #fde8e8; color: var(--bad); }
+  .tag.new  { background: #e6f4ea; color: var(--ok); }
+  /* ===== 时间线 ===== */
+  .timeline { position: relative; margin: 18px 0 10px; padding-left: 30px; }
+  .timeline::before {
+    content: ""; position: absolute; left: 8px; top: 6px; bottom: 6px;
+    width: 2px; background: var(--border);
+  }
+  .step { position: relative; margin-bottom: 18px; }
+  .step::before {
+    content: ""; position: absolute; left: -30px; top: 6px;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--primary); border: 3px solid var(--bg);
+  }
+  .step .t { font-weight: 700; color: #15395e; }
+  .step .cmd { font-family: var(--mono); font-size: 12.5px; background: #eef2f7; padding: 2px 8px; border-radius: 4px; }
+  .step .think {
+    margin-top: 8px; font-size: 13.5px; background: #fdf8ef;
+    border-left: 3px solid var(--accent); padding: 8px 14px; border-radius: 0 6px 6px 0;
+  }
+  .step .think b { color: var(--accent); }
+  /* ===== 修复项 ===== */
+  .fix { display: grid; grid-template-columns: 36px 1fr; gap: 14px; margin-bottom: 12px; }
+  .fix .n {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--bad-bg); color: var(--bad);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 14px;
+  }
+  .fix p { margin-bottom: 2px; }
+  .fix .p { color: var(--muted); font-size: 13px; }
+  /* ===== 页脚 ===== */
+  footer {
+    border-top: 1px solid var(--border); margin-top: 40px;
+    padding: 20px 0 8px; color: var(--muted); font-size: 13px;
+  }
+  a.anchor { display: block; position: relative; top: -70px; visibility: hidden; }
+  @media (max-width: 720px) {
+    header.hero { padding: 36px 22px; }
+    nav.toc { padding: 12px 22px; }
+    main { padding: 28px 14px 60px; }
+    th, td { padding: 6px 8px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= 头部 ================= -->
+<header class="hero">
+  <div class="kicker">Upgrade Report · 升级工作报告</div>
+  <h1>54所卫星网络 IS-IS 智能分析平台</h1>
+  <div class="sub">复合故障诊断 · LLM 全程参与 · 批判性审查 —— 三层智能升级工作总结与验证结果</div>
+  <div class="meta">
+    <span><b>日期</b>　2026-08-20</span>
+    <span><b>版本</b>　workspace-orchestrator v3.0.0</span>
+    <span><b>状态</b>　<span style="color:#a8e0b5"><b>全部验证通过</b></span></span>
+    <span><b>覆盖场景</b>　10 单故障 + 11 复合故障</span>
+  </div>
+</header>
+
+<!-- ================= 目录 ================= -->
+<nav class="toc">
+  <a href="#overview">一、升级总览</a>
+  <a href="#combo">二、复合故障诊断</a>
+  <a href="#llm">三、LLM 全程参与</a>
+  <a href="#critic">四、批判性审查</a>
+  <a href="#knowledge">五、知识图谱注入</a>
+  <a href="#verify">六、全量验证结果</a>
+  <a href="#fixes">七、过程修复</a>
+  <a href="#deliverables">八、交付与待办</a>
+</nav>
+
+<main>
+
+<!-- ================= 一、总览 ================= -->
+<span class="anchor" id="overview"></span>
+<section>
+  <h2><span class="no">01</span>升级总览</h2>
+
+  <div class="cards">
+    <div class="stat"><div class="num">11</div><div class="lbl">新增复合故障场景</div></div>
+    <div class="stat"><div class="num">9</div><div class="lbl">流水线 LLM 推演阶段</div></div>
+    <div class="stat"><div class="num">21</div><div class="lbl">全量验证场景</div></div>
+    <div class="stat"><div class="num">100%</div><div class="lbl">规则命中率</div></div>
+  </div>
+
+  <div class="card">
+    <h3>升级目标（对应甲方要求）</h3>
+    <ul>
+      <li><span class="tag pass">核心诉求</span><b>Hermes（LLM）在分析流程关键环节全程参与思考与判断</b>——告别"一键黑盒"，让甲方在每个阶段看到 LLM 的观察、推理与决策过程。</li>
+      <li><span class="tag new">能力补齐</span><b>复合故障诊断</b>——两个独立故障在同一窗口叠加时，须分别识别各子故障证据并按规则逐项排查。</li>
+      <li><span class="tag new">质量保障</span><b>批判性审查</b>——批判子智能体对诊断报告独立审查，保障结论质量。</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>关键决策</h3>
+    <table>
+      <tr><th style="width:160px">决策点</th><th>选择</th><th>理由</th></tr>
+      <tr>
+        <td>LLM 参与方式</td>
+        <td>Hermes 执行 skill 流水线时<b>多阶段介入</b>（每阶段输出推演记录）；脚本内保持单次 LLM 辅助诊断</td>
+        <td>体现 LLM 思考能力；避免脚本内多次调 LLM 形成新的黑盒</td>
+      </tr>
+      <tr>
+        <td>诊断 LLM</td>
+        <td class="mono">硅基流动 Qwen/Qwen2.5-72B-Instruct</td>
+        <td>kimi-k3 配额失效（HTTP 401）；Qwen2.5 无思考模式、JSON 输出稳定</td>
+      </tr>
+      <tr>
+        <td>批判性审查</td>
+        <td>批判子智能体（isis-critic）按检查清单独立审查</td>
+        <td>独立审查者立场，输出结构化批判意见（CRITICAL→INFO 分级）</td>
+      </tr>
+      <tr>
+        <td>GraphRAG 模型</td>
+        <td class="mono">Qwen/Qwen2.5-72B-Instruct + local_tfidf 本地向量</td>
+        <td>与诊断引擎统一；embedding 本地化免外部依赖（离线环境）</td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<!-- ================= 二、复合故障 ================= -->
+<span class="anchor" id="combo"></span>
+<section>
+  <h2><span class="no">02</span>复合故障诊断（11 组场景）</h2>
+
+  <p>新增 <code>isis-simulator/src/isis_simulator/scenarios/combo_lib.py</code>，
+  定义 <code>COMBO_FAULTS</code>——每组复合场景在<b>同一故障窗口</b>叠加两个独立故障，</p>
+  <ul>
+    <li>pcap：两个故障特征叠加的网络报文（如认证失败 + 邻接 Down）</li>
+    <li>合并日志：双故障事件文本交错（如 MTU 不匹配 + Circuit type 不匹配）</li>
+  </ul>
+
+  <h3>复合场景清单</h3>
+  <table>
+    <tr><th>场景名</th><th>叠加故障 A</th><th>叠加故障 B</th><th>验证结论</th></tr>
+    <tr><td class="mono">combo-auth-area</td>       <td class="mono">auth_mismatch</td>            <td class="mono">area_mismatch</td>             <td><span class="pill ok">L2×2 + L3×1</span></td></tr>
+    <tr><td class="mono">combo-auth-mtu</td>         <td class="mono">auth_mismatch</td>            <td class="mono">mtu_mismatch</td>               <td><span class="pill ok">L2×3</span></td></tr>
+    <tr><td class="mono">combo-auth-circuit</td>     <td class="mono">auth_mismatch</td>            <td class="mono">circuit_type_mismatch</td>       <td><span class="pill ok">L2×3 + L3×1</span></td></tr>
+    <tr><td class="mono">combo-auth-hello</td>       <td class="mono">auth_mismatch</td>            <td class="mono">hello_timer_mismatch</td>        <td><span class="pill ok">L2×3</span></td></tr>
+    <tr><td class="mono">combo-mtu-area</td>         <td class="mono">mtu_mismatch</td>             <td class="mono">area_mismatch</td>              <td><span class="pill ok">L2×2 + L3×1</span></td></tr>
+    <tr><td class="mono">combo-mtu-hello</td>        <td class="mono">mtu_mismatch</td>             <td class="mono">hello_timer_mismatch</td>       <td><span class="pill ok">L2×3</span></td></tr>
+    <tr><td class="mono">combo-mtu-circuit</td>      <td class="mono">mtu_mismatch</td>             <td class="mono">circuit_type_mismatch</td>      <td><span class="pill ok">L2×3 + L3×1</span></td></tr>
+    <tr><td class="mono">combo-circuit-area</td>     <td class="mono">circuit_type_mismatch</td>    <td class="mono">area_mismatch</td>              <td><span class="pill ok">L2×1 + L3×2</span></td></tr>
+    <tr><td class="mono">combo-hello-area</td>       <td class="mono">hello_timer_mismatch</td>     <td class="mono">area_mismatch</td>              <td><span class="pill ok">L2×2 + L3×1</span></td></tr>
+    <tr><td class="mono">combo-duplicate-auth</td>   <td class="mono">duplicate_system_id</td>      <td class="mono">auth_mismatch</td>              <td><span class="pill ok">L2×2 + L3×1</span></td></tr>
+    <tr><td class="mono">combo-link-netem</td>       <td class="mono">link_down</td>                <td class="mono">netem_loss_delay</td>           <td><span class="pill ok">L1 + L2 + L4</span></td></tr>
+  </table>
+
+  <p class="note" style="color:var(--muted);font-size:13.5px">
+    <b>判定要点</b>：复合场景命中层<b>横跨两个子故障</b>（如 combo-link-netem 同时命中 L1/L2 链路层与 L4 应用层），
+    证明各子故障均被分别识别，而非二选一的单故障误判。
+  </p>
+</section>
+
+<!-- ================= 三、LLM 全程参与 ================= -->
+<span class="anchor" id="llm"></span>
+<section>
+  <h2><span class="no">03</span>LLM 全程参与（9 阶段推演）</h2>
+
+  <p><code>skills/workspace-orchestrator/SKILL.md</code>（v3.0.0）将流水线拆分为 9 个阶段，
+  <code>run.py</code> 支持 <code>--stage</code> 单阶段执行。Hermes 在每个阶段之间
+  <b>必须</b>输出 <b>【Hermes 推演 · 阶段名】</b>记录，包含三要素：</p>
+
+  <div class="cards">
+    <div class="stat" style="text-align:left; padding:16px 18px">
+      <div class="lbl" style="font-size:14px; font-weight:800; color:#15395e">① 看见了什么（观察）</div>
+      <div class="lbl" style="margin-top:6px">简明列出该阶段产物的关键数值、事件与信号</div>
+    </div>
+    <div class="stat" style="text-align:left; padding:16px 18px">
+      <div class="lbl" style="font-size:14px; font-weight:800; color:#15395e">② 我的判断（推理）</div>
+      <div class="lbl" style="margin-top:6px">基于观察给出初步判断、可能原因与风险点</div>
+    </div>
+    <div class="stat" style="text-align:left; padding:16px 18px">
+      <div class="lbl" style="font-size:14px; font-weight:800; color:#15395e">③ 下一步决策（决策）</div>
+      <div class="lbl" style="margin-top:6px">说明选择下一步的原因、预期结果与验证方式</div>
+    </div>
+  </div>
+
+  <h3>流水线示例（link-down 场景）</h3>
+  <div class="timeline">
+    <div class="step">
+      <div class="t">阶段 1 · 生成数据</div>
+      <div class="cmd">run.py link-down --run-id demo_run --stage generate</div>
+      <div class="think"><b>【Hermes 推演 · 生成数据】</b>读取 pcap/log 文件清单与大小，预估异常注入阶段与可能的故障类型。</div>
+    </div>
+    <div class="step">
+      <div class="t">阶段 2 · 准备输入</div>
+      <div class="cmd">run.py link-down --run-id demo_run --stage prepare</div>
+      <div class="think"><b>【Hermes 推演 · 准备输入】</b>确认 pcap 与 log 成对、数量吻合；缺文件则说明处理。</div>
+    </div>
+    <div class="step">
+      <div class="t">阶段 3 · 构建知识</div>
+      <div class="cmd">run.py link-down --run-id demo_run --stage build_knowledge</div>
+      <div class="think"><b>【Hermes 推演 · 构建知识】</b>阅读 nodes.csv，确认复合故障节点在库，说明其诊断价值。</div>
+    </div>
+    <div class="step">
+      <div class="t">阶段 4 · 构建索引</div>
+      <div class="cmd">run.py link-down --run-id demo_run --stage build_index</div>
+      <div class="think"><b>【Hermes 推演 · 构建索引】</b>说明索引规模变化与查询时延预估。</div>
+    </div>
+    <div class="step">
+      <div class="t">阶段 5 · 启动 GraphRAG</div>
+      <div class="cmd">run.py link-down --run-id demo_run --stage start_rag</div>
+      <div class="think"><b>【Hermes 推演 · 启动服务】</b>确认 /health 正常、索引与模型配置。</div>
+    </div>
+    <div class="step">
+      <div class="t">阶段 6 · 运行分析</div>
+      <div class="cmd">export GRAPHRAG_ENABLED=true &amp;&amp; python3 -m agent_analysis --input agent-analysis/data/incoming/demo_run</div>
+      <div class="think"><b>【Hermes 推演 · 规则匹配】</b>逐一核对命中规则依据、误报可能与复合故障完整性。<br>
+        <b>【Hermes 推演 · LLM 诊断】</b>评价 LLM 结论与命中规则、知识引用的证据链一致性。</div>
+    </div>
+    <div class="step">
+      <div class="t">阶段 7 · 批判性审查（必需）</div>
+      <div class="cmd">run.py link-down --run-id demo_run --stage critic</div>
+      <div class="think"><b>【Hermes 推演 · 批判审查】</b>汇总批判子智能体问题清单，说明采纳 / 拒绝理由。</div>
+    </div>
+    <div class="step">
+      <div class="t">阶段 8 · 汇总呈现</div>
+      <div class="cmd">run.py link-down --run-id demo_run --stage report</div>
+      <div class="think"><b>【Hermes 推演 · 总结交付】</b>综合报告、批判意见与自身判断输出最终结论及可信度标注。</div>
+    </div>
+    <div class="step">
+      <div class="t">阶段 9 · 前端展示（可选）</div>
+      <div class="cmd">run.py link-down --run-id demo_run --stage frontend</div>
+      <div class="think">启动 http://localhost:8080。</div>
+    </div>
+  </div>
+
+  <div class="card" style="background:#fdf8ef; border-color:#e8cfa0">
+    <b style="color:var(--warn)">设计说明</b>：LLM 的参与体现在 <b>Hermes 执行流水线各阶段的主动推理</b>，
+    而非脚本内多次调用 LLM。engine.py 已回滚为<b>单次 LLM 辅助诊断</b>（保留复合故障判定等确定性标注），
+    避免"脚本内黑盒化"。
+  </div>
+</section>
+
+<!-- ================= 四、批判性审查 ================= -->
+<span class="anchor" id="critic"></span>
+<section>
+  <h2><span class="no">04</span>批判性审查（isis-critic 子智能体）</h2>
+
+  <p>Hermes 执行完整工作流后，<b>必须</b>启动批判性子智能体（isis-critic）对诊断报告独立审查——</p>
+  <ul>
+    <li>基于 <code>skills/workspace-orchestrator/references/critic-checklist.md</code> 逐项核查</li>
+    <li>分 6 大核查域：数据完整性 / 特征提取 / 规则命中 / 知识引用 / LLM 结论质量 / 复合故障专项</li>
+    <li>输出结构化批判意见至 <code>agent-analysis/output/reports/run_&lt;ts&gt;.critique.md</code></li>
+  </ul>
+
+  <h3>问题等级定义</h3>
+  <table>
+    <tr><th style="width:120px">等级</th><th>含义</th><th>处置</th></tr>
+    <tr><td><span class="pill bad">CRITICAL</span></td><td>结论与证据相悖，或存在明显漏判</td><td>必须修正后重新出结论</td></tr>
+    <tr><td><span class="pill warn">MAJOR</span></td><td>证据不足、归因不唯一、缺少必要排查步骤</td><td>应补充证据或修正结论</td></tr>
+    <tr><td><span class="pill blue">MINOR</span></td><td>表达不清、格式问题、参考文献缺失</td><td>建议改进，不阻塞结论</td></tr>
+    <tr><td><span class="pill" style="background:#eef1f5;color:#374151">INFO</span></td><td>观察性建议、可操作优化</td><td>仅供参考</td></tr>
+  </table>
+
+  <div class="card" style="background:#fdf8ef; border-color:#e8cfa0">
+    <b style="color:var(--warn)">强制规则</b>：批判性审查为<b>必需步骤</b>；若批判子智能体不可用，
+    Hermes 应<b>停止流程并说明原因</b>，不得直接交付未经审查的结论。
+  </div>
+</section>
+
+<!-- ================= 五、知识图谱注入 ================= -->
+<span class="anchor" id="knowledge"></span>
+<section>
+  <h2><span class="no">05</span>知识图谱注入与 GraphRAG 重建</h2>
+
+  <div class="cards">
+    <div class="stat"><div class="num">35</div><div class="lbl">知识节点数</div></div>
+    <div class="stat"><div class="num">75</div><div class="lbl">关系边数</div></div>
+    <div class="stat"><div class="num">11</div><div class="lbl">composite_fault 节点</div></div>
+    <div class="stat"><div class="num">22</div><div class="lbl">combines 关系边</div></div>
+  </div>
+
+  <div class="cards">
+    <div class="stat"><div class="num">114</div><div class="lbl">GraphRAG 实体</div></div>
+    <div class="stat"><div class="num">160</div><div class="lbl">GraphRAG 关系</div></div>
+    <div class="stat"><div class="num">8</div><div class="lbl">社区数</div></div>
+    <div class="stat"><div class="num">20</div><div class="lbl">combo 相关实体</div></div>
+  </div>
+
+  <p><code>knowledge/scripts/build.py</code> 为每个复合场景注入 <code>composite_fault</code> 节点与
+  <code>combines</code> 关系边，并重建 GraphRAG 索引（微软 GraphRAG 2.7.2，<code>graphrag/.venv</code>）。
+  复合故障问答实测：</p>
+
+  <blockquote style="margin:14px 0; padding:14px 18px; border-left:4px solid var(--primary); background:var(--primary-light); border-radius:0 8px 8px 0;">
+    <span style="color:var(--muted);font-size:13px">Query</span><br>
+    "复合故障 auth mismatch 与 area mismatch 同时出现时如何诊断？"
+    <br><br>
+    <span style="color:var(--muted);font-size:13px">GraphRAG 回答（节选）</span><br>
+    <b>1. 确认故障现象</b>（邻接是否成功建立）→ <b>2. 分别核查认证配置</b>（password / keychain 一致性）→
+    <b>3. 分别核查 Area 配置</b>（area id / level 一致性）→ <b>4. 按证据链逐项排除</b>。
+  </blockquote>
+</section>
+
+<!-- ================= 六、全量验证结果 ================= -->
+<span class="anchor" id="verify"></span>
+<section>
+  <h2><span class="no">06</span>全量验证结果（21 场景）</h2>
+
+  <h3>单故障场景（10 组）</h3>
+  <table>
+    <tr><th>场景</th><th>命中规则</th><th>结论层</th><th>判定</th></tr>
+    <tr><td class="mono">baseline（正常基线）</td><td>—</td><td>—</td><td><span class="pill ok">normal 无异常</span></td></tr>
+    <tr><td class="mono">link-down</td><td class="mono">L1×1, L2×1</td><td>L1</td><td><span class="pill ok">通过</span></td></tr>
+    <tr><td class="mono">auth-mismatch</td><td class="mono">L2×2</td><td>L2</td><td><span class="pill ok">通过</span></td></tr>
+    <tr><td class="mono">mtu-mismatch</td><td class="mono">L2×2</td><td>L2</td><td><span class="pill ok">通过</span></td></tr>
+    <tr><td class="mono">area-mismatch</td><td class="mono">L3×1</td><td>L3</td><td><span class="pill ok">通过</span></td></tr>
+    <tr><td class="mono">hello-timer-mismatch</td><td class="mono">L2×2</td><td>L2</td><td><span class="pill ok">通过</span></td></tr>
+    <tr><td class="mono">circuit-type-mismatch</td><td class="mono">L2×1, L3×1</td><td>L2</td><td><span class="pill ok">通过</span></td></tr>
+    <tr><td class="mono">duplicate-system-id</td><td class="mono">L3×1</td><td>L3</td><td><span class="pill ok">通过</span></td></tr>
+    <tr><td class="mono">netem-loss-delay</td><td class="mono">L4×1</td><td>L4</td><td><span class="pill ok">通过</span></td></tr>
+    <tr><td class="mono">lsp-suppression</td><td class="mono">L2×1</td><td>L2</td><td><span class="pill ok">通过</span></td></tr>
+  </table>
+
+  <h3>复合故障场景（11 组，见第 02 节列表）</h3>
+  <p>全部跨层 / 多层命中，各子故障均被分别检出。例如：</p>
+  <table>
+    <tr><th>复合场景</th><th>A 故障证据</th><th>B 故障证据</th><th>合并日志示例</th></tr>
+    <tr>
+      <td class="mono">combo-auth-area</td>
+      <td class="mono">Authentication failed for IIH (L2×1)</td>
+      <td class="mono">IIH area mismatch (L3×1)</td>
+      <td class="mono">"Authentication failed…" + "area mismatch" 交错</td>
+    </tr>
+    <tr>
+      <td class="mono">combo-mtu-circuit</td>
+      <td class="mono">MTU mismatch detected 1492 vs 1500 (L2)</td>
+      <td class="mono">Received L1 IIH on L2-only circuit (L2+L3)</td>
+      <td class="mono">"MTU mismatch…" + "Circuit type mismatch…" 交错</td>
+    </tr>
+    <tr>
+      <td class="mono">combo-link-netem</td>
+      <td class="mono">物理层邻居丢失（L1）</td>
+      <td class="mono">丢包 / 延迟特征（L4）</td>
+      <td class="mono">L1 + L2 + L4 三层命中</td>
+    </tr>
+  </table>
+
+  <h3>LLM 诊断链路验证</h3>
+  <div class="card">
+    <ul>
+      <li><b>GraphRAG 服务：</b><code>/health</code> 正常，新索引 loaded，复合故障问答返回正确诊断流程</li>
+      <li><b>诊断引擎：</b>规则 → 知识引用 → LLM 结论 → 报告全链路端到端可用（硅基 Qwen）</li>
+      <li><b>报告样例：</b>LLM 结论含"最可能根因 / 影响范围 / 排查步骤"结构化输出，并标注 GraphRAG 知识引用来源</li>
+      <li><b>组合日志：</b>双故障事件文本合并验证通过（见上表）</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= 七、过程修复 ================= -->
+<span class="anchor" id="fixes"></span>
+<section>
+  <h2><span class="no">07</span>过程修复（本轮发现并解决）</h2>
+
+  <div class="fix">
+    <div class="n">1</div>
+    <div>
+      <p><b>场景名静默失败</b>：CLI 需精确场景名（<code>hello-timer</code> 应为 <code>hello-timer-mismatch</code>），未知场景静默跳过不报错</p>
+      <p class="p">修复：统一场景名注册与文档（GUIDE 场景表已更新），CLI 层补精确名映射</p>
+    </div>
+  </div>
+  <div class="fix">
+    <div class="n">2</div>
+    <div>
+      <p><b>runner 路径解析错误</b>：相对路径导致生成产物落于 <code>isis-simulator/isis-simulator/output/</code></p>
+      <p class="p">修复：<code>generate_isis_scenario</code> 增加 <code>output_dir.resolve()</code></p>
+    </div>
+  </div>
+  <div class="fix">
+    <div class="n">3</div>
+    <div>
+      <p><b>GraphRAG 解释器缺失</b>：微软 GraphRAG 依赖安装于 <code>graphrag/.venv</code>，系统 python 找不到模块</p>
+      <p class="p">修复：runner 增加 <code>graphrag_python()</code>，优先使用 venv 解释器构建索引 / 启动服务</p>
+    </div>
+  </div>
+  <div class="fix">
+    <div class="n">4</div>
+    <div>
+      <p><b>Qwen 思考模式导致 content 为空</b>：Qwen3.5 默认返回 reasoning_content 而 content 为空</p>
+      <p class="p">修复：客户端请求加 <code>enable_thinking=false</code> + 响应 JSON 解析回退；GraphRAG chat 模型切换到 Qwen2.5-72B（无思考模式）</p>
+    </div>
+  </div>
+  <div class="fix">
+    <div class="n">5</div>
+    <div>
+      <p><b>诊断 LLM 失效</b>：kimi-k3 配额过期（HTTP 401）</p>
+      <p class="p">修复：经确认切换至硅基流动 Qwen（<code>agent-analysis/.env.project</code>），已端到端验证</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 八、交付与待办 ================= -->
+<span class="anchor" id="deliverables"></span>
+<section>
+  <h2><span class="no">08</span>交付物与剩余事项</h2>
+
+  <div class="card">
+    <h3>本轮交付物</h3>
+    <table>
+      <tr><th>交付物</th><th>路径</th><th>说明</th></tr>
+      <tr><td>复合故障生成模块</td><td class="mono">isis-simulator/src/isis_simulator/scenarios/combo_lib.py</td><td>11 组 COMBO_FAULTS</td></tr>
+      <tr><td>知识注入脚本</td><td class="mono">knowledge/scripts/build.py</td><td>composite_fault 节点 + combines 边</td></tr>
+      <tr><td>流水线 SKILL</td><td class="mono">skills/workspace-orchestrator/SKILL.md</td><td>v3.0.0，9 阶段 + Hermes 推演节点</td></tr>
+      <tr><td>分阶段执行器</td><td class="mono">skills/workspace-orchestrator/run.py</td><td>--stage 参数</td></tr>
+      <tr><td>批判检查清单</td><td class="mono">skills/workspace-orchestrator/references/critic-checklist.md</td><td>6 大核查域 / 4 级问题</td></tr>
+      <tr><td>改进报告</td><td class="mono">docs/improv_report_20260820.md</td><td>详细验证表与决策记录</td></tr>
+      <tr><td>本 HTML 报告</td><td class="mono">docs/upgrade_report_20260820.html</td><td>—</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>剩余事项</h3>
+    <table>
+      <tr><th>#</th><th>事项</th><th>状态</th></tr>
+      <tr><td>1</td><td>前端界面展示复合故障场景（combo-* 报告渲染）</td><td><span class="pill warn">待办</span></td></tr>
+      <tr><td>2</td><td>知识发现（knowledge-builder discover）对 combo 未知组合的增量学习</td><td><span class="pill warn">待办</span></td></tr>
+      <tr><td>3</td><td>迁移甲方内网 vLLM 时统一替换三层模型配置</td><td><span class="pill warn">待办</span></td></tr>
+    </table>
+  </div>
+</section>
+
+<footer>
+  <hr style="border:none; border-top:1px solid var(--border); margin-bottom:14px">
+  <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px">
+    <span>54所卫星网络 IS-IS 智能分析平台 · 升级工作报告 v1.0</span>
+    <span>生成日期：2026-08-20 · 离线环境 · 无需外部资源</span>
+  </div>
+</footer>
+
+</main>
+</body>
+</html>

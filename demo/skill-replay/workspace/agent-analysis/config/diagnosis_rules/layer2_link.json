@@ -1,0 +1,111 @@
+{
+  "layer": "L2",
+  "name": "链路层",
+  "description": "检查IS-IS Hello、邻接、认证、MTU等链路层状态",
+  "rules": [
+    {
+      "id": "L2-R001",
+      "name": "adjacency_down",
+      "description": "IS-IS邻接关系Down",
+      "indicators": [
+        "adjacency_down",
+        "Adjacency",
+        "Down"
+      ],
+      "severity": "critical",
+      "affected_layers": [
+        "L2",
+        "L3"
+      ],
+      "suggestion": "检查链路状态、Hello定时器、认证配置",
+      "pcap_indicators": [
+        "NEIGHBOR_LOSS_AT_FAULT"
+      ],
+      "references": [
+        "RFC 1195 Section 6"
+      ]
+    },
+    {
+      "id": "L2-R002",
+      "name": "auth_failure",
+      "description": "IS-IS认证失败",
+      "indicators": [
+        "auth_fail",
+        "Authentication failed"
+      ],
+      "severity": "critical",
+      "affected_layers": [
+        "L2"
+      ],
+      "suggestion": "检查两端isis password配置是否一致",
+      "pcap_indicators": [
+        "INITIALIZING_NEIGHBOR_PRESENT"
+      ],
+      "references": [
+        "RFC 1195 Section 10"
+      ]
+    },
+    {
+      "id": "L2-R003",
+      "name": "circuit_type_mismatch",
+      "description": "电路类型不匹配",
+      "indicators": [
+        "circuit_type_mismatch",
+        "Circuit type mismatch"
+      ],
+      "severity": "warning",
+      "affected_layers": [
+        "L2",
+        "L3"
+      ],
+      "suggestion": "统一isis circuit-type配置",
+      "pcap_indicators": [
+        "CIRCUIT_TYPE_CHANGE",
+        "MIXED_HELLO_PDU_TYPES"
+      ],
+      "references": [
+        "RFC 1195 Section 1.2"
+      ]
+    },
+    {
+      "id": "L2-R004",
+      "name": "hello_timer_mismatch",
+      "description": "Hello/Holding定时器不匹配",
+      "indicators": [
+        "holding_timer_mismatch",
+        "Holding timer mismatch"
+      ],
+      "severity": "warning",
+      "affected_layers": [
+        "L2"
+      ],
+      "suggestion": "检查isis hello/holding-multiplier配置",
+      "pcap_indicators": [
+        "HOLDING_TIMER_CHANGE"
+      ],
+      "references": [
+        "RFC 1195 Section 6.3.2"
+      ]
+    },
+    {
+      "id": "L2-R005",
+      "name": "mtu_mismatch",
+      "description": "接口MTU不匹配",
+      "indicators": [
+        "mtu_mismatch",
+        "MTU mismatch"
+      ],
+      "severity": "warning",
+      "affected_layers": [
+        "L2"
+      ],
+      "suggestion": "统一接口MTU配置",
+      "pcap_indicators": [
+        "INTERFACE_MTU_CHANGE"
+      ],
+      "references": [
+        "RFC 1195 Section 6.7.2"
+      ]
+    }
+  ]
+}

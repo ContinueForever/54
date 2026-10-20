@@ -1,0 +1,38 @@
+{
+  "layer": "L4",
+  "name": "应用层",
+  "description": "检查端到端连通性、业务流量、应用性能",
+  "rules": [
+    {
+      "id": "L4-R001",
+      "name": "ping_unreachable",
+      "description": "端到端ping不可达",
+      "indicators": [
+        "ping成功率低于阈值",
+        "目的主机不可达",
+        "路由不可达"
+      ],
+      "severity": "critical",
+      "affected_layers": ["L3", "L4"],
+      "suggestion": "检查路由表、IS-IS邻接状态、ACL配置",
+      "pcap_indicators": [
+        "LINK_PROBE_DEGRADATION"
+      ],
+      "references": []
+    },
+    {
+      "id": "L4-R002",
+      "name": "high_latency",
+      "description": "端到端时延过高",
+      "indicators": [
+        "ping RTT超过阈值",
+        "业务响应缓慢",
+        "链路拥塞"
+      ],
+      "severity": "warning",
+      "affected_layers": ["L2", "L3", "L4"],
+      "suggestion": "检查链路带宽、QoS配置、路由路径",
+      "references": []
+    }
+  ]
+}

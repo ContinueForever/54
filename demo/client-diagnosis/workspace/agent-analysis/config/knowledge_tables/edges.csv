@@ -1,0 +1,23 @@
+source_id,relation,target_id,strength,description
+adjacency_down,caused_by,link_down,1.0,Physical link down causes adjacency down
+adjacency_down,caused_by,auth_mismatch,0.9,Authentication mismatch causes adjacency down
+adjacency_down,caused_by,area_mismatch,0.9,Area mismatch causes adjacency down
+adjacency_down,caused_by,hello_timer_mismatch,0.8,Hello timer mismatch causes adjacency down
+adjacency_down,caused_by,mtu_mismatch,0.8,MTU mismatch causes adjacency down
+adjacency_down,caused_by,circuit_type_mismatch,0.7,Circuit type mismatch causes adjacency down
+lsp_seq_wrap,caused_by,duplicate_system_id,0.9,Duplicate System ID can cause LSP sequence conflicts
+TLV_AUTH,mitigates,auth_mismatch,0.8,Correct Authentication TLV configuration prevents auth mismatch
+TLV_AREA_ADDR,mitigates,area_mismatch,0.8,Matching Area Address TLV prevents area mismatch
+TLV_PROTOS_SUPPORTED,related_to,adjacency_up,0.5,Protocols Supported TLV is part of neighbor negotiation
+TLV_IP_ADDR,related_to,adjacency_up,0.4,IP Interface Address TLV helps neighbor identification
+TLV_HOSTNAME,related_to,device,0.3,Hostname TLV maps IS-IS identity to router name
+TLV_EXT_IS_REACH,related_to,PDU_L2_LSP,0.9,IS reachability information is carried in LSP
+TLV_EXT_IP_REACH,related_to,PDU_L2_LSP,0.9,IP reachability information is carried in LSP
+TLV_PADDING,related_to,mtu_mismatch,0.6,Padding is used to ensure MTU-sized PDUs
+R01,connects_to,R02,1.0,Focal link between central and peer routers
+R01,has_interface,Gig0_0_0,1.0,R01 owns Gig0/0/0 interface
+R02,has_interface,Gig0_0_0,1.0,R02 owns Gig0/0/0 interface
+R02,runs,CORE,1.0,R02 runs IS-IS process CORE
+R01,runs,CORE,1.0,R01 runs IS-IS process CORE
+PDU_L2_LAN_IIH,used_on,broadcast,1.0,L2 LAN IIH is used on broadcast multi-access segments
+PDU_P2P_IIH,used_on,point_to_point,1.0,P2P IIH is used on point-to-point links

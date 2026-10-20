@@ -1,0 +1,702 @@
+[
+  {
+    "relative_s": 0.0,
+    "stage": "before",
+    "source_id": "000000000001",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 1.5,
+    "stage": "before",
+    "source_id": "000000000002",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 2.0,
+    "stage": "before",
+    "source_id": "000000000003",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334403",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 2.0,
+    "stage": "before",
+    "source_id": "000000000004",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334404",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 3.0,
+    "stage": "before",
+    "source_id": "000000000001",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 4.5,
+    "stage": "before",
+    "source_id": "000000000002",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 6.0,
+    "stage": "before",
+    "source_id": "000000000001",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 7.5,
+    "stage": "before",
+    "source_id": "000000000002",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 9.0,
+    "stage": "before",
+    "source_id": "000000000001",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 10.5,
+    "stage": "before",
+    "source_id": "000000000002",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 11.0,
+    "stage": "before",
+    "source_id": "000000000003",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334403",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 11.0,
+    "stage": "before",
+    "source_id": "000000000004",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334404",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 12.0,
+    "stage": "before",
+    "source_id": "000000000001",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 13.5,
+    "stage": "before",
+    "source_id": "000000000002",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 15.0,
+    "stage": "before",
+    "source_id": "000000000001",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 16.5,
+    "stage": "before",
+    "source_id": "000000000002",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 18.0,
+    "stage": "before",
+    "source_id": "000000000001",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 19.5,
+    "stage": "before",
+    "source_id": "000000000002",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 20.0,
+    "stage": "before",
+    "source_id": "000000000003",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334403",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 20.0,
+    "stage": "before",
+    "source_id": "000000000004",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334404",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 21.0,
+    "stage": "before",
+    "source_id": "000000000001",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 22.5,
+    "stage": "before",
+    "source_id": "000000000002",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 24.0,
+    "stage": "before",
+    "source_id": "000000000001",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 25.5,
+    "stage": "before",
+    "source_id": "000000000002",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 27.0,
+    "stage": "before",
+    "source_id": "000000000001",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 28.5,
+    "stage": "before",
+    "source_id": "000000000002",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 29.0,
+    "stage": "before",
+    "source_id": "000000000003",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334403",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 29.0,
+    "stage": "before",
+    "source_id": "000000000004",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334404",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 40.0,
+    "stage": "fault",
+    "source_id": "000000000001",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 41.5,
+    "stage": "fault",
+    "source_id": "000000000002",
+    "pdu_type_name": "L1_IIH",
+    "circuit_type": 1,
+    "holding_timer": 27,
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000014"
+  },
+  {
+    "relative_s": 42.0,
+    "stage": "fault",
+    "source_id": "000000000003",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334403",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 42.0,
+    "stage": "fault",
+    "source_id": "000000000004",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334404",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 43.0,
+    "stage": "fault",
+    "source_id": "000000000001",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 44.5,
+    "stage": "fault",
+    "source_id": "000000000002",
+    "pdu_type_name": "L1_IIH",
+    "circuit_type": 1,
+    "holding_timer": 27,
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000014"
+  },
+  {
+    "relative_s": 46.0,
+    "stage": "fault",
+    "source_id": "000000000001",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 47.5,
+    "stage": "fault",
+    "source_id": "000000000002",
+    "pdu_type_name": "L1_IIH",
+    "circuit_type": 1,
+    "holding_timer": 27,
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000014"
+  },
+  {
+    "relative_s": 49.0,
+    "stage": "fault",
+    "source_id": "000000000001",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 50.5,
+    "stage": "fault",
+    "source_id": "000000000002",
+    "pdu_type_name": "L1_IIH",
+    "circuit_type": 1,
+    "holding_timer": 27,
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000014"
+  },
+  {
+    "relative_s": 51.0,
+    "stage": "fault",
+    "source_id": "000000000003",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334403",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 51.0,
+    "stage": "fault",
+    "source_id": "000000000004",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334404",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 52.0,
+    "stage": "fault",
+    "source_id": "000000000001",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 53.5,
+    "stage": "fault",
+    "source_id": "000000000002",
+    "pdu_type_name": "L1_IIH",
+    "circuit_type": 1,
+    "holding_timer": 27,
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000014"
+  },
+  {
+    "relative_s": 55.0,
+    "stage": "fault",
+    "source_id": "000000000001",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 56.5,
+    "stage": "fault",
+    "source_id": "000000000002",
+    "pdu_type_name": "L1_IIH",
+    "circuit_type": 1,
+    "holding_timer": 27,
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000014"
+  },
+  {
+    "relative_s": 58.0,
+    "stage": "fault",
+    "source_id": "000000000001",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 59.5,
+    "stage": "fault",
+    "source_id": "000000000002",
+    "pdu_type_name": "L1_IIH",
+    "circuit_type": 1,
+    "holding_timer": 27,
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000014"
+  },
+  {
+    "relative_s": 60.0,
+    "stage": "fault",
+    "source_id": "000000000003",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334403",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 60.0,
+    "stage": "fault",
+    "source_id": "000000000004",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334404",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 61.0,
+    "stage": "fault",
+    "source_id": "000000000001",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 62.5,
+    "stage": "fault",
+    "source_id": "000000000002",
+    "pdu_type_name": "L1_IIH",
+    "circuit_type": 1,
+    "holding_timer": 27,
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000014"
+  },
+  {
+    "relative_s": 64.0,
+    "stage": "fault",
+    "source_id": "000000000001",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 65.5,
+    "stage": "fault",
+    "source_id": "000000000002",
+    "pdu_type_name": "L1_IIH",
+    "circuit_type": 1,
+    "holding_timer": 27,
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000014"
+  },
+  {
+    "relative_s": 67.0,
+    "stage": "fault",
+    "source_id": "000000000001",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 68.5,
+    "stage": "fault",
+    "source_id": "000000000002",
+    "pdu_type_name": "L1_IIH",
+    "circuit_type": 1,
+    "holding_timer": 27,
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000014"
+  },
+  {
+    "relative_s": 69.0,
+    "stage": "fault",
+    "source_id": "000000000003",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334403",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 69.0,
+    "stage": "fault",
+    "source_id": "000000000004",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334404",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 80.0,
+    "stage": "after",
+    "source_id": "000000000001",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 81.5,
+    "stage": "after",
+    "source_id": "000000000002",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 82.0,
+    "stage": "after",
+    "source_id": "000000000003",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334403",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 82.0,
+    "stage": "after",
+    "source_id": "000000000004",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334404",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 83.0,
+    "stage": "after",
+    "source_id": "000000000001",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 84.5,
+    "stage": "after",
+    "source_id": "000000000002",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 86.0,
+    "stage": "after",
+    "source_id": "000000000001",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 87.5,
+    "stage": "after",
+    "source_id": "000000000002",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 89.0,
+    "stage": "after",
+    "source_id": "000000000001",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 90.5,
+    "stage": "after",
+    "source_id": "000000000002",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 91.0,
+    "stage": "after",
+    "source_id": "000000000003",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334403",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 91.0,
+    "stage": "after",
+    "source_id": "000000000004",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334404",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 92.0,
+    "stage": "after",
+    "source_id": "000000000001",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015"
+  },
+  {
+    "relative_s": 93.5,
+    "stage": "after",
+    "source_id": "000000000002",
+    "pdu_type_name": "L2_IIH",
+    "circuit_type": 2,
+    "holding_timer": 27,
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000015"
+  }
+]

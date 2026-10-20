@@ -1,0 +1,7 @@
+{
+  "scenario_output": "/home/hermes/workspace/isis-simulator/output/incident_20261014_017",
+  "input_dir": "/home/hermes/workspace/agent-analysis/data/incoming/incident_20261014_017",
+  "scenario": "adjacency-incident",
+  "generated_through": "isis_simulator.generate.run_all",
+  "prepared_through": "scripts_lib.runner.prepare_analysis_input"
+}

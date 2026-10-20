@@ -1,0 +1,37 @@
+{
+  "layer": "L1",
+  "name": "物理层",
+  "description": "检查物理接口状态、光功率、链路连通性",
+  "rules": [
+    {
+      "id": "L1-R001",
+      "name": "interface_down",
+      "description": "接口物理状态为down",
+      "indicators": [
+        "link_down",
+        "Interface is Down",
+        "接口状态显示down",
+        "链路光功率异常",
+        "物理层无信号"
+      ],
+      "severity": "critical",
+      "affected_layers": ["L1"],
+      "suggestion": "检查光纤连接、光模块、对端设备状态",
+      "references": []
+    },
+    {
+      "id": "L1-R002",
+      "name": "interface_errors",
+      "description": "接口存在大量物理层错误",
+      "indicators": [
+        "CRC错误计数增加",
+        "帧错误计数增加",
+        "物理层丢包"
+      ],
+      "severity": "warning",
+      "affected_layers": ["L1", "L2"],
+      "suggestion": "检查链路质量、光模块兼容性、线缆损伤",
+      "references": []
+    }
+  ]
+}

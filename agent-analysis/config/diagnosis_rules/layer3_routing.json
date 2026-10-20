@@ -1,0 +1,75 @@
+{
+  "layer": "L3",
+  "name": "IS-IS路由层",
+  "description": "检查IS-IS邻居状态、LSP数据库、路由信息一致性",
+  "rules": [
+    {
+      "id": "L3-R001",
+      "name": "lsp_seq_num_wrap",
+      "description": "LSP序列号异常环绕",
+      "indicators": [
+        "LSP序列号不连续",
+        "序列号差值大于阈值",
+        "LSP频繁刷新"
+      ],
+      "severity": "critical",
+      "affected_layers": ["L3"],
+      "suggestion": "检查受影响节点的LSP数据库一致性，必要时重置IS-IS进程",
+      "references": ["RFC 1195 Section 5.2"]
+    },
+    {
+      "id": "L3-R002",
+      "name": "duplicate_system_id",
+      "description": "重复的System ID",
+      "indicators": [
+        "同一System ID出现在多个位置",
+        "LSP来源冲突",
+        "路由震荡"
+      ],
+      "severity": "critical",
+      "affected_layers": ["L3"],
+      "suggestion": "修改冲突节点的NET地址，确保System ID唯一",
+      "pcap_indicators": [
+        "DUPLICATE_NEIGHBOR_SYSTEM_ID",
+        "SOURCE_ID_MAC_CONFLICT"
+      ],
+      "references": ["RFC 1195 Section 3.3"]
+    },
+    {
+      "id": "L3-R003",
+      "name": "area_mismatch",
+      "description": "区域地址不匹配",
+      "indicators": [
+        "area_mismatch",
+        "area mismatch",
+        "两端区域地址不同",
+        "L1/L2邻接建立失败",
+        "区域间路由不可达"
+      ],
+      "severity": "critical",
+      "affected_layers": ["L3"],
+      "suggestion": "统一两端isis net配置的区域地址部分",
+      "references": ["RFC 1195 Section 4.4"]
+    },
+    {
+      "id": "L3-R004",
+      "name": "circuit_type_mismatch",
+      "description": "电路类型不匹配",
+      "indicators": [
+        "circuit_type_mismatch",
+        "Circuit type mismatch",
+        "一端为L1-only，另一端为L2-only",
+        "只能建立单边邻接",
+        "Level不匹配导致路由信息丢失"
+      ],
+      "severity": "warning",
+      "affected_layers": ["L3"],
+      "suggestion": "统一两端isis circuit-type配置",
+      "pcap_indicators": [
+        "CIRCUIT_TYPE_CHANGE",
+        "MIXED_HELLO_PDU_TYPES"
+      ],
+      "references": ["RFC 1195 Section 1.2"]
+    }
+  ]
+}

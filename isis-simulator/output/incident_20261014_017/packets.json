@@ -1,0 +1,1874 @@
+[
+  {
+    "frame": 1,
+    "relative_s": 0.0,
+    "stage": "before",
+    "size": 72,
+    "kind": "isis",
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015",
+    "ethertype": 58,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000001",
+    "holding_timer": 27,
+    "pdu_length": 55,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R01",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 55
+  },
+  {
+    "frame": 2,
+    "relative_s": 0.5,
+    "stage": "before",
+    "size": 60,
+    "kind": "ipv4",
+    "src_mac": "001122334401",
+    "dst_mac": "001122334402",
+    "ethertype": 2048,
+    "ipv4_proto": 1,
+    "icmp_type": 8
+  },
+  {
+    "frame": 3,
+    "relative_s": 0.508,
+    "stage": "before",
+    "size": 60,
+    "kind": "ipv4",
+    "src_mac": "001122334402",
+    "dst_mac": "001122334401",
+    "ethertype": 2048,
+    "ipv4_proto": 1,
+    "icmp_type": 0
+  },
+  {
+    "frame": 4,
+    "relative_s": 1.5,
+    "stage": "before",
+    "size": 72,
+    "kind": "isis",
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000015",
+    "ethertype": 58,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000002",
+    "holding_timer": 27,
+    "pdu_length": 55,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R02",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 55
+  },
+  {
+    "frame": 5,
+    "relative_s": 2.0,
+    "stage": "before",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334403",
+    "dst_mac": "0180c2000015",
+    "ethertype": 50,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000003",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R03",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  },
+  {
+    "frame": 6,
+    "relative_s": 2.0,
+    "stage": "before",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334404",
+    "dst_mac": "0180c2000015",
+    "ethertype": 50,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000004",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R04",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  },
+  {
+    "frame": 7,
+    "relative_s": 3.0,
+    "stage": "before",
+    "size": 72,
+    "kind": "isis",
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015",
+    "ethertype": 58,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000001",
+    "holding_timer": 27,
+    "pdu_length": 55,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R01",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 55
+  },
+  {
+    "frame": 8,
+    "relative_s": 3.5,
+    "stage": "before",
+    "size": 60,
+    "kind": "ipv4",
+    "src_mac": "001122334401",
+    "dst_mac": "001122334402",
+    "ethertype": 2048,
+    "ipv4_proto": 1,
+    "icmp_type": 8
+  },
+  {
+    "frame": 9,
+    "relative_s": 3.508,
+    "stage": "before",
+    "size": 60,
+    "kind": "ipv4",
+    "src_mac": "001122334402",
+    "dst_mac": "001122334401",
+    "ethertype": 2048,
+    "ipv4_proto": 1,
+    "icmp_type": 0
+  },
+  {
+    "frame": 10,
+    "relative_s": 4.5,
+    "stage": "before",
+    "size": 72,
+    "kind": "isis",
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000015",
+    "ethertype": 58,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000002",
+    "holding_timer": 27,
+    "pdu_length": 55,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R02",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 55
+  },
+  {
+    "frame": 11,
+    "relative_s": 6.0,
+    "stage": "before",
+    "size": 72,
+    "kind": "isis",
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015",
+    "ethertype": 58,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000001",
+    "holding_timer": 27,
+    "pdu_length": 55,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R01",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 55
+  },
+  {
+    "frame": 12,
+    "relative_s": 6.5,
+    "stage": "before",
+    "size": 60,
+    "kind": "ipv4",
+    "src_mac": "001122334401",
+    "dst_mac": "001122334402",
+    "ethertype": 2048,
+    "ipv4_proto": 1,
+    "icmp_type": 8
+  },
+  {
+    "frame": 13,
+    "relative_s": 6.508,
+    "stage": "before",
+    "size": 60,
+    "kind": "ipv4",
+    "src_mac": "001122334402",
+    "dst_mac": "001122334401",
+    "ethertype": 2048,
+    "ipv4_proto": 1,
+    "icmp_type": 0
+  },
+  {
+    "frame": 14,
+    "relative_s": 7.5,
+    "stage": "before",
+    "size": 72,
+    "kind": "isis",
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000015",
+    "ethertype": 58,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000002",
+    "holding_timer": 27,
+    "pdu_length": 55,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R02",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 55
+  },
+  {
+    "frame": 15,
+    "relative_s": 9.0,
+    "stage": "before",
+    "size": 72,
+    "kind": "isis",
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015",
+    "ethertype": 58,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000001",
+    "holding_timer": 27,
+    "pdu_length": 55,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R01",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 55
+  },
+  {
+    "frame": 16,
+    "relative_s": 9.5,
+    "stage": "before",
+    "size": 60,
+    "kind": "ipv4",
+    "src_mac": "001122334401",
+    "dst_mac": "001122334402",
+    "ethertype": 2048,
+    "ipv4_proto": 1,
+    "icmp_type": 8
+  },
+  {
+    "frame": 17,
+    "relative_s": 9.508,
+    "stage": "before",
+    "size": 60,
+    "kind": "ipv4",
+    "src_mac": "001122334402",
+    "dst_mac": "001122334401",
+    "ethertype": 2048,
+    "ipv4_proto": 1,
+    "icmp_type": 0
+  },
+  {
+    "frame": 18,
+    "relative_s": 10.5,
+    "stage": "before",
+    "size": 72,
+    "kind": "isis",
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000015",
+    "ethertype": 58,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000002",
+    "holding_timer": 27,
+    "pdu_length": 55,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R02",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 55
+  },
+  {
+    "frame": 19,
+    "relative_s": 11.0,
+    "stage": "before",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334403",
+    "dst_mac": "0180c2000015",
+    "ethertype": 50,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000003",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R03",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  },
+  {
+    "frame": 20,
+    "relative_s": 11.0,
+    "stage": "before",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334404",
+    "dst_mac": "0180c2000015",
+    "ethertype": 50,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000004",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R04",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  },
+  {
+    "frame": 21,
+    "relative_s": 12.0,
+    "stage": "before",
+    "size": 72,
+    "kind": "isis",
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015",
+    "ethertype": 58,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000001",
+    "holding_timer": 27,
+    "pdu_length": 55,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R01",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 55
+  },
+  {
+    "frame": 22,
+    "relative_s": 12.5,
+    "stage": "before",
+    "size": 60,
+    "kind": "ipv4",
+    "src_mac": "001122334401",
+    "dst_mac": "001122334402",
+    "ethertype": 2048,
+    "ipv4_proto": 1,
+    "icmp_type": 8
+  },
+  {
+    "frame": 23,
+    "relative_s": 12.508,
+    "stage": "before",
+    "size": 60,
+    "kind": "ipv4",
+    "src_mac": "001122334402",
+    "dst_mac": "001122334401",
+    "ethertype": 2048,
+    "ipv4_proto": 1,
+    "icmp_type": 0
+  },
+  {
+    "frame": 24,
+    "relative_s": 13.5,
+    "stage": "before",
+    "size": 72,
+    "kind": "isis",
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000015",
+    "ethertype": 58,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000002",
+    "holding_timer": 27,
+    "pdu_length": 55,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R02",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 55
+  },
+  {
+    "frame": 25,
+    "relative_s": 15.0,
+    "stage": "before",
+    "size": 72,
+    "kind": "isis",
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015",
+    "ethertype": 58,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000001",
+    "holding_timer": 27,
+    "pdu_length": 55,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R01",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 55
+  },
+  {
+    "frame": 26,
+    "relative_s": 15.5,
+    "stage": "before",
+    "size": 60,
+    "kind": "ipv4",
+    "src_mac": "001122334401",
+    "dst_mac": "001122334402",
+    "ethertype": 2048,
+    "ipv4_proto": 1,
+    "icmp_type": 8
+  },
+  {
+    "frame": 27,
+    "relative_s": 15.508,
+    "stage": "before",
+    "size": 60,
+    "kind": "ipv4",
+    "src_mac": "001122334402",
+    "dst_mac": "001122334401",
+    "ethertype": 2048,
+    "ipv4_proto": 1,
+    "icmp_type": 0
+  },
+  {
+    "frame": 28,
+    "relative_s": 16.5,
+    "stage": "before",
+    "size": 72,
+    "kind": "isis",
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000015",
+    "ethertype": 58,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000002",
+    "holding_timer": 27,
+    "pdu_length": 55,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R02",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 55
+  },
+  {
+    "frame": 29,
+    "relative_s": 18.0,
+    "stage": "before",
+    "size": 72,
+    "kind": "isis",
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015",
+    "ethertype": 58,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000001",
+    "holding_timer": 27,
+    "pdu_length": 55,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R01",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 55
+  },
+  {
+    "frame": 30,
+    "relative_s": 18.5,
+    "stage": "before",
+    "size": 60,
+    "kind": "ipv4",
+    "src_mac": "001122334401",
+    "dst_mac": "001122334402",
+    "ethertype": 2048,
+    "ipv4_proto": 1,
+    "icmp_type": 8
+  },
+  {
+    "frame": 31,
+    "relative_s": 18.508,
+    "stage": "before",
+    "size": 60,
+    "kind": "ipv4",
+    "src_mac": "001122334402",
+    "dst_mac": "001122334401",
+    "ethertype": 2048,
+    "ipv4_proto": 1,
+    "icmp_type": 0
+  },
+  {
+    "frame": 32,
+    "relative_s": 19.5,
+    "stage": "before",
+    "size": 72,
+    "kind": "isis",
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000015",
+    "ethertype": 58,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000002",
+    "holding_timer": 27,
+    "pdu_length": 55,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R02",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 55
+  },
+  {
+    "frame": 33,
+    "relative_s": 20.0,
+    "stage": "before",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334403",
+    "dst_mac": "0180c2000015",
+    "ethertype": 50,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000003",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R03",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  },
+  {
+    "frame": 34,
+    "relative_s": 20.0,
+    "stage": "before",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334404",
+    "dst_mac": "0180c2000015",
+    "ethertype": 50,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000004",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R04",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  },
+  {
+    "frame": 35,
+    "relative_s": 21.0,
+    "stage": "before",
+    "size": 72,
+    "kind": "isis",
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015",
+    "ethertype": 58,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000001",
+    "holding_timer": 27,
+    "pdu_length": 55,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R01",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 55
+  },
+  {
+    "frame": 36,
+    "relative_s": 21.5,
+    "stage": "before",
+    "size": 60,
+    "kind": "ipv4",
+    "src_mac": "001122334401",
+    "dst_mac": "001122334402",
+    "ethertype": 2048,
+    "ipv4_proto": 1,
+    "icmp_type": 8
+  },
+  {
+    "frame": 37,
+    "relative_s": 21.508,
+    "stage": "before",
+    "size": 60,
+    "kind": "ipv4",
+    "src_mac": "001122334402",
+    "dst_mac": "001122334401",
+    "ethertype": 2048,
+    "ipv4_proto": 1,
+    "icmp_type": 0
+  },
+  {
+    "frame": 38,
+    "relative_s": 22.5,
+    "stage": "before",
+    "size": 72,
+    "kind": "isis",
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000015",
+    "ethertype": 58,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000002",
+    "holding_timer": 27,
+    "pdu_length": 55,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R02",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 55
+  },
+  {
+    "frame": 39,
+    "relative_s": 24.0,
+    "stage": "before",
+    "size": 72,
+    "kind": "isis",
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015",
+    "ethertype": 58,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000001",
+    "holding_timer": 27,
+    "pdu_length": 55,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R01",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 55
+  },
+  {
+    "frame": 40,
+    "relative_s": 24.5,
+    "stage": "before",
+    "size": 60,
+    "kind": "ipv4",
+    "src_mac": "001122334401",
+    "dst_mac": "001122334402",
+    "ethertype": 2048,
+    "ipv4_proto": 1,
+    "icmp_type": 8
+  },
+  {
+    "frame": 41,
+    "relative_s": 24.508,
+    "stage": "before",
+    "size": 60,
+    "kind": "ipv4",
+    "src_mac": "001122334402",
+    "dst_mac": "001122334401",
+    "ethertype": 2048,
+    "ipv4_proto": 1,
+    "icmp_type": 0
+  },
+  {
+    "frame": 42,
+    "relative_s": 25.5,
+    "stage": "before",
+    "size": 72,
+    "kind": "isis",
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000015",
+    "ethertype": 58,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000002",
+    "holding_timer": 27,
+    "pdu_length": 55,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R02",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 55
+  },
+  {
+    "frame": 43,
+    "relative_s": 27.0,
+    "stage": "before",
+    "size": 72,
+    "kind": "isis",
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015",
+    "ethertype": 58,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000001",
+    "holding_timer": 27,
+    "pdu_length": 55,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R01",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 55
+  },
+  {
+    "frame": 44,
+    "relative_s": 27.5,
+    "stage": "before",
+    "size": 60,
+    "kind": "ipv4",
+    "src_mac": "001122334401",
+    "dst_mac": "001122334402",
+    "ethertype": 2048,
+    "ipv4_proto": 1,
+    "icmp_type": 8
+  },
+  {
+    "frame": 45,
+    "relative_s": 27.508,
+    "stage": "before",
+    "size": 60,
+    "kind": "ipv4",
+    "src_mac": "001122334402",
+    "dst_mac": "001122334401",
+    "ethertype": 2048,
+    "ipv4_proto": 1,
+    "icmp_type": 0
+  },
+  {
+    "frame": 46,
+    "relative_s": 28.5,
+    "stage": "before",
+    "size": 72,
+    "kind": "isis",
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000015",
+    "ethertype": 58,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000002",
+    "holding_timer": 27,
+    "pdu_length": 55,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R02",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 55
+  },
+  {
+    "frame": 47,
+    "relative_s": 29.0,
+    "stage": "before",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334403",
+    "dst_mac": "0180c2000015",
+    "ethertype": 50,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000003",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R03",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  },
+  {
+    "frame": 48,
+    "relative_s": 29.0,
+    "stage": "before",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334404",
+    "dst_mac": "0180c2000015",
+    "ethertype": 50,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000004",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R04",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  },
+  {
+    "frame": 49,
+    "relative_s": 40.0,
+    "stage": "fault",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015",
+    "ethertype": 50,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000001",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R01",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  },
+  {
+    "frame": 50,
+    "relative_s": 40.5,
+    "stage": "fault",
+    "size": 60,
+    "kind": "ipv4",
+    "src_mac": "001122334401",
+    "dst_mac": "001122334402",
+    "ethertype": 2048,
+    "ipv4_proto": 1,
+    "icmp_type": 8
+  },
+  {
+    "frame": 51,
+    "relative_s": 41.5,
+    "stage": "fault",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000014",
+    "ethertype": 50,
+    "pdu_type": 17,
+    "pdu_type_name": "L1_IIH",
+    "hdr_len": 27,
+    "circuit_type": 1,
+    "source_id": "000000000002",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R02",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  },
+  {
+    "frame": 52,
+    "relative_s": 42.0,
+    "stage": "fault",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334403",
+    "dst_mac": "0180c2000015",
+    "ethertype": 50,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000003",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R03",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  },
+  {
+    "frame": 53,
+    "relative_s": 42.0,
+    "stage": "fault",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334404",
+    "dst_mac": "0180c2000015",
+    "ethertype": 50,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000004",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R04",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  },
+  {
+    "frame": 54,
+    "relative_s": 43.0,
+    "stage": "fault",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015",
+    "ethertype": 50,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000001",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R01",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  },
+  {
+    "frame": 55,
+    "relative_s": 43.5,
+    "stage": "fault",
+    "size": 60,
+    "kind": "ipv4",
+    "src_mac": "001122334401",
+    "dst_mac": "001122334402",
+    "ethertype": 2048,
+    "ipv4_proto": 1,
+    "icmp_type": 8
+  },
+  {
+    "frame": 56,
+    "relative_s": 44.5,
+    "stage": "fault",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000014",
+    "ethertype": 50,
+    "pdu_type": 17,
+    "pdu_type_name": "L1_IIH",
+    "hdr_len": 27,
+    "circuit_type": 1,
+    "source_id": "000000000002",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R02",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  },
+  {
+    "frame": 57,
+    "relative_s": 46.0,
+    "stage": "fault",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015",
+    "ethertype": 50,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000001",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R01",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  },
+  {
+    "frame": 58,
+    "relative_s": 46.5,
+    "stage": "fault",
+    "size": 60,
+    "kind": "ipv4",
+    "src_mac": "001122334401",
+    "dst_mac": "001122334402",
+    "ethertype": 2048,
+    "ipv4_proto": 1,
+    "icmp_type": 8
+  },
+  {
+    "frame": 59,
+    "relative_s": 47.5,
+    "stage": "fault",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000014",
+    "ethertype": 50,
+    "pdu_type": 17,
+    "pdu_type_name": "L1_IIH",
+    "hdr_len": 27,
+    "circuit_type": 1,
+    "source_id": "000000000002",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R02",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  },
+  {
+    "frame": 60,
+    "relative_s": 49.0,
+    "stage": "fault",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015",
+    "ethertype": 50,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000001",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R01",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  },
+  {
+    "frame": 61,
+    "relative_s": 49.5,
+    "stage": "fault",
+    "size": 60,
+    "kind": "ipv4",
+    "src_mac": "001122334401",
+    "dst_mac": "001122334402",
+    "ethertype": 2048,
+    "ipv4_proto": 1,
+    "icmp_type": 8
+  },
+  {
+    "frame": 62,
+    "relative_s": 50.5,
+    "stage": "fault",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000014",
+    "ethertype": 50,
+    "pdu_type": 17,
+    "pdu_type_name": "L1_IIH",
+    "hdr_len": 27,
+    "circuit_type": 1,
+    "source_id": "000000000002",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R02",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  },
+  {
+    "frame": 63,
+    "relative_s": 51.0,
+    "stage": "fault",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334403",
+    "dst_mac": "0180c2000015",
+    "ethertype": 50,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000003",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R03",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  },
+  {
+    "frame": 64,
+    "relative_s": 51.0,
+    "stage": "fault",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334404",
+    "dst_mac": "0180c2000015",
+    "ethertype": 50,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000004",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R04",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  },
+  {
+    "frame": 65,
+    "relative_s": 52.0,
+    "stage": "fault",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015",
+    "ethertype": 50,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000001",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R01",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  },
+  {
+    "frame": 66,
+    "relative_s": 52.5,
+    "stage": "fault",
+    "size": 60,
+    "kind": "ipv4",
+    "src_mac": "001122334401",
+    "dst_mac": "001122334402",
+    "ethertype": 2048,
+    "ipv4_proto": 1,
+    "icmp_type": 8
+  },
+  {
+    "frame": 67,
+    "relative_s": 53.5,
+    "stage": "fault",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000014",
+    "ethertype": 50,
+    "pdu_type": 17,
+    "pdu_type_name": "L1_IIH",
+    "hdr_len": 27,
+    "circuit_type": 1,
+    "source_id": "000000000002",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R02",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  },
+  {
+    "frame": 68,
+    "relative_s": 55.0,
+    "stage": "fault",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015",
+    "ethertype": 50,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000001",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R01",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  },
+  {
+    "frame": 69,
+    "relative_s": 55.5,
+    "stage": "fault",
+    "size": 60,
+    "kind": "ipv4",
+    "src_mac": "001122334401",
+    "dst_mac": "001122334402",
+    "ethertype": 2048,
+    "ipv4_proto": 1,
+    "icmp_type": 8
+  },
+  {
+    "frame": 70,
+    "relative_s": 56.5,
+    "stage": "fault",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000014",
+    "ethertype": 50,
+    "pdu_type": 17,
+    "pdu_type_name": "L1_IIH",
+    "hdr_len": 27,
+    "circuit_type": 1,
+    "source_id": "000000000002",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R02",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  },
+  {
+    "frame": 71,
+    "relative_s": 58.0,
+    "stage": "fault",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015",
+    "ethertype": 50,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000001",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R01",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  },
+  {
+    "frame": 72,
+    "relative_s": 58.5,
+    "stage": "fault",
+    "size": 60,
+    "kind": "ipv4",
+    "src_mac": "001122334401",
+    "dst_mac": "001122334402",
+    "ethertype": 2048,
+    "ipv4_proto": 1,
+    "icmp_type": 8
+  },
+  {
+    "frame": 73,
+    "relative_s": 59.5,
+    "stage": "fault",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000014",
+    "ethertype": 50,
+    "pdu_type": 17,
+    "pdu_type_name": "L1_IIH",
+    "hdr_len": 27,
+    "circuit_type": 1,
+    "source_id": "000000000002",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R02",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  },
+  {
+    "frame": 74,
+    "relative_s": 60.0,
+    "stage": "fault",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334403",
+    "dst_mac": "0180c2000015",
+    "ethertype": 50,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000003",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R03",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  },
+  {
+    "frame": 75,
+    "relative_s": 60.0,
+    "stage": "fault",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334404",
+    "dst_mac": "0180c2000015",
+    "ethertype": 50,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000004",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R04",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  },
+  {
+    "frame": 76,
+    "relative_s": 61.0,
+    "stage": "fault",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015",
+    "ethertype": 50,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000001",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R01",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  },
+  {
+    "frame": 77,
+    "relative_s": 61.5,
+    "stage": "fault",
+    "size": 60,
+    "kind": "ipv4",
+    "src_mac": "001122334401",
+    "dst_mac": "001122334402",
+    "ethertype": 2048,
+    "ipv4_proto": 1,
+    "icmp_type": 8
+  },
+  {
+    "frame": 78,
+    "relative_s": 62.5,
+    "stage": "fault",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000014",
+    "ethertype": 50,
+    "pdu_type": 17,
+    "pdu_type_name": "L1_IIH",
+    "hdr_len": 27,
+    "circuit_type": 1,
+    "source_id": "000000000002",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R02",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  },
+  {
+    "frame": 79,
+    "relative_s": 64.0,
+    "stage": "fault",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015",
+    "ethertype": 50,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000001",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R01",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  },
+  {
+    "frame": 80,
+    "relative_s": 64.5,
+    "stage": "fault",
+    "size": 60,
+    "kind": "ipv4",
+    "src_mac": "001122334401",
+    "dst_mac": "001122334402",
+    "ethertype": 2048,
+    "ipv4_proto": 1,
+    "icmp_type": 8
+  },
+  {
+    "frame": 81,
+    "relative_s": 65.5,
+    "stage": "fault",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000014",
+    "ethertype": 50,
+    "pdu_type": 17,
+    "pdu_type_name": "L1_IIH",
+    "hdr_len": 27,
+    "circuit_type": 1,
+    "source_id": "000000000002",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R02",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  },
+  {
+    "frame": 82,
+    "relative_s": 67.0,
+    "stage": "fault",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334401",
+    "dst_mac": "0180c2000015",
+    "ethertype": 50,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000001",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R01",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  },
+  {
+    "frame": 83,
+    "relative_s": 67.5,
+    "stage": "fault",
+    "size": 60,
+    "kind": "ipv4",
+    "src_mac": "001122334401",
+    "dst_mac": "001122334402",
+    "ethertype": 2048,
+    "ipv4_proto": 1,
+    "icmp_type": 8
+  },
+  {
+    "frame": 84,
+    "relative_s": 68.5,
+    "stage": "fault",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334402",
+    "dst_mac": "0180c2000014",
+    "ethertype": 50,
+    "pdu_type": 17,
+    "pdu_type_name": "L1_IIH",
+    "hdr_len": 27,
+    "circuit_type": 1,
+    "source_id": "000000000002",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R02",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  },
+  {
+    "frame": 85,
+    "relative_s": 69.0,
+    "stage": "fault",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334403",
+    "dst_mac": "0180c2000015",
+    "ethertype": 50,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000003",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R03",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  },
+  {
+    "frame": 86,
+    "relative_s": 69.0,
+    "stage": "fault",
+    "size": 64,
+    "kind": "isis",
+    "src_mac": "001122334404",
+    "dst_mac": "0180c2000015",
+    "ethertype": 50,
+    "pdu_type": 18,
+    "pdu_type_name": "L2_IIH",
+    "hdr_len": 27,
+    "circuit_type": 2,
+    "source_id": "000000000004",
+    "holding_timer": 27,
+    "pdu_length": 47,
+    "area_addresses": [
+      "490001"
+    ],
+    "protocols_supported": [
+      204
+    ],
+    "hostname": "R04",
+    "has_auth": false,
+    "padding_total": 0,
+    "pdu_total_len": 47
+  }
+]

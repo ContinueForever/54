@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>分析流程图 - run_20261013_200713</title>
+    <!-- 优先本地 mermaid（离线可用），失败时回退 CDN -->
+    <script src="/static/vendor/mermaid.min.js"></script>
+    <script>
+        if (typeof mermaid === 'undefined') {
+            document.write('<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"><\/script>');
+        }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof mermaid !== 'undefined') {
+                mermaid.initialize({ startOnLoad: true, theme: 'default' });
+                mermaid.run();
+            } else {
+                document.querySelector('.mermaid').innerHTML =
+                    '<p style="color:#b91c1c">mermaid 加载失败，无法渲染时序图</p>';
+            }
+        });
+    </script>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; margin: 20px; background: #f7f9fc; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; border: 1px solid #e5e7eb; }
+        h1 { color: #1f2937; margin-bottom: 8px; }
+        .info { color: #6b7280; margin-bottom: 20px; font-size: 0.95rem; }
+        .mermaid { background: #fafafa; padding: 20px; border-radius: 8px; border: 1px solid #e5e7eb; overflow: auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>IS-IS 故障诊断执行时序图</h1>
+        <div class="info">
+            <p>追踪ID: run_20261013_200713</p>
+            <p>开始时间: 2026-10-13T20:07:13.822607</p>
+            <p>结束时间: 2026-10-13T20:07:13.825115</p>
+        </div>
+        <div class="mermaid">
+sequenceDiagram
+    participant H as Hermes分析引擎
+    participant L1 as L1物理层
+    participant L2 as L2链路层
+    participant L3 as L3-IS-IS路由层
+    participant L4 as L4应用层
+    H->>L1: 物理层检查
+    activate L1
+    L1-->>H: ✅ 正常
+    deactivate L1
+    H->>L2: 链路层检查
+    activate L2
+    L2-->>H: ❌ 命中 1 条规则
+    deactivate L2
+    H->>L3: IS-IS路由层检查
+    activate L3
+    L3-->>H: ❌ 命中 1 条规则
+    deactivate L3
+    H->>L4: 应用层检查
+    activate L4
+    L4-->>H: ✅ 正常
+    deactivate L4
+    Note over H: 【诊断结论】<br/>故障层级: L2<br/>故障类型: unknown<br/>建议操作: 查看详细报告和时序流程图
+        </div>
+    </div>
+</body>
+</html>

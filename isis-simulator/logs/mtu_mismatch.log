@@ -1,0 +1,2 @@
+Jan 01 00:00:42 R02 ISIS: MTU mismatch detected on Gig0/0/0 (1492 vs 1500)
+Jan 01 00:00:44 R02 ISIS: Adjacency to R01 (Gig0/0/0) is Down

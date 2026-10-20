@@ -1,0 +1,392 @@
+{
+  "status": "passed",
+  "count": 76,
+  "checks": [
+    {
+      "name": "Authoritative project run",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Original report bytes",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Original trace bytes",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Input preserved: link-observation.pcap",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Input preserved: device-events.log",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Input preserved: network-state.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: analysis-result.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: analysis-trace.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: critique.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: critique.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: device-events.log",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: diagnosis-report.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: execution.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: features.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: generation.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: incident.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: knowledge-after/edges.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: knowledge-after/node_attributes.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: knowledge-after/nodes.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: knowledge-before/edges.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: knowledge-before/node_attributes.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: knowledge-before/nodes.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: knowledge-build.log",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: knowledge-candidates/candidate_attributes.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: knowledge-candidates/candidate_edges.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: knowledge-candidates/candidate_nodes.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: knowledge-candidates/diff_report.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: knowledge-candidates/merge_snapshot/.initialized",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: knowledge-candidates/merge_snapshot/edges.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: knowledge-candidates/merge_snapshot/node_attributes.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: knowledge-candidates/merge_snapshot/nodes.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: knowledge-diff.log",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: knowledge-extract.log",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: knowledge-graph.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: knowledge-input.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: knowledge-query.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: knowledge-validate.log",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: knowledge-validation.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: knowledge-validation.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: link-observation.pcap",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: manifest.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: model-call.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: model-response.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: network-state.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: packet-features.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: packets.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: preparation.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: skill-audit.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: skill-definitions/flow-tracer.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: skill-definitions/isis-analysis.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: skill-definitions/kg-validator.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: skill-definitions/knowledge-bridge.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: skill-definitions/knowledge-builder.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: skill-definitions/material-to-csv.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: skill-definitions/workspace-orchestrator.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Artifact content/hash: source-rules.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Actual pipeline order",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Source observation does not give root cause",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Raw log has symptoms without diagnosis",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "No recovery in original input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Measured business degradation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Cross-layer rule aggregation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "No false composite conclusion",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Actual knowledge preparation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Diagnosis consumes prepared tables",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "CSV and graph node sets agree",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Formal knowledge tables preserved",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "No CRITICAL knowledge error",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Illustrative model is explicitly marked",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Illustrative provider cannot masquerade as configured model",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Model context retains all raw logs",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Independent review belongs to this run",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Embedded task matches data",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Template fully replaced",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Offline snapshot has no external resource dependencies",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "Client JavaScript syntax",
+      "passed": true,
+      "detail": ""
+    }
+  ],
+  "browser_checks": [
+    "原始报障复盘",
+    "异常窗口R02筛选",
+    "逐条报文详情"
+  ],
+  "model_mode": "illustrative"
+}

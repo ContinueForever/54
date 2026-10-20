@@ -1,0 +1,49 @@
+# 运行时数据（不提交Git）
+data/incoming/*
+data/processed/*
+data/traces/*
+!data/incoming/.gitkeep
+!data/processed/.gitkeep
+!data/traces/.gitkeep
+
+# 输出目录
+output/reports/*
+output/sequence_diagrams/*
+output/exports/*
+!output/reports/.gitkeep
+!output/sequence_diagrams/.gitkeep
+!output/exports/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# 虚拟环境
+venv/
+.env
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 日志
+*.log
+logs/
+
+# 临时文件
+tmp/
+temp/
+*.tmp

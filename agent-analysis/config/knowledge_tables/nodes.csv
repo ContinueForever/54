@@ -1,0 +1,32 @@
+node_id,node_type,name,description,source
+PDU_L2_LAN_IIH,protocol_pdu,L2 LAN IIH,Level-2 LAN Hello PDU used to discover and maintain IS-IS neighbors on broadcast segments,RFC 1195
+PDU_L1_LAN_IIH,protocol_pdu,L1 LAN IIH,Level-1 LAN Hello PDU used on L1-only broadcast segments,RFC 1195
+PDU_P2P_IIH,protocol_pdu,P2P IIH,Point-to-point Hello PDU used on point-to-point links,RFC 1195
+PDU_L2_LSP,protocol_pdu,L2 LSP,Level-2 Link State PDU carrying topology and reachability information,RFC 1195
+PDU_L1_LSP,protocol_pdu,L1 LSP,Level-1 Link State PDU carrying area topology information,RFC 1195
+PDU_L2_CSNP,protocol_pdu,L2 CSNP,Complete Sequence Number PDU used for LSDB synchronization on L2 broadcast segments,RFC 1195
+PDU_L1_CSNP,protocol_pdu,L1 CSNP,Complete Sequence Number PDU used for LSDB synchronization on L1 broadcast segments,RFC 1195
+TLV_AREA_ADDR,protocol_tlv,Area Address TLV,TLV 1 lists area addresses supported by the originating IS,RFC 1195
+TLV_AUTH,protocol_tlv,Authentication TLV,TLV 10 carries authentication information used to verify IS-IS PDUs,RFC 1195
+TLV_PROTOS_SUPPORTED,protocol_tlv,Protocols Supported TLV,TLV 129 lists NLPIDs of network layer protocols supported by the IS,RFC 1195
+TLV_IP_ADDR,protocol_tlv,IP Interface Address TLV,TLV 132 lists IPv4 addresses of the originating interface,RFC 1195
+TLV_HOSTNAME,protocol_tlv,Dynamic Hostname TLV,TLV 137 carries human-readable hostname of the router,RFC 5301
+TLV_EXT_IS_REACH,protocol_tlv,Extended IS Reachability TLV,TLV 22 describes IS neighbors with extended metrics,RFC 5305
+TLV_EXT_IP_REACH,protocol_tlv,Extended IP Reachability TLV,TLV 135 describes IP prefixes with extended metrics,RFC 5305
+TLV_PADDING,protocol_tlv,Padding TLV,TLV 8 is used to pad PDUs to desired size for MTU consistency,RFC 1195
+adjacency_up,state,Adjacency Up,IS-IS neighbor adjacency has reached Up state,observational
+adjacency_down,state,Adjacency Down,IS-IS neighbor adjacency has transitioned to Down state,observational
+lsp_seq_wrap,fault,LSP Sequence Number Wrap,LSP sequence number wrapped or jumped unexpectedly causing LSDB inconsistency,RFC 1195
+area_mismatch,fault,Area Mismatch,Area address in received IIH does not match local configuration,RFC 1195
+auth_mismatch,fault,Authentication Mismatch,Authentication TLV missing or mismatched between IS-IS neighbors,RFC 1195
+circuit_type_mismatch,fault,Circuit Type Mismatch,L1/L2 circuit-type mismatch prevents adjacency formation,RFC 1195
+hello_timer_mismatch,fault,Hello Timer Mismatch,Hello or holding timer mismatch causes premature adjacency timeout,RFC 1195
+mtu_mismatch,fault,MTU Mismatch,Interface MTU mismatch prevents IS-IS PDU exchange or adjacency up,RFC 1195
+duplicate_system_id,fault,Duplicate System ID,Two routers using the same System ID causes LSP conflict,RFC 1195
+link_down,fault,Link Down,Physical or data-link interface has gone down,observational
+lsp_suppression,fault,LSP Suppression,IS-IS interface or process suppressed LSP generation/forwarding,observational
+netem_loss_delay,fault,Packet Loss and Delay,Emulated link degradation producing packet loss and latency,observational
+R01,device,Router R01,Central star router in the simulated topology,topology
+R02,device,Router R02,Fault-peer router on the focal link,topology
+Gig0_0_0,interface,GigabitEthernet 0/0/0,Default focal link interface on R01/R02,topology
+CORE,process,IS-IS process CORE,Named IS-IS process running on routers,topology

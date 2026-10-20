@@ -1,0 +1,8 @@
+Oct 14 14:30:02 R01 ISIS: Adjacency to R02 on Gig0/0/0 is UP
+Oct 14 14:30:03 R02 ISIS: Adjacency to R01 on Gig0/0/0 is UP
+Oct 14 14:30:28 R01 MONITOR: Ping to 10.20.2.1: 0% packet loss
+Oct 14 14:30:40 R02 CONFIG: Configuration commit completed, revision 1042
+Oct 14 14:30:40 R02 ISIS: Adjacency to R01 on Gig0/0/0 is Down, local configuration changed
+Oct 14 14:30:44 R01 MONITOR: Probe to 10.20.2.1 timed out
+Oct 14 14:30:55 R01 ISIS: Adjacency to R02 on Gig0/0/0 is Down, neighbor hold time expired
+Oct 14 14:31:09 R01 MONITOR: Ping to 10.20.2.1: 100% packet loss

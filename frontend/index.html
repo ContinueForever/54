@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>54所 卫星网络 IS-IS 智能分析平台</title>
+  <style>
+    :root {
+      --bg: #f7f9fc;
+      --panel: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --accent-light: #eff6ff;
+      --border: #e5e7eb;
+      --danger: #dc2626;
+      --ok: #16a34a;
+      --warn: #d97706;
+      --code-bg: #1f2937;
+      --code-fg: #f3f4f6;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; height: 100%; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background: var(--bg); color: var(--text); }
+    .container { width: 100vw; height: 100vh; scroll-snap-type: y proximity; overflow-y: scroll; scroll-behavior: smooth; }
+    .section { width: 100vw; min-height: 100vh; scroll-snap-align: start; padding: 60px 80px; display: flex; flex-direction: column; justify-content: flex-start; padding-top: 80px; }
+    h1, h2, h3 { margin: 0 0 20px 0; }
+    h1 { font-size: 2.8rem; color: var(--accent); }
+    h2 { font-size: 2rem; border-bottom: 2px solid var(--accent-light); padding-bottom: 10px; }
+    p { line-height: 1.7; color: var(--muted); font-size: 1.1rem; max-width: 1000px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-top: 30px; max-width: 1200px; }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); transition: transform 0.2s, box-shadow 0.2s; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+    .card h3 { font-size: 1.2rem; margin-bottom: 10px; color: var(--accent); }
+    .card .metric { font-size: 2rem; font-weight: 700; color: var(--text); margin: 10px 0; }
+    .card .status { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
+    .status.ok { background: #dcfce7; color: var(--ok); }
+    .status.warn { background: #fef3c7; color: var(--warn); }
+    .status.danger { background: #fee2e2; color: var(--danger); }
+    .code-block { background: var(--code-bg); color: var(--code-fg); padding: 20px; border-radius: 10px; font-family: "SFMono-Regular", Consolas, monospace; font-size: 0.9rem; overflow-x: auto; white-space: pre-wrap; max-width: 1000px; }
+    .nav { position: fixed; right: 30px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 12px; z-index: 100; }
+    .nav a { width: 12px; height: 12px; border-radius: 50%; background: var(--border); transition: background 0.2s; }
+    .nav a.active { background: var(--accent); }
+    .scroll-hint { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); color: var(--muted); font-size: 0.9rem; animation: bounce 2s infinite; pointer-events: none; }
+    @keyframes bounce { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 8px); } }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; background: var(--panel); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+    th, td { padding: 14px 18px; text-align: left; border-bottom: 1px solid var(--border); }
+    th { background: var(--accent-light); color: var(--accent); font-weight: 600; }
+    tr:last-child td { border-bottom: none; }
+    .footer { margin-top: 60px; font-size: 0.85rem; color: var(--muted); }
+    .btn { display: inline-block; margin-top: 20px; padding: 12px 24px; background: var(--accent); color: white; border-radius: 8px; text-decoration: none; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; }
+    .btn:hover { background: #1d4ed8; }
+    .btn.secondary { background: white; color: var(--accent); border: 1px solid var(--accent); }
+    .btn.secondary:hover { background: var(--accent-light); }
+    .report { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 24px; max-width: 1000px; max-height: 55vh; overflow: auto; font-family: "SFMono-Regular", Consolas, monospace; font-size: 0.95rem; line-height: 1.6; white-space: pre-wrap; }
+    .report h1, .report h2, .report h3 { color: var(--text); margin: 12px 0; }
+    .report code { background: #f3f4f6; padding: 2px 6px; border-radius: 4px; }
+    #kg-canvas { width: 100%; height: 55vh; background: var(--panel); border: 1px solid var(--border); border-radius: 12px; }
+    .tooltip { position: absolute; background: rgba(0,0,0,0.8); color: #fff; padding: 6px 10px; border-radius: 6px; font-size: 0.8rem; pointer-events: none; opacity: 0; transition: opacity 0.2s; }
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <a href="#sec1" class="active" data-idx="1" title="首页"></a>
+    <a href="#sec2" data-idx="2" title="最新诊断"></a>
+    <a href="#sec3" data-idx="3" title="时序图"></a>
+    <a href="#sec4" data-idx="4" title="触发分析"></a>
+    <a href="#sec5" data-idx="5" title="知识图谱"></a>
+    <a href="#sec6" data-idx="6" title="工作流"></a>
+  </div>
+
+  <div class="container">
+    <section id="sec1" class="section">
+      <h1>54所 卫星网络 IS-IS 智能分析平台</h1>
+      <p>基于 RFC 知识图谱、GraphRAG 与本地 vLLM，实现 IS-IS 协议 pcap/log 生成、故障分层诊断、执行时序可视化的一体化离线工作流。</p>
+      <div class="grid">
+        <div class="card"><h3>IS-IS 模拟器</h3><div class="metric">10</div><p>正常 / 故障场景 pcap + log 生成</p></div>
+        <div class="card"><h3>知识图谱</h3><div class="metric" id="kg-nodes">-</div><p>节点 / 边，用于 GraphRAG 检索</p></div>
+        <div class="card"><h3>分析引擎</h3><div class="metric" id="trace-count">-</div><p>执行追踪与异常检测报告</p></div>
+        <div class="card"><h3>LLM 诊断模型</h3><div class="metric" style="font-size:1.4rem;" id="llm-model">-</div></div>
+      </div>
+      <div>
+        <a href="#sec2" class="btn">查看运行结果</a>
+        <a href="#sec5" class="btn secondary">查看知识图谱</a>
+      </div>
+    </section>
+
+    <section id="sec2" class="section">
+      <h2>最新诊断结果</h2>
+      <p id="latest-summary">正在加载最新分析结果...</p>
+      <div class="grid" id="latest-cards"></div>
+      <div id="report-section" style="margin-top: 30px; display: none;">
+        <h3>诊断报告（Markdown）</h3>
+        <div class="report" id="report-content"></div>
+      </div>
+    </section>
+
+    <section id="sec3" class="section">
+      <h2>执行时序流程图</h2>
+      <p>将分析引擎的执行追踪记录渲染为交互式序列图。</p>
+      <div id="seq-placeholder" style="margin: 20px 0; padding: 40px; background: var(--panel); border: 1px solid var(--border); border-radius: 12px; text-align: center; color: var(--muted);">
+        暂无序列图，请运行分析引擎后刷新。
+      </div>
+      <iframe id="seq-frame" style="width: 100%; height: 60vh; border: 1px solid var(--border); border-radius: 12px; display: none; background: white;"></iframe>
+    </section>
+
+    <section id="sec4" class="section">
+      <h2>触发分析 &amp; LLM 配置</h2>
+      <p>选择 IS-IS 故障场景，一键触发完整诊断流程；并在此配置 LLM 提供商供私有化部署使用。</p>
+
+      <div class="grid" style="max-width: 1100px; margin-bottom: 30px;">
+        <div class="card" style="grid-column: span 2;">
+          <h3>LLM 诊断模型配置</h3>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 12px;">
+            <div>
+              <table style="margin-top: 0; font-size: 0.95rem;">
+                <tr><th>参数</th><th>当前值</th></tr>
+                <tr><td>模型</td><td id="cfg-model" style="font-weight:600;">-</td></tr>
+                <tr><td>端点</td><td id="cfg-endpoint" style="font-size:0.85rem; word-break:break-all;">-</td></tr>
+                <tr><td>配置文件</td><td id="cfg-file" style="font-size:0.85rem;">-</td></tr>
+              </table>
+            </div>
+            <div>
+              <p style="font-size:0.9rem; margin-bottom:8px; font-weight:600; color: var(--text);">私有化部署（Qwen / DeepSeek）</p>
+              <p style="font-size:0.85rem; margin-bottom: 8px;">修改 <code>agent-analysis/.env.project</code>：</p>
+              <div class="code-block" style="font-size: 0.8rem; padding: 14px;" id="cfg-deploy-hint">
+LLM_PROVIDER=openai
+DEFAULT_MODEL_NAME=Qwen2.5-72B-Instruct
+OPENAI_COMPATIBLE_CHAT_ENDPOINT=http://&lt;host&gt;:&lt;port&gt;/v1/chat/completions
+OPENAI_COMPATIBLE_CHAT_API_KEY=&lt;your-key&gt;
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid" style="max-width: 1100px; align-items: start;">
+        <div class="card">
+          <h3>选择故障场景</h3>
+          <select id="scenario-select" style="width:100%; padding:10px; border:1px solid var(--border); border-radius:8px; font-size:1rem; margin-top:8px; background:var(--panel); color:var(--text);">
+            <option value="">-- 加载中 --</option>
+          </select>
+          <button class="btn" id="run-btn" onclick="triggerRun()" style="margin-top: 16px; width: 100%;">运行分析</button>
+          <div id="run-status" style="margin-top: 14px; font-size: 0.9rem; color: var(--muted);"></div>
+        </div>
+
+        <div class="card" style="grid-column: span 2;">
+          <h3>历史分析记录</h3>
+          <p style="margin-bottom: 12px; font-size: 0.9rem;">最近 20 次运行结果（每次运行对应一个故障场景）</p>
+          <div id="traces-table-wrap">
+            <table>
+              <thead><tr><th>Run ID</th><th>时间</th><th>检测异常</th><th>状态</th><th>报告</th></tr></thead>
+              <tbody id="traces-tbody"><tr><td colspan="5" style="text-align:center; color:var(--muted);">加载中...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sec5" class="section">
+      <h2>知识图谱拓扑</h2>
+      <p>可视化当前知识图谱的节点与关系（力导向图，鼠标悬停查看详情，点击节点查看关联关系）。GraphRAG 索引状态实时显示于右上角。</p>
+      <div class="grid" style="max-width: 1200px; margin-top: 0; margin-bottom: 20px;">
+        <div class="card" id="graphrag-status-card">
+          <h3>GraphRAG 索引状态</h3>
+          <div class="metric" id="graphrag-status" style="font-size:1.3rem;">检测中...</div>
+          <p id="graphrag-detail" style="margin: 0;">正在查询 GraphRAG 服务...</p>
+        </div>
+        <div class="card">
+          <h3>检索模式</h3>
+          <div class="metric" id="graphrag-mode" style="font-size:1.3rem;">-</div>
+          <p style="margin: 0;">graphrag = 语义检索 / csv_fallback = 关键词降级</p>
+        </div>
+        <div class="card">
+          <h3>LLM 模型</h3>
+          <div class="metric" id="graphrag-llm" style="font-size:1.1rem;">-</div>
+          <p style="margin: 0;" id="graphrag-llm-provider">-</p>
+        </div>
+      </div>
+      <div style="position: relative; max-width: 1200px;">
+        <canvas id="kg-canvas"></canvas>
+        <div class="tooltip" id="tooltip"></div>
+      </div>
+      <p style="margin-top: 10px; font-size: 0.95rem;">节点颜色：PDU/协议实体（蓝）、故障（红）、症状（橙）、规则/建议（绿）、状态（青）、设备（灰）；节点大小反映连接度。点击节点查看详情。</p>
+      <div class="card" id="node-detail-card" style="max-width: 1200px; margin-top: 16px; display: none;">
+        <h3 id="node-detail-title">节点详情</h3>
+        <div id="node-detail-body"></div>
+      </div>
+    </section>
+
+    <section id="sec6" class="section">
+      <h2>工作流脚本</h2>
+      <p>一键生成数据、构建知识图谱、启动 GraphRAG 并运行分析。</p>
+      <div class="code-block">cd /home/hermes/workspace
+export PYTHONPATH="agent-analysis/src:isis-simulator/src:graphrag/src:knowledge"
+python3 scripts/generate_and_analyze.py link-down
+python3 scripts/run_pipeline.py link-down</div>
+      <div class="grid" style="margin-top: 30px; max-width: 900px;">
+        <div class="card"><h3>generate_and_analyze.py</h3><p>轻量模式：生成数据并运行分析，不启动服务。</p></div>
+        <div class="card"><h3>run_pipeline.py</h3><p>完整模式：生成数据、分析、启动 GraphRAG 与前端服务。</p></div>
+      </div>
+      <table style="max-width: 900px;">
+        <tr><th>模块</th><th>状态</th><th>说明</th></tr>
+        <tr><td>isis-simulator</td><td><span class="status ok">可用</span></td><td>10 场景 pcap/log 生成</td></tr>
+        <tr><td>knowledge</td><td><span class="status ok">可用</span></td><td>RFC 摘要 + CSV 知识图谱</td></tr>
+        <tr><td>graphrag</td><td><span class="status ok">可用</span></td><td>零依赖本地查询服务</td></tr>
+        <tr><td>agent-analysis</td><td><span class="status ok">可用</span></td><td>特征提取与诊断报告</td></tr>
+        <tr><td>frontend</td><td><span class="status ok">可用</span></td><td>前端演示界面</td></tr>
+        <tr><td>skills</td><td><span class="status ok">已部署</span></td><td>workspace-orchestrator / knowledge-builder</td></tr>
+      </table>
+      <div class="footer">离线环境运行 · 无第三方依赖 · 54所卫星网络 IS-IS 故障诊断项目</div>
+    </section>
+  </div>
+
+  <div class="scroll-hint">滚动鼠标滚轮切换页面</div>
+
+  <script>
+    const API = window.location.origin + '/api';
+
+    function renderMarkdown(md) {
+      return md
+        .replace(/^# (.*)$/gm, '<h1>$1</h1>')
+        .replace(/^## (.*)$/gm, '<h2>$1</h2>')
+        .replace(/^### (.*)$/gm, '<h3>$1</h3>')
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/`([^`]+)`/g, '<code>$1</code>')
+        .replace(/\n/g, '<br>');
+    }
+
+    async function loadLatest() {
+      try {
+        const res = await fetch(API + '/latest');
+        const data = await res.json();
+        document.getElementById('kg-nodes').textContent = data.kg_nodes || '-';
+        document.getElementById('trace-count').textContent = data.trace_count || '-';
+        if (data.llm_info) {
+          document.getElementById('llm-model').textContent = data.llm_info.model || 'unknown';
+        }
+
+        const summary = document.getElementById('latest-summary');
+        const cards = document.getElementById('latest-cards');
+        if (data.latest && data.latest.trace_id) {
+          const pcapLen = data.latest.input && data.latest.input.pcap_files ? data.latest.input.pcap_files.length : 0;
+          const logLen = data.latest.input && data.latest.input.log_files ? data.latest.input.log_files.length : 0;
+          summary.textContent = `最新运行: ${data.latest.trace_id}，输入 ${pcapLen} 个 pcap，${logLen} 个 log。`;
+          const anomalyText = (data.latest.anomalies && data.latest.anomalies.length)
+            ? data.latest.anomalies.map(a => a.type).join(', ')
+            : '未检出异常';
+          cards.innerHTML = `
+            <div class="card"><h3>Trace ID</h3><div class="metric">${data.latest.trace_id}</div></div>
+            <div class="card"><h3>异常</h3><div class="metric" style="font-size:1.3rem;">${anomalyText}</div></div>
+            <div class="card"><h3>状态</h3><span class="status ${data.latest.anomalies && data.latest.anomalies.length ? 'danger' : 'ok'}">${data.latest.anomalies && data.latest.anomalies.length ? '异常' : '正常'}</span></div>
+          `;
+          if (data.report) {
+            document.getElementById('report-section').style.display = 'block';
+            document.getElementById('report-content').innerHTML = renderMarkdown(data.report);
+          }
+          if (data.sequence_diagram) {
+            document.getElementById('seq-placeholder').style.display = 'none';
+            const frame = document.getElementById('seq-frame');
+            frame.style.display = 'block';
+            frame.src = data.sequence_diagram;
+          }
+        } else {
+          summary.textContent = '暂无分析结果，请运行工作流脚本。';
+          cards.innerHTML = '';
+        }
+      } catch (e) {
+        console.error(e);
+        document.getElementById('latest-summary').textContent = '加载失败，请检查后端服务。';
+      }
+    }
+
+    // GraphRAG 索引状态
+    async function loadGraphragStatus() {
+      const statusEl = document.getElementById('graphrag-status');
+      const detailEl = document.getElementById('graphrag-detail');
+      const modeEl = document.getElementById('graphrag-mode');
+      const llmEl = document.getElementById('graphrag-llm');
+      const llmProviderEl = document.getElementById('graphrag-llm-provider');
+      try {
+        const res = await fetch(API + '/graphrag-status');
+        const data = await res.json();
+        if (data.service_running) {
+          const loaded = data.service_detail && data.service_detail.graphrag_index_loaded;
+          statusEl.textContent = loaded ? '索引已加载（语义检索）' : '服务在线（CSV 降级）';
+          statusEl.style.color = loaded ? 'var(--ok)' : 'var(--warn)';
+          const nodes = data.service_detail ? data.service_detail.nodes : '-';
+          const edges = data.service_detail ? data.service_detail.edges : '-';
+          detailEl.textContent = `节点 ${nodes ?? '-'} / 边 ${edges ?? '-'}，索引文件 ${data.index_files.length}/${data.index_files_required.length}`;
+          modeEl.textContent = loaded ? 'graphrag' : 'csv_fallback';
+        } else {
+          statusEl.textContent = data.indexed ? '索引就绪，服务未启动' : '未连接 / 未建索引';
+          statusEl.style.color = 'var(--danger)';
+          detailEl.textContent = `索引文件 ${data.index_files.length}/${data.index_files_required.length}，请确认 GraphRAG 服务已启动（默认端口 9200）。`;
+          modeEl.textContent = '-';
+        }
+        llmEl.textContent = data.model || 'unknown';
+        llmProviderEl.textContent = 'Provider: ' + (data.provider || 'unknown');
+      } catch (e) {
+        statusEl.textContent = '查询失败';
+        statusEl.style.color = 'var(--danger)';
+        detailEl.textContent = String(e);
+      }
+    }
+
+    // 导航高亮 + 鼠标滚轮切换
+    const sections = document.querySelectorAll('.section');
+    const dots = document.querySelectorAll('.nav a');
+    const container = document.querySelector('.container');
+
+    function updateNav(idx) {
+      dots.forEach(d => d.classList.toggle('active', parseInt(d.dataset.idx) === idx));
+    }
+
+    container.addEventListener('scroll', () => {
+      let idx = 1;
+      sections.forEach((sec, i) => {
+        const rect = sec.getBoundingClientRect();
+        if (rect.top <= window.innerHeight / 2) idx = i + 1;
+      });
+      updateNav(idx);
+    });
+
+    // 知识图谱可视化
+    async function drawGraph() {
+      const res = await fetch(API + '/graph');
+      const data = await res.json();
+      const canvas = document.getElementById('kg-canvas');
+      const ctx = canvas.getContext('2d');
+      const tooltip = document.getElementById('tooltip');
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
+
+      const width = rect.width, height = rect.height;
+      const nodes = data.nodes.map(n => ({...n, x: Math.random() * width, y: Math.random() * height, vx: 0, vy: 0}));
+      const edges = data.edges;
+
+      const degree = {};
+      edges.forEach(e => {
+        degree[e.source] = (degree[e.source] || 0) + 1;
+        degree[e.target] = (degree[e.target] || 0) + 1;
+      });
+      nodes.forEach(n => { n.radius = 5 + Math.min(10, (degree[n.id] || 0) * 1.5); });
+
+      const typeColor = {
+        pdu: '#2563eb',
+        tlv: '#7c3aed',
+        fault: '#dc2626',
+        symptom: '#f59e0b',
+        rule: '#16a34a',
+        state: '#0891b2',
+        device: '#4b5563',
+        unknown: '#9ca3af'
+      };
+
+      function step() {
+        for (let i = 0; i < nodes.length; i++) {
+          nodes[i].vx *= 0.9; nodes[i].vy *= 0.9;
+        }
+        for (let i = 0; i < nodes.length; i++) {
+          for (let j = i + 1; j < nodes.length; j++) {
+            const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
+            const dist = Math.sqrt(dx*dx + dy*dy) || 1;
+            const f = 1200 / (dist * dist);
+            nodes[i].vx += f * dx / dist; nodes[i].vy += f * dy / dist;
+            nodes[j].vx -= f * dx / dist; nodes[j].vy -= f * dy / dist;
+          }
+        }
+        edges.forEach(e => {
+          const s = nodes.find(n => n.id === e.source), t = nodes.find(n => n.id === e.target);
+          if (!s || !t) return;
+          const dx = t.x - s.x, dy = t.y - s.y;
+          const dist = Math.sqrt(dx*dx + dy*dy) || 1;
+          const f = (dist - 80) * 0.005;
+          s.vx += f * dx / dist; s.vy += f * dy / dist;
+          t.vx -= f * dx / dist; t.vy -= f * dy / dist;
+        });
+        const cx = width/2, cy = height/2;
+        nodes.forEach(n => {
+          n.vx += (cx - n.x) * 0.001;
+          n.vy += (cy - n.y) * 0.001;
+          n.x += n.vx; n.y += n.vy;
+          n.x = Math.max(20, Math.min(width-20, n.x));
+          n.y = Math.max(20, Math.min(height-20, n.y));
+        });
+      }
+
+      function findNodeAt(mx, my) {
+        let found = null;
+        nodes.forEach(n => {
+          const dx = mx - n.x, dy = my - n.y;
+          if (dx*dx + dy*dy < (n.radius + 4) * (n.radius + 4)) found = n;
+        });
+        return found;
+      }
+
+      let hover = null;
+      canvas.addEventListener('mousemove', e => {
+        const r = canvas.getBoundingClientRect();
+        const mx = e.clientX - r.left, my = e.clientY - r.top;
+        hover = findNodeAt(mx, my);
+        if (hover) {
+          tooltip.style.opacity = 1;
+          tooltip.style.left = (mx + 10) + 'px';
+          tooltip.style.top = (my + 10) + 'px';
+          tooltip.textContent = hover.label + ' (' + hover.type + ') · 连接数 ' + (degree[hover.id] || 0);
+          canvas.style.cursor = 'pointer';
+        } else {
+          tooltip.style.opacity = 0;
+          canvas.style.cursor = 'default';
+        }
+      });
+
+      canvas.addEventListener('click', e => {
+        const r = canvas.getBoundingClientRect();
+        const mx = e.clientX - r.left, my = e.clientY - r.top;
+        const clicked = findNodeAt(mx, my);
+        if (!clicked) return;
+        const outEdges = edges.filter(e => e.source === clicked.id);
+        const inEdges = edges.filter(e => e.target === clicked.id);
+        const detailCard = document.getElementById('node-detail-card');
+        document.getElementById('node-detail-title').textContent = `${clicked.label} (${clicked.type})`;
+        const relLines = [];
+        outEdges.forEach(e => {
+          const t = nodes.find(n => n.id === e.target);
+          relLines.push(`→ <strong>${t ? t.label : e.target}</strong> (${e.relation || 'related'})`);
+        });
+        inEdges.forEach(e => {
+          const s = nodes.find(n => n.id === e.source);
+          relLines.push(`← <strong>${s ? s.label : e.source}</strong> (${e.relation || 'related'})`);
+        });
+        document.getElementById('node-detail-body').innerHTML = relLines.length
+          ? '<ul><li>' + relLines.join('</li><li>') + '</li></ul>'
+          : '<p>暂无关联关系。</p>';
+        detailCard.style.display = 'block';
+      });
+
+      function render() {
+        ctx.clearRect(0, 0, width, height);
+        ctx.strokeStyle = '#d1d5db'; ctx.lineWidth = 1;
+        edges.forEach(e => {
+          const s = nodes.find(n => n.id === e.source), t = nodes.find(n => n.id === e.target);
+          if (!s || !t) return;
+          ctx.beginPath(); ctx.moveTo(s.x, s.y); ctx.lineTo(t.x, t.y); ctx.stroke();
+        });
+        nodes.forEach(n => {
+          ctx.beginPath(); ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
+          ctx.fillStyle = typeColor[n.type] || typeColor.unknown;
+          ctx.fill();
+          if (hover === n) {
+            ctx.lineWidth = 2; ctx.strokeStyle = '#111827'; ctx.stroke();
+          }
+          ctx.fillStyle = '#374151'; ctx.font = '12px sans-serif';
+          ctx.fillText(n.label, n.x + n.radius + 4, n.y + 4);
+        });
+        step(); requestAnimationFrame(render);
+      }
+      render();
+    }
+
+    async function loadConfig() {
+      try {
+        const res = await fetch(API + '/config');
+        const data = await res.json();
+        const info = data.llm_info || {};
+        document.getElementById('cfg-model').textContent = info.model || '-';
+        document.getElementById('cfg-endpoint').textContent = info.endpoint || '-';
+        document.getElementById('cfg-file').textContent = info.env_file || '-';
+        if (info.env_vars) {
+          const lines = Object.entries(info.env_vars).map(([k, v]) => `${k}=${v}`).join('\n');
+          document.getElementById('cfg-deploy-hint').textContent = lines;
+        }
+      } catch (e) { console.error('loadConfig', e); }
+    }
+
+    async function loadScenarios() {
+      try {
+        const res = await fetch(API + '/scenarios');
+        const data = await res.json();
+        const sel = document.getElementById('scenario-select');
+        sel.innerHTML = data.scenarios.map(s =>
+          `<option value="${s.id}">${s.label}</option>`
+        ).join('');
+      } catch (e) { console.error('loadScenarios', e); }
+    }
+
+    async function loadTraces() {
+      try {
+        const res = await fetch(API + '/traces');
+        const data = await res.json();
+        const tbody = document.getElementById('traces-tbody');
+        if (!data.traces || data.traces.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:var(--muted);">暂无历史记录</td></tr>';
+          return;
+        }
+        tbody.innerHTML = data.traces.map(t => `
+          <tr>
+            <td style="font-size:0.85rem; font-family:monospace;">${t.id}</td>
+            <td style="font-size:0.85rem;">${t.time}</td>
+            <td style="font-size:0.85rem;">${t.anomalies && t.anomalies.length ? t.anomalies.join(', ') : '未检出异常'}</td>
+            <td><span class="status ${t.status === '异常' ? 'danger' : t.status === '正常' ? 'ok' : 'warn'}">${t.status}</span></td>
+            <td>${t.has_report ? '<span class="status ok">有</span>' : '<span class="status warn">无</span>'}</td>
+          </tr>`).join('');
+      } catch (e) { console.error('loadTraces', e); }
+    }
+
+    let _pollTimer = null;
+    async function triggerRun() {
+      const scenario = document.getElementById('scenario-select').value;
+      if (!scenario) return;
+      const btn = document.getElementById('run-btn');
+      const statusEl = document.getElementById('run-status');
+      btn.disabled = true;
+      btn.textContent = '启动中...';
+      statusEl.textContent = '';
+      try {
+        const res = await fetch(API + '/run', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({scenario}),
+        });
+        const data = await res.json();
+        if (res.status === 409) {
+          statusEl.textContent = '有分析正在运行，请稍候...';
+          btn.disabled = false; btn.textContent = '运行分析';
+          return;
+        }
+        if (!data.started) {
+          statusEl.textContent = '启动失败: ' + (data.error || '未知错误');
+          btn.disabled = false; btn.textContent = '运行分析';
+          return;
+        }
+        statusEl.innerHTML = `<span class="status warn">运行中</span> ${data.run_id} (场景: ${data.scenario})`;
+        btn.textContent = '运行中...';
+        _pollTimer = setInterval(async () => {
+          try {
+            const sr = await fetch(API + '/run-status');
+            const sd = await sr.json();
+            if (!sd.running) {
+              clearInterval(_pollTimer);
+              btn.disabled = false; btn.textContent = '运行分析';
+              if (sd.error) {
+                statusEl.innerHTML = `<span class="status danger">失败</span> ${sd.error}`;
+              } else {
+                statusEl.innerHTML = `<span class="status ok">完成</span> ${sd.run_id} — 结果已更新`;
+                loadLatest(); loadTraces();
+              }
+            }
+          } catch (_) {}
+        }, 3000);
+      } catch (e) {
+        statusEl.textContent = '请求失败: ' + e;
+        btn.disabled = false; btn.textContent = '运行分析';
+      }
+    }
+
+    loadLatest();
+    loadGraphragStatus();
+    loadConfig();
+    loadScenarios();
+    loadTraces();
+    drawGraph().catch(console.error);
+  </script>
+</body>
+</html>

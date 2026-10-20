@@ -1,0 +1,508 @@
+{
+  "status": "passed",
+  "check_count": 97,
+  "checks": [
+    {
+      "check": "Embedded artifact equals file: evidence/after/edges.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Artifact hash: evidence/after/edges.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Embedded artifact equals file: evidence/after/knowledge_graph.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Artifact hash: evidence/after/knowledge_graph.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Embedded artifact equals file: evidence/after/node_attributes.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Artifact hash: evidence/after/node_attributes.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Embedded artifact equals file: evidence/after/nodes.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Artifact hash: evidence/after/nodes.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Embedded artifact equals file: evidence/analysis-trace.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Artifact hash: evidence/analysis-trace.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Embedded artifact equals file: evidence/before/edges.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Artifact hash: evidence/before/edges.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Embedded artifact equals file: evidence/before/knowledge_graph.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Artifact hash: evidence/before/knowledge_graph.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Embedded artifact equals file: evidence/before/node_attributes.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Artifact hash: evidence/before/node_attributes.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Embedded artifact equals file: evidence/before/nodes.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Artifact hash: evidence/before/nodes.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Embedded artifact equals file: evidence/candidate/candidate_attributes.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Artifact hash: evidence/candidate/candidate_attributes.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Embedded artifact equals file: evidence/candidate/candidate_edges.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Artifact hash: evidence/candidate/candidate_edges.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Embedded artifact equals file: evidence/candidate/candidate_nodes.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Artifact hash: evidence/candidate/candidate_nodes.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Embedded artifact equals file: evidence/candidate/diff_report.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Artifact hash: evidence/candidate/diff_report.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Embedded artifact equals file: evidence/circuit-type-mismatch.pcap",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Artifact hash: evidence/circuit-type-mismatch.pcap",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Embedded artifact equals file: evidence/circuit_type_mismatch.log",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Artifact hash: evidence/circuit_type_mismatch.log",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Embedded artifact equals file: evidence/diff.log",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Artifact hash: evidence/diff.log",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Embedded artifact equals file: evidence/execution-record.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Artifact hash: evidence/execution-record.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Embedded artifact equals file: evidence/extract.log",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Artifact hash: evidence/extract.log",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Embedded artifact equals file: evidence/interpretation.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Artifact hash: evidence/interpretation.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Embedded artifact equals file: evidence/knowledge-query.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Artifact hash: evidence/knowledge-query.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Embedded artifact equals file: evidence/knowledge_graph.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Artifact hash: evidence/knowledge_graph.txt",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Embedded artifact equals file: evidence/merge-and-build.log",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Artifact hash: evidence/merge-and-build.log",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Embedded artifact equals file: evidence/merge_snapshot/.initialized",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Artifact hash: evidence/merge_snapshot/.initialized",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Embedded artifact equals file: evidence/merge_snapshot/edges.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Artifact hash: evidence/merge_snapshot/edges.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Embedded artifact equals file: evidence/merge_snapshot/node_attributes.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Artifact hash: evidence/merge_snapshot/node_attributes.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Embedded artifact equals file: evidence/merge_snapshot/nodes.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Artifact hash: evidence/merge_snapshot/nodes.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Embedded artifact equals file: evidence/original-report.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Artifact hash: evidence/original-report.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Embedded artifact equals file: evidence/original-sequence.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Artifact hash: evidence/original-sequence.html",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Embedded artifact equals file: evidence/packets.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Artifact hash: evidence/packets.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Embedded artifact equals file: evidence/pcap-features.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Artifact hash: evidence/pcap-features.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Embedded artifact equals file: evidence/source-rules.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Artifact hash: evidence/source-rules.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Embedded artifact equals file: evidence/validate-full.log",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Artifact hash: evidence/validate-full.log",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Embedded artifact equals file: evidence/validate.log",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Artifact hash: evidence/validate.log",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Embedded artifact equals file: evidence/validation.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Artifact hash: evidence/validation.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Embedded artifact equals file: evidence/validation.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Artifact hash: evidence/validation.md",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Embedded artifact equals file: evidence/manifest.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Historical report unchanged",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Historical trace unchanged",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Original project tables unchanged",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Five real candidate nodes",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Node delta matches merge",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "CSV and JSON node sets match",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "CSV and JSON edges match",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Merge snapshot preserves baseline",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Supplemental commands succeeded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "No model or index rebuild requested",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "No CRITICAL errors",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Known source warnings preserved",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "All 70 archived packets decoded",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "R02 protocol type at before",
+      "passed": true,
+      "detail": "{'L2_IIH'}"
+    },
+    {
+      "check": "R02 protocol type at fault",
+      "passed": true,
+      "detail": "{'L1_IIH'}"
+    },
+    {
+      "check": "R02 protocol type at after",
+      "passed": true,
+      "detail": "{'L2_IIH'}"
+    },
+    {
+      "check": "Actual knowledge query hit",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Skill-stage mapping does not invent call history",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "No external or local runtime resources",
+      "passed": true,
+      "detail": "[]"
+    },
+    {
+      "check": "Embedded data round trips exactly",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Diagnosis timeline follows actual trace order",
+      "passed": true,
+      "detail": "['load', 'feature', 'knowledge', 'L1', 'L2', 'L3', 'L4', 'report']"
+    },
+    {
+      "check": "Knowledge maintenance is a separate view",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "No runtime backend calls",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "No unresolved template tokens",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "JavaScript syntax check",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Browser export preserves original bytes",
+      "passed": true,
+      "detail": ""
+    }
+  ],
+  "browser_verified": [
+    "Desktop and narrow-screen layouts rendered",
+    "Eight process nodes match trace records and update evidence inspector",
+    "Timeline Home and Right key locate actual stages without losing focus",
+    "Automatic retrospective playback completes at report generation",
+    "All five task views render",
+    "Independent material/build/validation maintenance records render",
+    "Knowledge evidence dialog opens and closes",
+    "Browser console contains no error messages"
+  ],
+  "browser_limit": "The in-app browser allows HTTP/HTTPS only; file:// opening is not browser-verified. Runtime resources and backend requests are absent.",
+  "mode": "offline replay; existing report plus local supplemental knowledge processing",
+  "interface_version": "completed-analysis-workbench-v2",
+  "viewport_checks": [
+    "410px narrow-screen preview",
+    "1280px desktop breakpoint preview"
+  ]
+}

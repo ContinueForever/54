@@ -1,0 +1,93 @@
+{
+  "overall": "合格（保留非阻塞注意项）",
+  "reviewer": "isis-critic 独立 LLM 子智能体",
+  "review_execution": "本次真实独立 LLM 审查；由 Codex 子智能体重新读取当前文件、复核证据并生成审查，不是预置审查示例。",
+  "configured_model_distinction": "本次审查与项目配置模型的诊断环节不同；项目诊断解读为 Codex 编写并明确标注的示例，未调用配置模型接口。",
+  "reviewed_at": "2026-10-14T17:35:04.073741+08:00",
+  "run_id": "run_20261014_173241_529785",
+  "scope": "用户授权的受控合成网络资料、项目实际离线执行记录及工作台模板来源/边界措辞；不替代浏览器交互验收。",
+  "issues": [
+    {
+      "level": "INFO",
+      "title": "知识维护通过结构校验，但有非本案来源缺失与 GraphRAG 跳过项",
+      "evidence": "knowledge-validation.json：2 个 RFC 5305 节点来源无法溯源（MAJOR）；6 对疑似同义节点（MINOR）；GraphRAG 一致性 SKIP。knowledge-query.json.mode=local_csv；preparation.json.index_rebuilt=false。",
+      "risk": "若把知识维护描述为“全部通过”或“本次进行了 GraphRAG 索引和在线检索”，将夸大实际执行范围。缺失 RFC 5305 节点没有用于本案最终主根因。",
+      "recommendation": "展示结构校验通过及剩余来源警告；明确本次使用本地 CSV 检索、未重建 GraphRAG 索引。后续补齐 RFC 5305 材料。"
+    }
+  ],
+  "resolved_previous_issues": [
+    {
+      "title": "邻接保持时间到期的精确归因缺少时间轴支持",
+      "resolution": "R02 的 T+40 s Down 已注明 local configuration changed；R01 在 T+55 s neighbor hold time expired。最后观察到的 R02 正常 L2 Hello 为 T+28.5 s，Holding 27 s，约 T+55.5 s 到期与秒级日志 T+55 相容。不再宣称双方同时到期。"
+    },
+    {
+      "title": "保存的示例模型输入缺少被输出引用的原始提交事件",
+      "resolution": "features.json.log 保留全部 8 条 raw_lines；model-call.json.prompt 中逐条包含原始日志，含配置提交和探测超时。"
+    },
+    {
+      "title": "解读中的规则计数与实际运行不一致",
+      "resolution": "报告和示例均明确 4 条规则命中、3 个候选模式，1 个主根因及其后果。"
+    },
+    {
+      "title": "诊断报告输入清单遗漏设备状态文件",
+      "resolution": "报告输入清单已增加 state:1；prompt 中包含完整状态与配置快照。"
+    },
+    {
+      "title": "物理层 PASS 需要解释为未命中现有规则",
+      "resolution": "追踪的 L1 PASS 详情已改为“未命中本层规则”；模型示例保留有限快照不能排除间歇性物理问题的边界。"
+    },
+    {
+      "title": "聚合日志的两条事件不是按时间排列",
+      "resolution": "原始日志与 raw_lines 已按时间戳排序；配置提交与本地邻接失效先于 T+44 s 探测超时。"
+    },
+    {
+      "title": "日志提取把 0% 丢包也标记为 packet_loss",
+      "resolution": "0% packet loss 现在识别为 probe_healthy；100% packet loss 才标为 packet_loss，正常与异常探测已区分。"
+    }
+  ],
+  "verified": {
+    "pcap_records": 86,
+    "decoded_records": 86,
+    "iih_records": 56,
+    "before_icmp_requests": 10,
+    "before_icmp_replies": 10,
+    "fault_icmp_requests": 10,
+    "fault_icmp_replies": 0,
+    "raw_log_lines": 8,
+    "parsed_log_events": 6,
+    "all_raw_log_lines_in_model_prompt": true,
+    "input_files": {
+      "pcap": 1,
+      "log": 1,
+      "state": 1
+    },
+    "rule_hits": 4,
+    "candidate_patterns": 3,
+    "primary_root_causes": 1,
+    "recovery_evidence_present": false,
+    "configured_model_called": false,
+    "knowledge_query_mode": "local_csv",
+    "formal_report_matches_demo_copy": true,
+    "formal_trace_matches_demo_copy": true,
+    "log_lines_sorted": true,
+    "zero_loss_parsed_as_healthy": true,
+    "workbench_source_boundary_reviewed": true,
+    "workbench_no_hit_claims_full_health": false,
+    "workbench_claims_configured_model_called_in_illustrative_mode": false
+  },
+  "reviewed_files_sha256": {
+    "diagnosis-report.md": "81b822c1c648ed6da903213765de57cec9e294b93bbfae157b350eb48144b6cc",
+    "model-call.json": "611e3ca1261cc4213648585a738cfdf35012048fdcb3111934833ca36579fad6",
+    "features.json": "c17a17a17e586a7db85fcb23af5dd53e330f2c87b27e95e92f82c9ea454100f4",
+    "packets.json": "274f4645e26c4a935efd229bab4c76cf76e067500a574a5f1c00bfbd0227c119",
+    "network-state.json": "c0b0ee387c3f1a0ad67af5fd7de1bea7b85a3ba2ecdc1b834f48b8328107f1a2",
+    "device-events.log": "80f38d368e0adab47601f56a0ccf773abfa49aa3595cca57a698432bcc0d3fe6",
+    "knowledge-query.json": "3231f5d7e1c6aa4cafb3e04f3aa228f9dcdcfcdfe95b033cdea0a5371f20e800",
+    "preparation.json": "b5da81ff5f6d2aeb89c754e803ae8049553e791bc1527f7420ad5c140d472ddc",
+    "knowledge-validation.json": "6f9f6c09309f1dfe963e9f01e6c8e48ec139fc2d42979ac14240edf5d2d441c7",
+    "analysis-trace.json": "dae25af5f9a94843c0bd589246f2f86c24e5d841f36cf50f3684dc2cb94429de"
+  },
+  "reviewed_source_sha256": {
+    "demo/client-diagnosis/workbench.template.html": "286a2fe431056f2a5fdef7c522e53e5312315c811dd15e113290151771d07434"
+  }
+}

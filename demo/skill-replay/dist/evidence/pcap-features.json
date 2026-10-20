@@ -1,0 +1,348 @@
+{
+  "pcap_path": "/home/hermes/workspace/isis-simulator/output/verify_circuit_type/pcapng/circuit-type-mismatch.pcap",
+  "total_packets": 70,
+  "stages": {
+    "before": {
+      "iih_count": 28,
+      "lsp_count": 0,
+      "src_ids": [
+        "000000000001",
+        "000000000002",
+        "000000000003",
+        "000000000004"
+      ],
+      "areas": [
+        "490001"
+      ],
+      "holding_timers": [
+        27
+      ],
+      "pdu_types": [
+        "L2_IIH"
+      ],
+      "max_pdu_len": 47
+    },
+    "fault": {
+      "iih_count": 28,
+      "lsp_count": 0,
+      "src_ids": [
+        "000000000001",
+        "000000000002",
+        "000000000003",
+        "000000000004"
+      ],
+      "areas": [
+        "490001"
+      ],
+      "holding_timers": [
+        27
+      ],
+      "pdu_types": [
+        "L1_IIH",
+        "L2_IIH"
+      ],
+      "max_pdu_len": 47
+    },
+    "after": {
+      "iih_count": 14,
+      "lsp_count": 0,
+      "src_ids": [
+        "000000000001",
+        "000000000002",
+        "000000000003",
+        "000000000004"
+      ],
+      "areas": [
+        "490001"
+      ],
+      "holding_timers": [
+        27
+      ],
+      "pdu_types": [
+        "L2_IIH"
+      ],
+      "max_pdu_len": 47
+    }
+  },
+  "icmp": {},
+  "duplicate_system_id": false,
+  "pcap_signals": [
+    "CIRCUIT_TYPE_CHANGE",
+    "MIXED_HELLO_PDU_TYPES"
+  ],
+  "signal_evidence": {
+    "CIRCUIT_TYPE_CHANGE": "R02 PDU类型: [18] -> [17]"
+  },
+  "per_source": {
+    "000000000001": {
+      "stages": {
+        "after": {
+          "iih_count": 5,
+          "holding_values": [
+            27
+          ],
+          "areas": [
+            "490001"
+          ],
+          "has_auth": false,
+          "max_pdu_total": 47,
+          "pdu_types": [
+            "L2_IIH"
+          ],
+          "hello_intervals_s": [
+            3.0,
+            3.0,
+            3.0,
+            3.0
+          ]
+        },
+        "before": {
+          "iih_count": 10,
+          "holding_values": [
+            27
+          ],
+          "areas": [
+            "490001"
+          ],
+          "has_auth": false,
+          "max_pdu_total": 47,
+          "pdu_types": [
+            "L2_IIH"
+          ],
+          "hello_intervals_s": [
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0
+          ]
+        },
+        "fault": {
+          "iih_count": 10,
+          "holding_values": [
+            27
+          ],
+          "areas": [
+            "490001"
+          ],
+          "has_auth": false,
+          "max_pdu_total": 47,
+          "pdu_types": [
+            "L2_IIH"
+          ],
+          "hello_intervals_s": [
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0
+          ]
+        }
+      },
+      "lsp_ids": []
+    },
+    "000000000002": {
+      "stages": {
+        "after": {
+          "iih_count": 5,
+          "holding_values": [
+            27
+          ],
+          "areas": [
+            "490001"
+          ],
+          "has_auth": false,
+          "max_pdu_total": 47,
+          "pdu_types": [
+            "L2_IIH"
+          ],
+          "hello_intervals_s": [
+            3.0,
+            3.0,
+            3.0,
+            3.0
+          ]
+        },
+        "before": {
+          "iih_count": 10,
+          "holding_values": [
+            27
+          ],
+          "areas": [
+            "490001"
+          ],
+          "has_auth": false,
+          "max_pdu_total": 47,
+          "pdu_types": [
+            "L2_IIH"
+          ],
+          "hello_intervals_s": [
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0
+          ]
+        },
+        "fault": {
+          "iih_count": 10,
+          "holding_values": [
+            27
+          ],
+          "areas": [
+            "490001"
+          ],
+          "has_auth": false,
+          "max_pdu_total": 47,
+          "pdu_types": [
+            "L1_IIH"
+          ],
+          "hello_intervals_s": [
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0,
+            3.0
+          ]
+        }
+      },
+      "lsp_ids": []
+    },
+    "000000000003": {
+      "stages": {
+        "after": {
+          "iih_count": 2,
+          "holding_values": [
+            27
+          ],
+          "areas": [
+            "490001"
+          ],
+          "has_auth": false,
+          "max_pdu_total": 47,
+          "pdu_types": [
+            "L2_IIH"
+          ],
+          "hello_intervals_s": [
+            9.0
+          ]
+        },
+        "before": {
+          "iih_count": 4,
+          "holding_values": [
+            27
+          ],
+          "areas": [
+            "490001"
+          ],
+          "has_auth": false,
+          "max_pdu_total": 47,
+          "pdu_types": [
+            "L2_IIH"
+          ],
+          "hello_intervals_s": [
+            9.0,
+            9.0,
+            9.0
+          ]
+        },
+        "fault": {
+          "iih_count": 4,
+          "holding_values": [
+            27
+          ],
+          "areas": [
+            "490001"
+          ],
+          "has_auth": false,
+          "max_pdu_total": 47,
+          "pdu_types": [
+            "L2_IIH"
+          ],
+          "hello_intervals_s": [
+            9.0,
+            9.0,
+            9.0
+          ]
+        }
+      },
+      "lsp_ids": []
+    },
+    "000000000004": {
+      "stages": {
+        "after": {
+          "iih_count": 2,
+          "holding_values": [
+            27
+          ],
+          "areas": [
+            "490001"
+          ],
+          "has_auth": false,
+          "max_pdu_total": 47,
+          "pdu_types": [
+            "L2_IIH"
+          ],
+          "hello_intervals_s": [
+            9.0
+          ]
+        },
+        "before": {
+          "iih_count": 4,
+          "holding_values": [
+            27
+          ],
+          "areas": [
+            "490001"
+          ],
+          "has_auth": false,
+          "max_pdu_total": 47,
+          "pdu_types": [
+            "L2_IIH"
+          ],
+          "hello_intervals_s": [
+            9.0,
+            9.0,
+            9.0
+          ]
+        },
+        "fault": {
+          "iih_count": 4,
+          "holding_values": [
+            27
+          ],
+          "areas": [
+            "490001"
+          ],
+          "has_auth": false,
+          "max_pdu_total": 47,
+          "pdu_types": [
+            "L2_IIH"
+          ],
+          "hello_intervals_s": [
+            9.0,
+            9.0,
+            9.0
+          ]
+        }
+      },
+      "lsp_ids": []
+    }
+  }
+}
